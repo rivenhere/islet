@@ -5,6 +5,7 @@
  */
 import type { useSettingStore } from "@/store/setting";
 import { normalizeLocale } from "@/i18n";
+import { normalizeUrl, type Shortcut } from "@/config/shortcuts";
 
 type SettingStore = ReturnType<typeof useSettingStore>;
 
@@ -80,6 +81,31 @@ const VALIDATORS: Record<TransferKey, (v: unknown) => boolean> = {
   focusOnNewTab: isBool,
 };
 
+/**
+ * Clean imported shortcuts the same way the editor does: normalize the address (adding https://),
+ * drop entries whose name or address isn't usable, and give duplicate ids a new one,
+ * since editing, deleting and drag sorting all find entries by id.
+ */
+const sanitizeShortcuts = (list: Shortcut[]): Shortcut[] => {
+  const seen = new Set<string>();
+  const result: Shortcut[] = [];
+  for (const s of list) {
+    const name = s.name.trim();
+    const url = normalizeUrl(s.url);
+    if (!name || !url) continue;
+    const id = s.id && !seen.has(s.id) ? s.id : `sc-${crypto.randomUUID()}`;
+    seen.add(id);
+    result.push({
+      id,
+      name,
+      url,
+      iconPath: s.iconPath || undefined,
+      color: s.color || undefined,
+    });
+  }
+  return result;
+};
+
 /** Build the export object */
 const buildExport = (store: SettingStore) => {
   const settings: Record<string, unknown> = {};
@@ -121,8 +147,16 @@ export const applySettingsImport = (
   const patch: Record<string, unknown> = {};
   for (const key of TRANSFER_KEYS) {
     if (key in source && VALIDATORS[key](source[key])) {
-      patch[key] =
-        key === "language" ? normalizeLocale(source[key]) : source[key];
+      const value = source[key];
+      if (key === "shortcuts") {
+        const list = value as Shortcut[];
+        const clean = sanitizeShortcuts(list);
+        // A list where nothing survives cleaning is broken, not empty: keep the current shortcuts
+        if (list.length > 0 && clean.length === 0) continue;
+        patch[key] = clean;
+      } else {
+        patch[key] = key === "language" ? normalizeLocale(value) : value;
+      }
     }
   }
 

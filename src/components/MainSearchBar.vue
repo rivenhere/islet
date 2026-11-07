@@ -141,9 +141,14 @@ watch(keyword, () => {
   closeChooser();
 });
 
-/** Whether this navigation opens a new tab: the setting, flipped while Ctrl/⌘ is held */
-const wantsNewTab = (e?: KeyboardEvent | MouseEvent) =>
-  settingStore.openInNewTab !== !!(e && (e.ctrlKey || e.metaKey));
+/**
+ * Whether this navigation opens a new tab: the setting, flipped while Ctrl/⌘ is held;
+ * a middle-click always opens a new tab, like on a link.
+ */
+const wantsNewTab = (e?: KeyboardEvent | MouseEvent) => {
+  if (e instanceof MouseEvent && e.button === 1) return true;
+  return settingStore.openInNewTab !== !!(e && (e.ctrlKey || e.metaKey));
+};
 
 /** Navigate; Shift+Enter opening a new window is handled by the browser, so it isn't checked here */
 const go = (url: string, e?: KeyboardEvent | MouseEvent) =>
@@ -333,7 +338,7 @@ onUnmounted(() => {
               :key="engine.id"
               class="engine-option"
               :class="{ selected: engine.id === currentEngine.id }"
-              @mousedown.prevent="selectEngine(engine.id)"
+              @mousedown.left.prevent="selectEngine(engine.id)"
             >
               {{ engine.name }}
             </li>
@@ -349,7 +354,8 @@ onUnmounted(() => {
             :key="target.url"
             class="suggestion-item is-site"
             :class="{ active: index === chooserIndex }"
-            @mousedown.prevent="go(target.url, $event)"
+            @mousedown.left.prevent="go(target.url, $event)"
+            @mousedown.middle.prevent="go(target.url, $event)"
             @mouseenter="chooserIndex = index"
           >
             <span class="site-badge" :class="{ 'is-alt': target.isAlt }">{{
@@ -370,7 +376,8 @@ onUnmounted(() => {
               active: index === activeIndex,
               'is-site': item.type === 'site',
             }"
-            @mousedown.prevent="pickItem(item, $event)"
+            @mousedown.left.prevent="pickItem(item, $event)"
+            @mousedown.middle.prevent="pickItem(item, $event)"
             @mouseenter="activeIndex = index"
           >
             <template v-if="item.type === 'site'">
@@ -390,7 +397,8 @@ onUnmounted(() => {
                 v-if="item.site.altUrls?.length"
                 class="site-badge is-alt alt-trigger"
                 :title="t('MainSearchBar.altHint')"
-                @mousedown.prevent.stop="openChooser(item.site)"
+                @mousedown.left.prevent.stop="openChooser(item.site)"
+                @mousedown.middle.prevent.stop
               >
                 {{ t("MainSearchBar.alt") }}
               </button>
@@ -401,7 +409,8 @@ onUnmounted(() => {
               <button
                 class="suggestion-remove"
                 :aria-label="t('MainSearchBar.removeHistory')"
-                @mousedown.prevent.stop="removeSuggestion(item.term)"
+                @mousedown.left.prevent.stop="removeSuggestion(item.term)"
+                @mousedown.middle.prevent.stop
               >
                 ×
               </button>

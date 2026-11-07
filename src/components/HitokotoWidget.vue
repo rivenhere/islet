@@ -1,14 +1,24 @@
 <script setup lang="ts">
-import { ref, watch, onUnmounted } from "vue";
+import { ref, computed, watch, onUnmounted } from "vue";
 import { useSettingStore } from "@/store/setting";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const settingStore = useSettingStore();
 
-// Quote text and its source
-const hitokotoText = ref(t("HitokotoWidget.padding"));
-const hitokotoFrom = ref("");
+// The fetched quote; null until one arrives. Placeholder and error text are translated when shown,
+// so they follow a language change instead of keeping the language they were created in.
+const quote = ref<{ text: string; from: string } | null>(null);
+const failed = ref(false);
+
+const hitokotoText = computed(() => {
+  if (failed.value) return t("HitokotoWidget.empty.title");
+  return quote.value?.text ?? t("HitokotoWidget.padding");
+});
+const hitokotoFrom = computed(() => {
+  if (failed.value) return t("HitokotoWidget.empty.from");
+  return quote.value?.from ?? "";
+});
 
 // Loading state prevents repeat refresh clicks; copied state briefly shows "Copied"
 const loading = ref(false);
@@ -26,14 +36,21 @@ const fetchHitokoto = async () => {
     const res = await fetch("https://v1.hitokoto.cn", {
       signal: controller.signal,
     });
+    // An error response (such as a rate limit) can still be JSON, so check both the status and the fields
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    hitokotoText.value = data.hitokoto;
-    hitokotoFrom.value = data.from;
+    if (typeof data?.hitokoto !== "string" || !data.hitokoto) {
+      throw new Error("Unexpected response");
+    }
+    quote.value = {
+      text: data.hitokoto,
+      from: typeof data.from === "string" ? data.from : "",
+    };
+    failed.value = false;
   } catch (error) {
     // A deliberate abort isn't an error, so don't show the fallback text
     if (controller.signal.aborted) return;
-    hitokotoText.value = t("HitokotoWidget.empty.title");
-    hitokotoFrom.value = t("HitokotoWidget.empty.from");
+    failed.value = true;
   } finally {
     loading.value = false;
   }

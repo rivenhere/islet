@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onUnmounted } from "vue";
 import { useSettingStore } from "@/store/setting";
 import { useI18n } from "vue-i18n";
 import { NAV_ICONS } from "@/config/navIcons";
@@ -123,6 +123,22 @@ const useLetter = () => {
 };
 
 const close = () => emit("close");
+
+// Esc closes only the editor. It listens in the capture phase and stops the event there, so the settings
+// panel's own Esc handler (which would close the panel and the editor inside it) never sees it.
+const onEscape = (e: KeyboardEvent) => {
+  if (e.key !== "Escape") return;
+  e.stopPropagation();
+  close();
+};
+watch(
+  () => props.open,
+  (open) => {
+    if (open) window.addEventListener("keydown", onEscape, true);
+    else window.removeEventListener("keydown", onEscape, true);
+  },
+);
+onUnmounted(() => window.removeEventListener("keydown", onEscape, true));
 
 const save = () => {
   const ok = props.editId
