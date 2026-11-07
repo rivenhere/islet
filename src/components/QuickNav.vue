@@ -26,6 +26,44 @@ const openEdit = (id: string) => {
 const closeEditor = () => {
   editorOpen.value = false;
 };
+
+// Drag-and-drop sorting: the icon is the drag handle, the whole tile is the drop target
+const draggingId = ref<string | null>(null);
+// Swallows the click some browsers fire on the tile right after a drop
+const suppressClick = ref(false);
+
+const onDragStart = (event: DragEvent, id: string) => {
+  draggingId.value = id;
+  if (!event.dataTransfer) return;
+  event.dataTransfer.effectAllowed = "move";
+  // Firefox only starts a drag once some data is set
+  event.dataTransfer.setData("text/plain", id);
+};
+
+// Reorder live: the dragged tile takes the hovered tile's place
+const onDragEnter = (targetId: string) => {
+  if (!draggingId.value || draggingId.value === targetId) return;
+  settingStore.moveShortcut(draggingId.value, targetId);
+};
+
+const onDragOver = (event: DragEvent) => {
+  if (event.dataTransfer) event.dataTransfer.dropEffect = "move";
+};
+
+const finishDrag = () => {
+  if (!draggingId.value) return;
+  draggingId.value = null;
+  suppressClick.value = true;
+  window.setTimeout(() => {
+    suppressClick.value = false;
+  }, 0);
+};
+
+const onTileClick = (event: MouseEvent) => {
+  if (!suppressClick.value) return;
+  event.preventDefault();
+  suppressClick.value = false;
+};
 </script>
 
 <template>
@@ -34,12 +72,25 @@ const closeEditor = () => {
       v-for="s in settingStore.shortcuts"
       :key="s.id"
       class="tile"
+      :class="{ 'tile--dragging': draggingId === s.id }"
       :href="s.url"
       :title="s.name"
       :target="settingStore.openInNewTab ? '_blank' : undefined"
       :rel="settingStore.openInNewTab ? 'noopener' : undefined"
+      draggable="false"
+      @click="onTileClick"
+      @dragenter.prevent="onDragEnter(s.id)"
+      @dragover.prevent="onDragOver"
+      @drop.prevent="finishDrag"
     >
-      <ShortcutIcon :shortcut="s" :size="48" />
+      <span
+        class="tile-drag-handle"
+        draggable="true"
+        @dragstart="onDragStart($event, s.id)"
+        @dragend="finishDrag"
+      >
+        <ShortcutIcon :shortcut="s" :size="48" />
+      </span>
       <span class="tile-name">{{ s.name }}</span>
 
       <!-- Hover actions: edit / delete -->
@@ -115,10 +166,25 @@ const closeEditor = () => {
   font-smooth: never;
   transition:
     transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
-    background-color 0.2s ease;
+    background-color 0.2s ease,
+    opacity 0.15s ease;
 
   &:hover {
     transform: translateY(-3px);
+  }
+}
+
+.tile.tile--dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.tile-drag-handle {
+  display: inline-flex;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
   }
 }
 
