@@ -16,6 +16,7 @@ import {
   contributeUrl,
 } from "@/config/sites";
 import { navigateTo } from "@/utils/navigate";
+import { parseUrlInput } from "@/utils/urlInput";
 
 const { t, locale } = useI18n();
 const settingStore = useSettingStore();
@@ -208,7 +209,11 @@ const handleEnter = (e: KeyboardEvent) => {
     }
   }
 
-  // 4. Everything else goes to the search engine
+  // 4. An address (https://..., github.com, localhost:3000) opens directly, without a search or a history entry
+  const address = parseUrlInput(input);
+  if (address) return go(address, e);
+
+  // 5. Everything else goes to the search engine
   search(input, e);
 };
 

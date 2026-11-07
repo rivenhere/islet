@@ -15,7 +15,7 @@
 
 - **复古像素美学**：纯手工打造的 UI 组件，采用“新粗野主义 (Neo-brutalism)”设计风格，带来独特的复古游戏机质感。
 - **沉浸式体验**：没有多余的干扰，专注于时间感知与快速导航。
-- **多引擎搜索**：优雅的胶囊搜索框，支持一键无缝切换 Google、Bing、百度等主流引擎。
+- **多引擎搜索**：优雅的胶囊搜索框，支持一键无缝切换 Google、Bing、百度等主流引擎。输入 `github.com` 这样的网址，按 Enter 直接打开。
 - **官网直达**：内置经 PR 审核的官方网址库，输入 `/github` 直达、`/gh?user=xx&repo=yy` 直达子页面、`tags:dev` 按分类筛选（`tags:tool|code` 匹配任一分类），帮你绕开搜索结果里的盗版与钓鱼站。缺少官网？可以[申请收录](https://github.com/rivenhere/islet/issues/new?template=site_request.yml)，也欢迎按 [贡献指南](CONTRIBUTING.zh.md) 提交 PR。
 - **键盘友好**：`Ctrl+K` 聚焦搜索、`Ctrl+Enter` 反转跳转方式（替换当前页 / 新标签页）、`Shift+Enter` 新窗口打开、`Alt+Enter` 选择备用官方地址、`Ctrl+,` 开关设置。
 - **快捷导航**：搜索栏下方自定义常用网站磁贴，内置像素图标或首字母，可选主题色，纯本地零联网。

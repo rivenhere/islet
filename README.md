@@ -15,7 +15,7 @@
 
 - **Retro pixel look**: handcrafted UI components in a Neo-brutalist style, with the feel of a retro game console.
 - **Immersive**: no distractions, just the time and fast navigation.
-- **Multiple search engines**: a clean capsule search box that switches between Google, Bing, Baidu and others in one click.
+- **Multiple search engines**: a clean capsule search box that switches between Google, Bing, Baidu and others in one click. Type an address such as `github.com` and Enter opens it directly.
 - **Official site shortcuts**: a built-in list of official URLs reviewed through PRs. Type `/github` to go straight there, `/gh?user=xx&repo=yy` for a specific page, or `tags:dev` to filter by category (`tags:tool|code` matches either category), so you can skip the pirated and phishing sites in search results. Missing a site? [Request it](https://github.com/rivenhere/islet/issues/new?template=site_request.yml), or send a PR by following the [contributing guide](CONTRIBUTING.md).
 - **Keyboard friendly**: `Ctrl+K` focuses search, `Ctrl+Enter` flips how links open (current tab / new tab), `Shift+Enter` opens a new window, `Alt+Enter` chooses a backup official address, and `Ctrl+,` toggles settings.
 - **Quick navigation**: custom tiles for your favorite sites below the search box, with built-in pixel icons or initials and optional theme colors. Fully local, with no network requests.
