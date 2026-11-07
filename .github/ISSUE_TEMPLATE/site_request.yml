@@ -1,0 +1,53 @@
+name: "🌐 Request a site / 申请收录网站"
+description: "A website is missing from the official site list / 官网直达中缺少某个网站"
+labels: ["site-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! You don't need to edit any code: a maintainer can add the site for you. If you'd rather send a PR yourself, see [CONTRIBUTING.md](https://github.com/rivenhere/islet/blob/main/CONTRIBUTING.md).
+        感谢提交！你不需要改任何代码，维护者会帮你添加。如果想自己提交 PR，请看[贡献指南](https://github.com/rivenhere/islet/blob/main/CONTRIBUTING.zh.md)。
+
+  - type: input
+    id: name
+    attributes:
+      label: "Site name / 网站名称"
+      placeholder: "e.g. / 例如 GitHub"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: "Official address / 官方地址"
+      description: "Must start with https://. / 必须以 https:// 开头。"
+      placeholder: "https://github.com"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proof
+    attributes:
+      label: "Proof it's official / 官方证明"
+      description: "A source showing this address belongs to the project or company, such as its official repository, Wikipedia entry or official social account. / 能证明该地址属于该项目或公司的来源，如官方仓库、维基百科条目或官方社交账号。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "Short names and categories / 简称与分类"
+      description: "Optional: what people might type to find it, and which categories it fits. / 可选：大家可能输入的简称，以及适合的分类。"
+      placeholder: "e.g. short name: gh; categories: code, dev / 例如 简称：gh；分类：code、dev"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: criteria
+    attributes:
+      label: "Inclusion criteria / 收录标准"
+      options:
+        - label: "This is the official site, not a pirated site, third-party mirror, download site, aggregator or short link. / 这是官方网站，不是盗版站、第三方镜像、下载站、聚合站或短链接。"
+          required: true
+        - label: "This isn't an NSFW site (adult or pornographic content). / 这不是 NSFW 站点（成人、色情内容）。"
+          required: true

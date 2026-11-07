@@ -1,29 +1,32 @@
-# Islet - 极简像素起始页
+# Islet - A Minimal Pixel Start Page
 
-[![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+**English** | [简体中文](README.zh.md) · 📖 [Wiki](https://github.com/rivenhere/islet/wiki)
+
 [![Vue 3](https://img.shields.io/badge/Vue-3.x-brightgreen.svg)](https://vuejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-latest-purple.svg)](https://vitejs.dev/)
 
-**Islet** 是一个极简、优雅的浏览器新标签页扩展。它摒弃了喧嚣的信息流与复杂的组件，旨在为你的浏览器提供一个纯粹、专注且充满 8-bit 复古美学的上网起点。
+**Islet** is a minimal, elegant new tab extension for your browser. It leaves out noisy feeds and complicated widgets, giving you a pure, focused starting point with an 8-bit retro look.
 
-> 兼容 Chrome 与 Firefox（Manifest V3）。Firefox 下同时接管「新标签页」与「主页」；Chrome 下接管「新标签页」（Chrome 的主页接管仅限 Windows/macOS 且不支持扩展内页面，故 Chrome 版不含该功能）。
-
----
-
-## ✨ 核心特性
-
-* **复古像素美学**：纯手工打造的 UI 组件，采用“新粗野主义 (Neo-brutalism)”设计风格，带来独特的复古游戏机质感。
-* **沉浸式体验**：没有多余的干扰，专注于时间感知与快速导航。
-* **多引擎搜索**：优雅的胶囊搜索框，支持一键无缝切换 Google、Bing、百度等主流引擎。
-* **快捷导航**：搜索栏下方自定义常用网站磁贴，内置像素图标或首字母，可选主题色，纯本地零联网。
-* **每日一言**：每次新建标签页，随机获取一句充满人文气息的语录，点亮你的心情。
-* **智能深色模式**：随系统主题自动切换，首屏即正确着色、无闪屏，平滑的视觉过渡，全天候舒适阅读。
-* **多语言**：内置简体中文、English、日本語。
-* **隐私至上**：零数据收集，100% 本地运行，无需任何联网权限要求。
+> Works with Chrome and Firefox (Manifest V3). Firefox takes over both the new tab page and the home page. Chrome takes over the new tab page only, because Chrome's home page override is limited to Windows/macOS and doesn't accept pages inside an extension.
 
 ---
 
-## 🛠️ 技术栈
+## ✨ Features
+
+- **Retro pixel look**: handcrafted UI components in a Neo-brutalist style, with the feel of a retro game console.
+- **Immersive**: no distractions, just the time and fast navigation.
+- **Multiple search engines**: a clean capsule search box that switches between Google, Bing, Baidu and others in one click.
+- **Official site shortcuts**: a built-in list of official URLs reviewed through PRs. Type `/github` to go straight there, `/gh?user=xx&repo=yy` for a specific page, or `tags:dev` to filter by category (`tags:tool|code` matches either category), so you can skip the pirated and phishing sites in search results. Missing a site? [Request it](https://github.com/rivenhere/islet/issues/new?template=site_request.yml), or send a PR by following the [contributing guide](CONTRIBUTING.md).
+- **Keyboard friendly**: `Ctrl+K` focuses search, `Ctrl+Enter` flips how links open (current tab / new tab), `Shift+Enter` opens a new window, `Alt+Enter` chooses a backup official address, and `Ctrl+,` toggles settings.
+- **Quick navigation**: custom tiles for your favorite sites below the search box, with built-in pixel icons or initials and optional theme colors. Fully local, with no network requests.
+- **Daily quote (optional)**: when turned on, each new tab fetches a random quote. This is the only feature that uses the network (it requests hitokoto.cn), and it's **off by default**. You can turn it on in settings.
+- **Smart dark mode**: follows your system theme, with correct colors from the first frame, no flash, and smooth transitions.
+- **Multiple languages**: Simplified Chinese, English and Japanese.
+- **Privacy first**: no data collection and no permissions. Runs 100% locally by default; the daily quote, the only feature that uses the network, must be turned on by hand.
+
+---
+
+## 🛠️ Tech Stack
 
 <p align="left">
   <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" alt="Vue" />
@@ -35,89 +38,95 @@
 
 ---
 
-## 📦 安装使用
+## 📦 Installation
 
-前往 [Releases](https://github.com/Talyra42/islet/releases) 下载对应浏览器的 zip 并解压，然后在浏览器中加载：
+Download the zip for your browser from [Releases](https://github.com/rivenhere/islet/releases), unzip it, then load it in your browser:
 
-**Chrome / Edge**（下载 `islet-vX.Y.Z-chrome.zip`）
+**Chrome / Edge** (download `islet-vX.Y.Z-chrome.zip`, works on every system)
 
-1. 打开 `chrome://extensions`，开启右上角的「开发者模式」。
-2. 点击「加载已解压的扩展程序」，选择解压后的文件夹。
+1. Open `chrome://extensions` and turn on "Developer mode" in the top right.
+2. Click "Load unpacked" and select the unzipped folder.
 
-**Firefox**（下载 `islet-vX.Y.Z-firefox.zip`）
+Keep the unzipped folder in place, because the browser loads the extension from it.
 
-1. 打开 `about:debugging#/runtime/this-firefox`。
-2. 点击「临时加载附加组件」，选择文件夹内的 `manifest.json`。
+**Chrome / Edge, packed `.crx`** (download `islet-vX.Y.Z-chrome-crx.zip`, best on Linux)
 
-> 两个版本的差别仅在 `manifest.json`：Chrome 版移除了 Firefox 专属的 `browser_specific_settings` 与仅限 Windows/macOS 的 `chrome_settings_overrides`（主页接管），否则 Linux 上的 Chrome 会拒绝加载扩展。
+1. Unzip it to get `islet-vX.Y.Z-chrome.crx`.
+2. Open `chrome://extensions` and turn on "Developer mode".
+3. Drag the `.crx` file onto that page.
 
-安装后新建标签页即可看到 Islet。
+The browser keeps its own copy, so you can delete the files afterwards. Don't open the `.crx` from a download link: Chrome then rejects it with `CRX_REQUIRED_PROOF_MISSING`, because it only installs downloaded `.crx` files from the Chrome Web Store. On Windows and macOS, Chrome may disable a `.crx` installed this way; use "Load unpacked" there.
+
+**Firefox** (download `islet-vX.Y.Z-firefox.zip`)
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click "Load Temporary Add-on" and select `manifest.json` inside the folder.
+
+> The two versions differ only in `manifest.json`. The Chrome version removes the Firefox-only `browser_specific_settings` and the Windows/macOS-only `chrome_settings_overrides` (home page override), because Chrome on Linux would otherwise refuse to load the extension.
+
+Open a new tab after installing to see Islet.
 
 ---
 
-## 🚀 本地开发
+## 🚀 Local Development
 
-> 需要 [Node.js](https://nodejs.org/) ≥ 22.13 与 [pnpm](https://pnpm.io/)。
+> Requires [Node.js](https://nodejs.org/) ≥ 22.13 and [pnpm](https://pnpm.io/).
 
-1.  **克隆项目**
+1. **Clone the project**
+
     ```bash
-    git clone git@github.com:Talyra42/islet.git
+    git clone https://github.com/rivenhere/islet.git
     cd islet
     ```
 
-2.  **安装依赖**
+2. **Install dependencies**
+
     ```bash
     pnpm install
     ```
 
-3.  **启动开发服务器**
+3. **Start the dev server**
+
     ```bash
     pnpm dev
     ```
 
-4.  **构建扩展**
+4. **Build the extension**
+
     ```bash
     pnpm build
     ```
-    构建完成后，产物位于 `dist/` 目录，可直接按上文「安装使用」加载。
+
+    The output goes to `dist/`, which Firefox can load directly as described in [Installation](#-installation). For Chrome, run `scripts/publish.sh build` instead and load the generated `dist-chrome/` folder (`dist/` keeps Firefox-only settings, which Chrome on Linux refuses to load).
 
 ---
 
-## 🏷️ 发布
+## 🏷️ Releasing
 
-推荐使用发布脚本，一条命令完成版本升级、双浏览器构建与打 tag：
+The release script handles the version bump, both browser builds and the tag in one command:
 
 ```bash
-scripts/publish.sh patch   # 1.7.0 -> 1.7.1
-scripts/publish.sh minor   # 1.7.0 -> 1.8.0
-scripts/publish.sh major   # 1.7.0 -> 2.0.0
-scripts/publish.sh 1.9.3   # 指定版本号
-scripts/publish.sh build   # 不改版本号，仅构建双浏览器 zip（本地调试用）
+scripts/publish.sh patch   # 1.0.0 -> 1.0.1
+scripts/publish.sh minor   # 1.0.0 -> 1.1.0
+scripts/publish.sh major   # 1.0.0 -> 2.0.0
+scripts/publish.sh 1.9.3   # set a specific version
+scripts/publish.sh build   # keep the version, only build both zips (for local debugging)
 ```
 
-脚本会：写入版本号 → 构建 → 在 `release/` 下生成 `islet-vX.Y.Z-chrome.zip` 与 `islet-vX.Y.Z-firefox.zip` → 提交并打 tag → 询问是否推送。推送后 GitHub Actions 会自动构建同样的双版本 zip 并创建 GitHub Release。
+The script writes the version → builds → creates `islet-vX.Y.Z-chrome.zip` and `islet-vX.Y.Z-firefox.zip` in `release/` → commits and tags → asks whether to push. After the push, GitHub Actions builds the same two zips and creates a GitHub Release.
 
-也可以直接手动推 tag 触发 CI 发布：
+You can also push a tag by hand to trigger the release in CI:
 
 ```bash
-git tag v1.8.0
-git push origin v1.8.0
+git tag v1.1.0
+git push origin v1.1.0
 ```
 
 ---
 
-## 🙏 致谢
+## 🙏 Credits
 
-快捷导航图标全部**本地内置、零联网请求**：
+All quick navigation icons are **built in, with no network requests**:
 
-* 网站 / 品牌图标取自 [simple-icons](https://github.com/simple-icons/simple-icons)（CC0-1.0），并附带各品牌官方色作为磁贴底色；图标库以懒加载独立分包提供，不影响新标签页启动。
-* 通用像素图标与新增 / 编辑 / 删除等界面图标取自 [pixelarticons](https://github.com/halfmage/pixelarticons)（MIT License）。
-
----
-
-## 📄 开源协议
-
-本项目采用 **GNU General Public License v3.0 (GPL-3.0)** 开源协议。
-这意味着你可以自由地分发和修改该程序，但任何基于本项目修改后的版本发布，也必须保持开源并遵循 GPL-3.0 协议。
-
-详见 [LICENSE](LICENSE) 文件。
+- Website and brand icons come from [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0), along with each brand's official color for the tile background. The icon library is a separate lazy-loaded chunk, so it doesn't slow down opening a new tab.
+- Generic pixel icons and interface icons such as add, edit and delete come from [pixelarticons](https://github.com/halfmage/pixelarticons) (MIT License).

@@ -21,10 +21,15 @@
       "searchHistory": "搜索历史联想",
       "clearHistory": "清空",
       "appearance": "主题外观",
-      "showHitokoto": "显示一言",
+      "showHitokoto": "显示一言（联网获取）",
       "showShortcuts": "显示快捷导航",
       "language": "语言",
-      "autoHideSettingButton": "设置按钮自动隐藏"
+      "autoHideSettingButton": "设置按钮自动隐藏",
+      "siteSearch": "官网直达",
+      "openInNewTab": "在新标签页打开",
+      "focusOnNewTab": "新标签页聚焦搜索框（实验性）",
+      "focusOnNewTabHint": "新标签页会重新加载一次，让搜索框从地址栏夺回焦点；之后地址栏会显示扩展的地址。",
+      "showHitokotoHint": "开启后每次打开新标签页会向 hitokoto.cn 请求一句话；关闭时 Islet 完全本地运行。"
     },
     "shortcuts": {
       "title": "快捷导航",
@@ -67,7 +72,10 @@
     },
     "about": {
       "title": "关于 Islet",
-      "content": "一个极简、优雅的浏览器起始页。\n由 Talyra42 精心打造。"
+      "content": "一个极简、优雅的浏览器起始页。\n由 Talyra42 精心打造。\n贡献者：Riven 川",
+      "sites": "官网直达已收录 {count} 个经 PR 审核的官方网站，帮你绕开搜索结果里的盗版与钓鱼站。输入 /github 即可直达，/gh?user=xx&repo=yy 可直达指定页面，tags:dev 可按分类筛选，tags:tool{'|'}code 可匹配任一分类。",
+      "contribute": "提交收录 PR",
+      "keys": "快捷键：Ctrl+K 聚焦搜索 · Ctrl+Enter 反转跳转方式 · Ctrl+, 打开/关闭设置 · Alt+Enter 选择备用地址 · Shift+Enter 新窗口打开 · Esc 关闭"
     },
     "tabs": {
       "clock": "时钟",
@@ -86,7 +94,13 @@
   "MainSearchBar": {
     "empty": "输入内容，按回车搜索...",
     "removeHistory": "删除该历史记录",
-    "switchEngine": "切换搜索引擎"
+    "switchEngine": "切换搜索引擎",
+    "emptyWithSites": "输入内容搜索，/ 开头直达官网...",
+    "official": "官网",
+    "routeMiss": "未收录该站点，回车将使用 {engine} 搜索",
+    "contribute": "申请收录",
+    "alt": "备用",
+    "altHint": "选择备用官方地址（Alt+Enter）"
   },
   "HitokotoWidget": {
     "padding": "正在接受岛屿电波...",

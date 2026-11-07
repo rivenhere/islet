@@ -1,4 +1,4 @@
 /**
- * 当前已有的多语言
+ * Currently available languages (BCP 47 language tags, rules in src/i18n.ts)
  */
-export type LanguageTypes = "zh" | "en" | "ja";
+export type LanguageTypes = "zh-Hans" | "en" | "ja";

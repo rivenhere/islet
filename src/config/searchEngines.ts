@@ -1,21 +1,21 @@
 /**
- * 搜索引擎统一配置（单一数据源）
+ * Search engine configuration (single source of truth)
  *
- * 组件与设置面板都从这里读取引擎，避免多处硬编码不同步。
+ * Components and the settings panel all read engines from here, to avoid duplicated hardcoding.
  */
 
 export interface SearchEngine {
-  /** 唯一标识；持久化在设置里的 defaultEngine 即引用此 id */
+  /** Unique id; the persisted defaultEngine setting refers to this id */
   id: string;
-  /** 展示名称 */
+  /** Display name */
   name: string;
-  /** 搜索 URL 模板，用 %s 占位关键词；无 %s 时关键词直接拼接到末尾 */
+  /** Search URL template with %s for the search term; without %s the term is appended to the end */
   searchUrl: string;
-  /** 是否内置（内置引擎不可编辑/删除） */
+  /** Whether it's built in (built-in engines can't be edited or deleted) */
   builtin?: boolean;
 }
 
-/** 内置搜索引擎；id 与历史版本保持一致以兼容已持久化的设置 */
+/** Built-in search engines; ids match earlier versions so persisted settings keep working */
 export const BUILTIN_ENGINES: SearchEngine[] = [
   {
     id: "bing",
@@ -43,7 +43,7 @@ export const BUILTIN_ENGINES: SearchEngine[] = [
   },
 ];
 
-/** 根据引擎与关键词拼接最终跳转地址 */
+/** Build the final URL from an engine and search term */
 export const buildSearchUrl = (engine: SearchEngine, query: string): string => {
   const encoded = encodeURIComponent(query);
   return engine.searchUrl.includes("%s")

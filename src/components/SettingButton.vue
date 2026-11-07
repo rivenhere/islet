@@ -7,7 +7,7 @@ const settingStore = useSettingStore();
 const visible = ref(true);
 
 let hideTimer: number | null = null;
-// 用于 requestAnimationFrame 节流，避免高频 mousemove 反复执行逻辑
+// requestAnimationFrame throttle, to avoid running this logic on every mousemove
 let rafId: number | null = null;
 
 const clearHideTimer = () => {
@@ -30,7 +30,7 @@ const showButton = () => {
 };
 
 const handleMouseMove = (event: MouseEvent) => {
-  // 每帧最多处理一次，合并掉同一帧内的多次 mousemove
+  // Handle at most once per frame, merging mousemoves within a frame
   if (rafId !== null) return;
 
   rafId = window.requestAnimationFrame(() => {
@@ -60,7 +60,7 @@ const stopListening = () => {
   }
 };
 
-// 仅在「自动隐藏」开启时才挂载全局 mousemove 监听；关闭时彻底移除
+// Only attach the global mousemove listener while "auto-hide" is on; remove it entirely when off
 watch(
   () => settingStore.autoHideSettingButton,
   (enabled) => {
@@ -104,7 +104,8 @@ onUnmounted(stopListening);
 
 <style lang="scss" scoped>
 .setting-icon {
-  position: fixed;
+  /* Scrolls with the page, so it doesn't float over quick navigation on long pages; same as fixed when the page doesn't scroll */
+  position: absolute;
   top: 24px;
   right: 24px;
 

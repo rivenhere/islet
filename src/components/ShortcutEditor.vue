@@ -8,9 +8,9 @@ import PixelIcon from "./PixelIcon.vue";
 import ShortcutIcon from "./ShortcutIcon.vue";
 
 const props = defineProps<{
-  /** 是否打开 */
+  /** Whether it's open */
   open: boolean;
-  /** 编辑的 shortcut id；为 null 表示新增 */
+  /** The shortcut id being edited; null when adding */
   editId: string | null;
 }>();
 
@@ -21,11 +21,11 @@ const settingStore = useSettingStore();
 
 const name = ref("");
 const url = ref("");
-const iconPath = ref(""); // 空 = 首字母
-const color = ref(""); // 空 = 自动
+const iconPath = ref(""); // Empty = initial letter
+const color = ref(""); // Empty = automatic
 const error = ref(false);
 
-// --- 图标库（通用像素图标常驻 + 品牌图标懒加载）---
+// --- Icon library (generic pixel icons always loaded + brand icons lazy-loaded) ---
 interface IconItem {
   key: string;
   title: string;
@@ -33,7 +33,7 @@ interface IconItem {
   hex?: string;
 }
 
-/** 仅作 UI 用途、不进选择器的图标 */
+/** Icons used only by the UI, not shown in the picker */
 const UI_ONLY = new Set(["plus", "close", "pencil"]);
 
 const genericItems: IconItem[] = Object.entries(NAV_ICONS)
@@ -44,7 +44,7 @@ const library = ref<IconItem[]>(genericItems);
 const brandLoaded = ref(false);
 const brandLoading = ref(false);
 
-// 首次打开时懒加载庞大的品牌图标库（独立 chunk）
+// Lazy-load the large brand icon library on first open (separate chunk)
 const ensureBrandLibrary = async () => {
   if (brandLoaded.value || brandLoading.value) return;
   brandLoading.value = true;
@@ -63,7 +63,7 @@ const ensureBrandLibrary = async () => {
   }
 };
 
-// --- 搜索 + 触底分页 ---
+// --- Search + load more on scroll ---
 const query = ref("");
 const PAGE = 60;
 const visible = ref(PAGE);
@@ -88,7 +88,7 @@ const onGridScroll = (e: Event) => {
   }
 };
 
-// 打开时按模式初始化表单
+// Initialize the form for the current mode when opening
 watch(
   () => props.open,
   (open) => {
@@ -114,7 +114,7 @@ watch(
 
 const pickIcon = (item: IconItem) => {
   iconPath.value = item.path;
-  // 选品牌图标时，若用户尚未指定颜色，自动套用品牌色
+  // When choosing a brand icon, apply the brand color if the user hasn't chosen a color
   if (item.hex && color.value === "") color.value = `#${item.hex}`;
 };
 
@@ -169,7 +169,7 @@ const save = () => {
           </div>
 
           <div class="editor-body">
-            <!-- 预览 -->
+            <!-- Preview -->
             <div class="preview">
               <ShortcutIcon
                 :shortcut="{ name: name || '?', iconPath, color }"
@@ -177,7 +177,7 @@ const save = () => {
               />
             </div>
 
-            <!-- 名称 / 地址 -->
+            <!-- Name / address -->
             <label class="field">
               <span class="field-label">{{
                 t("SettingPanel.shortcuts.name")
@@ -201,7 +201,7 @@ const save = () => {
               />
             </label>
 
-            <!-- 图标选择 -->
+            <!-- Icon picker -->
             <div class="field">
               <span class="field-label">{{
                 t("SettingPanel.shortcuts.icon")
@@ -232,22 +232,16 @@ const save = () => {
                 >
                   <PixelIcon :path="item.path" :size="20" />
                 </button>
-                <div
-                  v-if="brandLoading && !brandLoaded"
-                  class="icon-hint"
-                >
+                <div v-if="brandLoading && !brandLoaded" class="icon-hint">
                   {{ t("SettingPanel.shortcuts.loadingIcons") }}
                 </div>
-                <div
-                  v-else-if="filtered.length === 0"
-                  class="icon-hint"
-                >
+                <div v-else-if="filtered.length === 0" class="icon-hint">
                   {{ t("SettingPanel.shortcuts.noIcon") }}
                 </div>
               </div>
             </div>
 
-            <!-- 颜色选择 -->
+            <!-- Color picker -->
             <div class="field">
               <span class="field-label">{{
                 t("SettingPanel.shortcuts.color")
@@ -298,7 +292,7 @@ const save = () => {
   position: fixed;
   inset: 0;
   z-index: 1100;
-  /* 不用 backdrop-filter：避免与设置面板遮罩叠加双重模糊导致卡顿 */
+  /* No backdrop-filter: stacking blur with the settings overlay causes jank */
   background-color: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
@@ -414,7 +408,7 @@ const save = () => {
   padding: 8px 12px;
 }
 
-/* 图标选择网格 */
+/* Icon picker grid */
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -477,7 +471,7 @@ const save = () => {
   text-align: center;
 }
 
-/* 颜色 */
+/* Colors */
 .color-row {
   display: flex;
   flex-wrap: wrap;
@@ -556,7 +550,7 @@ const save = () => {
   }
 }
 
-/* 过渡 */
+/* Transition */
 .modal-enter-active,
 .modal-leave-active {
   transition: opacity 0.25s ease;

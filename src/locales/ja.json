@@ -21,10 +21,15 @@
       "searchHistory": "検索履歴のサジェスト",
       "clearHistory": "クリア",
       "appearance": "テーマ設定",
-      "showHitokoto": "「一言」を表示",
+      "showHitokoto": "「一言」を表示（オンライン）",
       "showShortcuts": "クイックナビを表示",
       "language": "言語",
-      "autoHideSettingButton": "設定ボタンを自動的に隠す"
+      "autoHideSettingButton": "設定ボタンを自動的に隠す",
+      "siteSearch": "公式サイト直行",
+      "openInNewTab": "新しいタブで開く",
+      "focusOnNewTab": "新しいタブで検索ボックスにフォーカス（実験的）",
+      "focusOnNewTabHint": "新しいタブを一度だけ再読み込みして、アドレスバーから検索ボックスにフォーカスを移します。アドレスバーには拡張機能のアドレスが表示されます。",
+      "showHitokotoHint": "オンにすると新しいタブを開くたびに hitokoto.cn から一文を取得します。オフなら Islet は完全にローカルで動作します。"
     },
     "shortcuts": {
       "title": "クイックナビ",
@@ -67,7 +72,10 @@
     },
     "about": {
       "title": "Islet について",
-      "content": "極めてシンプルでエレガントなブラウザのスタートページ。\nTalyra42 が心を込めて制作しました。"
+      "content": "極めてシンプルでエレガントなブラウザのスタートページ。\nTalyra42 が心を込めて制作しました。\nコントリビューター：Riven",
+      "sites": "PR で審査された公式サイトを {count} 件収録。検索結果に紛れる海賊版・フィッシングサイトを避けられます。/github で直行、/gh?user=xx&repo=yy で指定ページへ、tags:dev でカテゴリ絞り込み、tags:tool{'|'}code でいずれかに一致。",
+      "contribute": "PR でサイトを追加",
+      "keys": "ショートカット：Ctrl+K 検索にフォーカス · Ctrl+Enter 開き方を反転 · Ctrl+, 設定の開閉 · Alt+Enter 予備アドレスを選択 · Shift+Enter 新しいウィンドウで開く · Esc 閉じる"
     },
     "tabs": {
       "clock": "時計",
@@ -86,7 +94,13 @@
   "MainSearchBar": {
     "empty": "入力して Enter で検索...",
     "removeHistory": "この履歴を削除",
-    "switchEngine": "検索エンジンを切り替え"
+    "switchEngine": "検索エンジンを切り替え",
+    "emptyWithSites": "入力して検索、/ で公式サイトへ直行...",
+    "official": "公式",
+    "routeMiss": "未収録のサイトです。Enter で {engine} 検索します",
+    "contribute": "追加を申請",
+    "alt": "予備",
+    "altHint": "予備の公式アドレスを選択（Alt+Enter）"
   },
   "HitokotoWidget": {
     "padding": "島からの電波を受信中...",

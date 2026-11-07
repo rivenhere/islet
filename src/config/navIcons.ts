@@ -1,16 +1,16 @@
 /**
- * 快捷导航内置像素图标（单一数据源）
+ * Built-in pixel icons for quick navigation (single source of truth)
  *
- * 图标取自 pixelarticons（https://github.com/halfmage/pixelarticons，MIT License）。
- * 均为单色像素 SVG，通过 `currentColor` 换色；每个图标仅存储合并后的 path 数据，
- * 由 PixelIcon.vue 统一渲染。纯本地内置，零联网（不拉取远程 favicon）。
+ * Icons come from pixelarticons (https://github.com/halfmage/pixelarticons, MIT License).
+ * All are single-color pixel SVGs recolored through `currentColor`; each icon stores only its merged path data,
+ * rendered by PixelIcon.vue. Fully local, with no network requests (no remote favicons).
  *
- * 视图坐标系统一为 24×24。
+ * The view coordinate system is 24×24.
  */
 
-/** 图标 id -> path 的 `d` 数据 */
+/** Icon id -> path `d` data */
 export const NAV_ICONS: Record<string, string> = {
-  // UI 操作图标（用于快捷导航的新增 / 编辑 / 删除按钮，始终随主包内置）
+  // UI action icons (for quick navigation's add / edit / delete buttons, always in the main bundle)
   plus: "M13 11h7v2h-7v7h-2v-7H4v-2h7V4h2v7Z",
   close:
     "M7 19H5V17H7V19ZM19 19H17V17H19V19ZM9 15V17H7V15H9ZM17 17H15V15H17V17ZM11 15H9V13H11V15ZM15 15H13V13H15V15ZM13 13H11V11H13V13ZM11 11H9V9H11V11ZM15 11H13V9H15V11ZM9 9H7V7H9V9ZM17 9H15V7H17V9ZM7 7H5V5H7V7ZM19 7H17V5H19V7Z",
@@ -26,7 +26,8 @@ export const NAV_ICONS: Record<string, string> = {
   user: "M9 2h6v2H9zm0 8h6v2H9zm6-6h2v6h-2zM7 4h2v6H7zM4 18h2v4H4zm14 0h2v4h-2zM8 14h8v2H8zm-2 2h2v2H6zm10 0h2v2h-2z",
   users:
     "M5 2h6v2H5zm10 0h4v2h-4zM5 10h6v2H5zm10 0h4v2h-4zm4-6h2v6h-2zm-8 0h2v6h-2zM3 4h2v6H3zM0 18h2v4H0zm14 0h2v4h-2zm8 0h2v4h-2zM4 14h8v2H4zm12 0h4v2h-4zM2 16h2v2H2zm10 0h2v2h-2zm8 0h2v2h-2z",
-  video: "M20 17V7h2v10zm-2-2V9h2v6zM2 7h2v10H2zm14 0h2v10h-2zM4 5h12v2H4zm0 12h12v2H4z",
+  video:
+    "M20 17V7h2v10zm-2-2V9h2v6zM2 7h2v10H2zm14 0h2v10h-2zM4 5h12v2H4zm0 12h12v2H4z",
   play: "M15 11h-2V9h2zm0 4h-2v-2h2zm-2 2h-2v-2h2zm0-8h-2V7h2zm-2-2H9V5h2zM9 21H7V3h2zm6-8h2v-2h-2zm-6 4h2v2H9z",
   clapperboard:
     "M4 3h16v2H4zm0 6h16v2H4zM2 5h2v14H2zm18 0h2v14h-2zM4 19h16v2H4zM18 7h-2v2h2zm-8 0H8v2h2zm6-2h-2v2h2zM8 5H6v2h2z",
@@ -63,10 +64,12 @@ export const NAV_ICONS: Record<string, string> = {
     "M20 6h-2v2h2V6Zm2 2h-2v4h2V8Zm-2 4H4v2h16v-2ZM4 8H2v4h2V8Zm4-2H4v2h4V6Zm8-4h-6v2h6V2Zm-6 2H8v2h2V4Zm0 4H8v2h2V8Zm8-4h-2v2h2V4Zm0 4h-2v2h2V8Zm-7 8h2v2h-2zm0 4h2v2h-2zm-7-2h7v2H4zm9 0h7v2h-7zm-2-4h2v2h-2z",
   database:
     "M2 6h2v4H2zm0 4h2v4H2zm0 4h2v4H2zm18-8h2v4h-2zm0 4h2v4h-2zm0 4h2v4h-2zM4 4h4v2H4zm0 8h4v-2H4zm0 4h4v-2H4zm0 4h4v-2H4zM16 4h4v2h-4zm0 8h4v-2h-4zm0 4h4v-2h-4zm0 4h4v-2h-4zM8 2h8v2H8zm0 12h8v-2H8zm0 4h8v-2H8zm0 4h8v-2H8z",
-  server: "M6 7h4v2H6zm0 8h4v2H6zM2 5h2v14H2zm18 0h2v14h-2zM4 19h16v2H4zM4 3h16v2H4zm0 8h16v2H4z",
+  server:
+    "M6 7h4v2H6zm0 8h4v2H6zM2 5h2v14H2zm18 0h2v14h-2zM4 19h16v2H4zM4 3h16v2H4zm0 8h16v2H4z",
   "book-open":
     "M2 3h9v2H2zM0 19h11v2H0zM13 3h9v2h-9zm0 16h11v2H13zM11 5h2v18h-2zM0 5h2v14H0zm22 0h2v14h-2zm-7 2h5v2h-5zm0 4h5v2h-5zm0 4h2v2h-2z",
-  library: "M3 4h2v17H3zm4 4h2v13H7zm4-2h2v15h-2zm4 0h2v5h-2zm2 5h2v5h-2zm2 5h2v5h-2z",
+  library:
+    "M3 4h2v17H3zm4 4h2v13H7zm4-2h2v15h-2zm4 0h2v5h-2zm2 5h2v5h-2zm2 5h2v5h-2z",
   article:
     "M8 2h12v2H8zM6 4h2v16H6zm14 0h2v16h-2zM4 20h16v2H4zm-2-9h2v9H2zm2-2h2v2H4zm6-3h8v2h-8zm0 4h8v2h-8zm0-2h2v2h-2zm6 0h2v2h-2zm-6 5h8v2h-8zm0 3h4v2h-4z",
   rss: "M4 10h6v2H4zm8 4h2v6h-2zm6 0h2v6h-2zM4 16h4v4H4zm12-6h2v4h-2zm-2-2h2v2h-2zM4 4h6v2H4zm6 2h4v2h-4zm0 6h2v2h-2z",
@@ -99,12 +102,14 @@ export const NAV_ICONS: Record<string, string> = {
     "M9 4h6v2H9zM7 6h2v2H7zm8 0h2v2h-2zm4-2h2v2h-2zm2-2h2v2h-2zM0 10h3v2H0zm21 0h3v2h-3zM3 4h2v2H3zM1 2h2v2H1zm6 12h2v2H7zm8 0h2v2h-2zM5 8h2v6H5zm12 0h2v6h-2zm-8 8h6v2H9zm0 4h6v2H9zm0-2h2v2H9zm4 0h2v2h-2zM11 0h2v3h-2z",
   flag: "M4 2h2v20H4z M4 4h16v2H4zm12 2h2v2h-2zm-2 2h2v2h-2zm2 2h2v2h-2zM4 12h16v2H4z",
   zap: "M4 13h8v6h2v2h-2v2h-2v-8H2v-4h2v2Zm12 6h-2v-2h2v2Zm2-2h-2v-2h2v2Zm2-2h-2v-2h2v2Zm-6-6h8v4h-2v-2h-8V5h-2V3h2V1h2v8Zm-8 2H4V9h2v2Zm2-2H6V7h2v2Zm2-2H8V5h2v2Z",
-  chart: "M4 2h16v2H4zm0 18h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zM7 11h2v6H7zm4-4h2v10h-2zm4 6h2v4h-2z",
+  chart:
+    "M4 2h16v2H4zm0 18h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zM7 11h2v6H7zm4-4h2v10h-2zm4 6h2v4h-2z",
   analytics:
     "M4 2h16v2H4zm0 18h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zm-9 8h2v6h-2zm-4 2h2v4H7zm8-8h2v12h-2z",
   gift: "M4 6h16v2H4zM2 8h2v4H2zm2 4h16v2H4zm16-4h2v4h-2zM6 4h2v2H6zm2-2h3v2H8zm3 2h2v2h-2zm2-2h3v2h-3zm3 2h2v2h-2zM4 14h2v6H4zm2 6h12v2H6zm12-6h2v6h-2zm-7-6h2v4h-2zm0 6h2v6h-2z",
-  "info-box": "M4 2h16v2H4zm0 18h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zm-9 5h2V7h-2zm0 8h2v-6h-2z",
+  "info-box":
+    "M4 2h16v2H4zm0 18h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zm-9 5h2V7h-2zm0 8h2v-6h-2z",
 };
 
-/** 图标 id 列表（决定选择器中的展示顺序） */
+/** Icon id list (sets the display order in the picker) */
 export const NAV_ICON_IDS: string[] = Object.keys(NAV_ICONS);

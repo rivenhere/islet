@@ -2,99 +2,117 @@ import type { LanguageTypes } from "@/types/language";
 import type { SearchEngine } from "@/config/searchEngines";
 import type { Shortcut } from "@/config/shortcuts";
 import { normalizeUrl } from "@/config/shortcuts";
+import { detectLocale } from "@/i18n";
+import { DBHelper } from "@/utils/dbHelper";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-/** 搜索历史最多保留的条数 */
+/** Maximum number of search history entries kept */
 const MAX_HISTORY = 50;
 
 /**
- * 设置相关的 Store
+ * Settings store
  */
 export const useSettingStore = defineStore(
   "islet-setting",
   () => {
     /**
-     * 是否展示设置面板
+     * Whether the settings panel is shown
      */
     const isSettingOpen = ref(false);
 
     /**
-     * 是否展示一言
+     * Whether the daily quote is shown (it requests hitokoto.cn, the only feature using the network, so it's off by default to stay local)
      */
-    const showHitokoto = ref(true);
+    const showHitokoto = ref(false);
 
     /**
-     * 是否展示秒
+     * Whether seconds are shown
      */
     const showSeconds = ref(true);
 
     /**
-     * 时间制式：24 小时制 / 12 小时制
+     * Hour format: 24-hour / 12-hour
      */
     const hourFormat = ref<"24" | "12">("24");
 
     /**
-     * 是否展示日期
+     * Whether the date is shown
      */
     const showDate = ref(false);
 
     /**
-     * 是否展示星期
+     * Whether the weekday is shown
      */
     const showWeekday = ref(false);
 
     /**
-     * 时钟字号：小 / 中 / 大
+     * Clock size: small / medium / large
      */
     const clockSize = ref<"small" | "medium" | "large">("medium");
 
     /**
-     * 默认搜索引擎（引用 searchEngines 中的 id，可为内置或自定义）
+     * Default search engine (an id from searchEngines, built-in or custom)
      */
     const defaultEngine = ref("bing");
 
     /**
-     * 用户自定义的搜索引擎
+     * User-defined search engines
      */
     const customEngines = ref<SearchEngine[]>([]);
 
     /**
-     * 是否启用搜索历史联想（纯本地，不联网）
+     * Whether search history suggestions are on (local only, no network)
      */
     const enableSearchHistory = ref(true);
 
     /**
-     * 搜索历史记录（最新在前）
+     * Search history (newest first)
      */
     const searchHistory = ref<string[]>([]);
 
     /**
-     * 主题模式，默认跟随系统
+     * Theme mode, following the system by default
      */
     const theme = ref<"light" | "dark" | "auto">("auto");
 
     /**
-     * 当前语言
+     * Current language; first use follows the browser, then the saved value is kept
      */
-    const language = ref<LanguageTypes>("zh");
+    const language = ref<LanguageTypes>(detectLocale());
 
     /**
-     * 是否自动隐藏设置按钮
+     * Whether the settings button auto-hides
      */
     const autoHideSettingButton = ref(false);
 
     /**
-     * 是否展示搜索栏下方的快捷导航
+     * Whether quick navigation is shown below the search bar
      */
     const showShortcuts = ref(true);
 
     /**
-     * 快捷导航列表（用户自定义的常用网站）
+     * Quick navigation list (the user's favorite sites)
      */
     const shortcuts = ref<Shortcut[]>([]);
 
-    /** 新增一条搜索历史（去重并置顶，超出上限则截断） */
+    /**
+     * Whether official site shortcuts are on (matches listed sites while typing, supports /key)
+     */
+    const enableSiteSearch = ref(true);
+
+    /**
+     * How links open: whether in a new tab (Ctrl+Enter flips it temporarily)
+     */
+    const openInNewTab = ref(false);
+
+    /**
+     * Experimental: reload a new tab once so the search box gets focus instead of the address bar
+     * (see utils/newTabFocus.ts)
+     */
+    const focusOnNewTab = ref(false);
+
+    /** Add a search history entry (deduplicated and moved to the top, truncated past the limit) */
     const addSearchHistory = (term: string) => {
       const value = term.trim();
       if (!value) return;
@@ -103,33 +121,38 @@ export const useSettingStore = defineStore(
       searchHistory.value = next.slice(0, MAX_HISTORY);
     };
 
-    /** 删除某一条搜索历史 */
+    /** Delete one search history entry */
     const removeSearchHistory = (term: string) => {
       searchHistory.value = searchHistory.value.filter((item) => item !== term);
     };
 
-    /** 清空搜索历史 */
+    /** Clear search history */
     const clearSearchHistory = () => {
       searchHistory.value = [];
     };
 
-    /** 添加自定义搜索引擎 */
+    /** Add a custom search engine */
     const addCustomEngine = (name: string, searchUrl: string) => {
       customEngines.value = [
         ...customEngines.value,
-        { id: `custom-${crypto.randomUUID()}`, name, searchUrl, builtin: false },
+        {
+          id: `custom-${crypto.randomUUID()}`,
+          name,
+          searchUrl,
+          builtin: false,
+        },
       ];
     };
 
-    /** 删除自定义搜索引擎；若删除的是当前默认引擎，回退到 bing */
+    /** Delete a custom search engine; if it's the current default, fall back to bing */
     const removeCustomEngine = (id: string) => {
       customEngines.value = customEngines.value.filter((e) => e.id !== id);
       if (defaultEngine.value === id) defaultEngine.value = "bing";
     };
 
     /**
-     * 新增一个快捷导航；URL 会归一化（补协议）。
-     * 返回是否成功（名称为空或 URL 非法则失败）。
+     * Add a quick navigation entry; the URL is normalized (protocol added).
+     * Returns whether it succeeded (fails if the name is empty or the URL is invalid).
      */
     const addShortcut = (
       name: string,
@@ -153,7 +176,7 @@ export const useSettingStore = defineStore(
       return true;
     };
 
-    /** 更新一个快捷导航（按 id）；URL 归一化，非法则不写入。返回是否成功 */
+    /** Update a quick navigation entry by id; the URL is normalized, and nothing is written if invalid. Returns whether it succeeded */
     const updateShortcut = (
       id: string,
       patch: { name: string; url: string; iconPath?: string; color?: string },
@@ -175,7 +198,7 @@ export const useSettingStore = defineStore(
       return true;
     };
 
-    /** 删除一个快捷导航 */
+    /** Delete a quick navigation entry */
     const removeShortcut = (id: string) => {
       shortcuts.value = shortcuts.value.filter((s) => s.id !== id);
     };
@@ -197,6 +220,9 @@ export const useSettingStore = defineStore(
       autoHideSettingButton,
       showShortcuts,
       shortcuts,
+      enableSiteSearch,
+      openInNewTab,
+      focusOnNewTab,
       addSearchHistory,
       removeSearchHistory,
       clearSearchHistory,
@@ -208,6 +234,7 @@ export const useSettingStore = defineStore(
     };
   },
   {
-    persist: true,
+    // Access localStorage through DBHelper (synchronous, so settings are readable before first paint); the key is still islet-setting
+    persist: { storage: DBHelper.local.storage },
   },
 );

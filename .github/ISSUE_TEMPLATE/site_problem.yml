@@ -1,0 +1,55 @@
+name: "🔗 Report a site problem / 反馈网站问题"
+description: "A listed website changed its domain, doesn't work, or looks wrong / 已收录的网站更换了域名、无法访问或地址有误"
+labels: ["site-problem"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! This helps keep the list trustworthy. / 感谢反馈！这能帮助保持列表可信。
+
+  - type: input
+    id: site
+    attributes:
+      label: "Site / 网站"
+      description: "Its name or what you type to reach it. / 网站名称，或你输入的内容。"
+      placeholder: "e.g. / 例如 GitHub, /gh"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: problem
+    attributes:
+      label: "What's wrong? / 遇到了什么问题？"
+      options:
+        - "The domain changed / 域名已更换"
+        - "The site doesn't work / 网站无法访问"
+        - "A page opens the wrong address / 子页面跳转地址有误"
+        - "It doesn't look official or looks unsafe / 看起来不是官方网站或不安全"
+        - "Other / 其他"
+    validations:
+      required: true
+
+  - type: input
+    id: new_url
+    attributes:
+      label: "New official address / 新的官方地址"
+      description: "If the domain changed. / 如果域名已更换，请填写。"
+      placeholder: "https://"
+    validations:
+      required: false
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "Details / 详细说明"
+      description: "What you typed, what happened, and any error you saw. / 你输入了什么、发生了什么，以及看到的错误。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proof
+    attributes:
+      label: "Proof / 证明"
+      description: "For a new domain, link an official announcement, repository or social account. / 如果是新域名，请附上官方公告、仓库或社交账号的链接。"
+    validations:
+      required: false

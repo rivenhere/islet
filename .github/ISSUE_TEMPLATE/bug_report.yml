@@ -1,26 +1,26 @@
-name: "🐛 Bug 反馈 / Bug report"
-description: "报告一个问题，帮助 Islet 变得更好 / Report a problem to help improve Islet"
+name: "🐛 Bug report / Bug 反馈"
+description: "Report a problem to help improve Islet / 报告一个问题，帮助 Islet 变得更好"
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        感谢反馈！请尽量填写以下信息。/ Thanks for reporting! Please fill in the details below.
+        Thanks for reporting! Please fill in the details below. / 感谢反馈！请尽量填写以下信息。
 
   - type: textarea
     id: description
     attributes:
-      label: "问题描述 / Description"
-      description: "清晰描述遇到的问题。/ A clear description of the bug."
-      placeholder: "例如：打开设置面板时……/ e.g. When opening the settings panel..."
+      label: "Description / 问题描述"
+      description: "A clear description of the bug. / 清晰描述遇到的问题。"
+      placeholder: "e.g. When opening the settings panel... / 例如：打开设置面板时……"
     validations:
       required: true
 
   - type: textarea
     id: steps
     attributes:
-      label: "复现步骤 / Steps to reproduce"
-      description: "如何一步步触发这个问题。/ How to reproduce, step by step."
+      label: "Steps to reproduce / 复现步骤"
+      description: "How to reproduce, step by step. / 如何一步步触发这个问题。"
       placeholder: |
         1. ...
         2. ...
@@ -31,44 +31,44 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: "期望行为 / Expected behavior"
-      description: "你认为正确的表现应该是怎样。/ What you expected to happen."
+      label: "Expected behavior / 期望行为"
+      description: "What you expected to happen. / 你认为正确的表现应该是怎样。"
     validations:
       required: false
 
   - type: textarea
     id: screenshots
     attributes:
-      label: "截图 / Screenshots"
-      description: "如有相关截图或录屏，请粘贴。/ Paste screenshots or recordings if any."
+      label: "Screenshots / 截图"
+      description: "Paste screenshots or recordings if any. / 如有相关截图或录屏，请粘贴。"
     validations:
       required: false
 
   - type: dropdown
     id: browser
     attributes:
-      label: "浏览器 / Browser"
+      label: "Browser / 浏览器"
       options:
         - Chrome
         - Edge
         - Firefox
-        - "其他 / Other"
+        - "Other / 其他"
     validations:
       required: true
 
   - type: input
     id: version
     attributes:
-      label: "扩展版本 / Extension version"
-      description: "见扩展管理页或设置面板「关于」。/ See the extensions page or the About tab."
-      placeholder: "例如 / e.g. 1.7.2"
+      label: "Extension version / 扩展版本"
+      description: "See the extensions page or the About tab. / 见扩展管理页或设置面板「关于」。"
+      placeholder: "e.g. / 例如 1.0.0"
     validations:
       required: false
 
   - type: input
     id: os
     attributes:
-      label: "操作系统 / OS"
-      placeholder: "例如 / e.g. Windows 11 / macOS 14 / Ubuntu 24.04"
+      label: "OS / 操作系统"
+      placeholder: "e.g. / 例如 Windows 11 / macOS 14 / Ubuntu 24.04"
     validations:
       required: false

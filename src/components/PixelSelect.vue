@@ -13,10 +13,10 @@ const emit = defineEmits<{
   "update:modelValue": [value: T];
 }>();
 
-// 控制下拉菜单的展开/收起状态
+// Whether the dropdown is open
 const isOpen = ref(false);
 
-// 计算当前选中的标签文本，用于展示在框内
+// Label of the current selection, shown in the box
 const currentLabel = computed(() => {
   const selectedOption = props.options.find(
     (opt) => opt.value === props.modelValue,
@@ -24,7 +24,7 @@ const currentLabel = computed(() => {
   return selectedOption ? selectedOption.label : t("PixelSelect.empty");
 });
 
-// 点击选项时的处理
+// Handle clicking an option
 const selectOption = (value: T) => {
   emit("update:modelValue", value);
   isOpen.value = false;
@@ -77,7 +77,7 @@ const selectOption = (value: T) => {
   outline: none;
 }
 
-/* 触发器外观 */
+/* Trigger appearance */
 .select-trigger {
   display: flex;
   justify-content: space-between;
@@ -119,7 +119,7 @@ const selectOption = (value: T) => {
   transform: rotate(180deg);
 }
 
-/* 下拉面板 */
+/* Dropdown panel */
 .select-dropdown {
   position: absolute;
   top: 100%;

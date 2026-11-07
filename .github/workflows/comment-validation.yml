@@ -1,0 +1,125 @@
+name: Comment Validation Result
+
+# Posts the Validate Data result on the PR. This workflow can write to PRs, so:
+# - It runs from the default branch and never checks out or runs PR code.
+# - The artifact comes from a run the PR controls, so its contents are untrusted: the PR number
+#   is checked against the run's commit, and the output is only ever shown as fenced text.
+on:
+  workflow_run:
+    workflows: ["Validate Data"]
+    types: [completed]
+
+permissions:
+  actions: read
+  pull-requests: write
+
+jobs:
+  comment:
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      (github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the result
+        uses: actions/download-artifact@v8
+        continue-on-error: true
+        with:
+          name: pr-result
+          path: pr-result
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: Post or update the comment
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const fs = require("fs");
+            const MARKER = "<!-- islet-sites-validation -->";
+            const BOT = "github-actions[bot]";
+            const MAX_OUTPUT = 30000;
+            const run = context.payload.workflow_run;
+            const { owner, repo } = context.repo;
+
+            // Untrusted input from the artifact
+            let number;
+            let output;
+            try {
+              number = fs.readFileSync("pr-result/pr-number", "utf8").trim();
+              output = fs.readFileSync("pr-result/output.txt", "utf8");
+            } catch {
+              core.info("No validation result found, nothing to post.");
+              return;
+            }
+            if (!/^[1-9][0-9]*$/.test(number)) {
+              core.warning("Ignoring an invalid PR number in the result.");
+              return;
+            }
+
+            // Only comment if this PR really is the one the run validated
+            let pr;
+            try {
+              ({ data: pr } = await github.rest.pulls.get({
+                owner,
+                repo,
+                pull_number: Number(number),
+              }));
+            } catch (error) {
+              if (error.status !== 404) throw error;
+              core.warning("The PR in the result doesn't exist.");
+              return;
+            }
+            if (pr.head.sha !== run.head_sha) {
+              core.info("The PR has newer commits or doesn't match this run, skipping.");
+              return;
+            }
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: pr.number,
+              per_page: 100,
+            });
+            const existing = comments.find(
+              (c) => c.user?.login === BOT && c.body?.includes(MARKER),
+            );
+
+            let body;
+            if (run.conclusion === "success") {
+              if (!existing) return; // Stay quiet unless there's an earlier failure to update
+              body = [
+                MARKER,
+                "### ✅ Site data validation passed / 站点数据校验通过",
+                "",
+                "The earlier errors are fixed. A maintainer will review this PR. / 之前的错误已修复，维护者会审核此 PR。",
+              ].join("\n");
+            } else {
+              const text = output.replace(/`{3,}/g, "'''").slice(0, MAX_OUTPUT);
+              body = [
+                MARKER,
+                "### ❌ Site data validation failed / 站点数据校验失败",
+                "",
+                "Please fix these errors and push again. This comment updates automatically. / 请修复以下错误后重新推送，此评论会自动更新。",
+                "",
+                "```text",
+                text,
+                "```",
+                "",
+                `See the [contributing guide](https://github.com/${owner}/${repo}/blob/main/CONTRIBUTING.md) / [贡献指南](https://github.com/${owner}/${repo}/blob/main/CONTRIBUTING.zh.md).`,
+              ].join("\n");
+            }
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pr.number,
+                body,
+              });
+            }

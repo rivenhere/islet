@@ -31,10 +31,15 @@
       "searchHistory": "Search History Suggestions",
       "clearHistory": "Clear",
       "appearance": "Appearance",
-      "showHitokoto": "Show Hitokoto",
+      "showHitokoto": "Show Hitokoto (online)",
       "showShortcuts": "Show Quick Nav",
       "language": "Language",
-      "autoHideSettingButton": "Auto-hide Settings Button"
+      "autoHideSettingButton": "Auto-hide Settings Button",
+      "siteSearch": "Official site shortcuts",
+      "openInNewTab": "Open in new tab",
+      "focusOnNewTab": "Focus search on new tab (experimental)",
+      "focusOnNewTabHint": "A new tab reloads once so the search box can take focus from the address bar. The address bar then shows the extension's address.",
+      "showHitokotoHint": "When on, each new tab requests a quote from hitokoto.cn. When off, Islet runs fully offline."
     },
     "shortcuts": {
       "title": "Quick Navigation",
@@ -77,7 +82,10 @@
     },
     "about": {
       "title": "About Islet",
-      "content": "A minimalist and elegant browser start page. \nCrafted with care by Talyra42."
+      "content": "A minimalist and elegant browser start page. \nCrafted with care by Talyra42.\nContributor: Riven.",
+      "sites": "Islet ships {count} PR-reviewed official websites so you can skip the pirated and phishing look-alikes in search results. Type /github to jump straight there, /gh?user=xx&repo=yy for a specific page, or tags:dev to filter by category (tags:tool{'|'}code matches either).",
+      "contribute": "Submit a site via PR",
+      "keys": "Shortcuts: Ctrl+K focus search · Ctrl+Enter flip open mode · Ctrl+, toggle settings · Alt+Enter choose backup address · Shift+Enter open in new window · Esc close"
     }
   },
   "PixelSelect": {
@@ -86,7 +94,13 @@
   "MainSearchBar": {
     "empty": "Type and press Enter to search...",
     "removeHistory": "Remove this history item",
-    "switchEngine": "Switch search engine"
+    "switchEngine": "Switch search engine",
+    "emptyWithSites": "Type to search, start with / for official sites...",
+    "official": "Official",
+    "routeMiss": "Site not listed, Enter will search with {engine}",
+    "contribute": "Request it",
+    "alt": "Backup",
+    "altHint": "Choose a backup official address (Alt+Enter)"
   },
   "HitokotoWidget": {
     "padding": "Catching island signals...",

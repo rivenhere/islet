@@ -1,13 +1,13 @@
 <script setup lang="ts">
-// 接收 v-model 绑定的值
+// Value bound through v-model
 const props = defineProps<{
   modelValue: boolean;
 }>();
 
-// 定义更新事件
+// Update event
 const emit = defineEmits(["update:modelValue"]);
 
-// 切换开关状态
+// Flip the toggle
 const toggle = () => {
   emit("update:modelValue", !props.modelValue);
 };
@@ -23,6 +23,8 @@ const toggle = () => {
 .pixel-toggle {
   width: 46px;
   height: 26px;
+  // Keep its size next to long labels (as a flex item it would otherwise shrink)
+  flex-shrink: 0;
   background-color: var(--active-bg);
   border: 2px solid var(--border-hard);
   border-radius: 6px;

@@ -1,0 +1,3505 @@
+{
+  "12306": {
+    "name": {
+      "zh-Hans": "中国铁路 12306",
+      "en": "China Railway 12306",
+      "ja": "中国鉄道 12306"
+    },
+    "url": "https://www.12306.cn",
+    "aliases": ["火车票", "铁路"],
+    "desc": {
+      "zh-Hans": "中国铁路官方购票",
+      "en": "Official China Railway tickets",
+      "ja": "中国鉄道の公式切符予約"
+    },
+    "tags": ["travel"]
+  },
+  "github": {
+    "name": "GitHub",
+    "url": "https://github.com",
+    "aliases": ["gh"],
+    "desc": {
+      "zh-Hans": "代码托管与开源协作平台",
+      "en": "Code hosting and open-source collaboration platform",
+      "ja": "コードホスティングとオープンソース協業プラットフォーム"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["user", "repo"],
+        "template": "{url}/{user}/{repo}"
+      },
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "gitlab": {
+    "name": "GitLab",
+    "url": "https://gitlab.com",
+    "aliases": ["gl"],
+    "desc": {
+      "zh-Hans": "代码托管与 DevOps 平台",
+      "en": "Code hosting and DevOps platform",
+      "ja": "コードホスティングと DevOps プラットフォーム"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["user", "repo"],
+        "template": "{url}/{user}/{repo}"
+      },
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      }
+    ]
+  },
+  "gitee": {
+    "name": {
+      "zh-Hans": "Gitee 码云",
+      "en": "Gitee",
+      "ja": "Gitee"
+    },
+    "url": "https://gitee.com",
+    "aliases": ["码云"],
+    "desc": {
+      "zh-Hans": "国内代码托管平台",
+      "en": "Chinese code hosting platform",
+      "ja": "中国のコードホスティング"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["user", "repo"],
+        "template": "{url}/{user}/{repo}"
+      },
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "https://so.gitee.com/?q={q}"
+      }
+    ]
+  },
+  "bilibili": {
+    "name": {
+      "zh-Hans": "哔哩哔哩",
+      "en": "Bilibili",
+      "ja": "bilibili"
+    },
+    "url": "https://www.bilibili.com",
+    "aliases": ["bili", "b站"],
+    "desc": {
+      "zh-Hans": "国内弹幕视频网站",
+      "en": "Chinese video site with bullet comments",
+      "ja": "中国の弾幕動画サイト"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["bv"],
+        "template": "{url}/video/{bv}"
+      },
+      {
+        "param": ["q"],
+        "template": "https://search.bilibili.com/all?keyword={q}"
+      }
+    ]
+  },
+  "youtube": {
+    "name": "YouTube",
+    "url": "https://www.youtube.com",
+    "aliases": ["yt"],
+    "desc": {
+      "zh-Hans": "全球视频分享平台",
+      "en": "Global video sharing platform",
+      "ja": "世界的な動画共有プラットフォーム"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["v"],
+        "template": "{url}/watch?v={v}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/results?search_query={q}"
+      }
+    ]
+  },
+  "wikipedia": {
+    "name": "Wikipedia",
+    "url": {
+      "zh-Hans": "https://zh.wikipedia.org/",
+      "en": "https://en.wikipedia.org/",
+      "ja": "https://ja.wikipedia.org/"
+    },
+    "aliases": ["wiki", "维基百科"],
+    "desc": {
+      "zh-Hans": "自由的百科全书",
+      "en": "The free encyclopedia",
+      "ja": "フリー百科事典"
+    },
+    "tags": ["reference"],
+    "params": [
+      {
+        "param": ["lang", "title"],
+        "template": "https://{lang}.wikipedia.org/wiki/{title}"
+      },
+      {
+        "param": ["title"],
+        "template": "{url}/wiki/{title}"
+      }
+    ]
+  },
+  "steam": {
+    "name": "Steam",
+    "url": "https://store.steampowered.com",
+    "desc": {
+      "zh-Hans": "Valve 官方游戏商店",
+      "en": "Valve's official game store",
+      "ja": "Valve 公式ゲームストア"
+    },
+    "tags": ["game"],
+    "params": [
+      {
+        "param": ["app"],
+        "template": "{url}/app/{app}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/?term={q}"
+      }
+    ]
+  },
+  "npm": {
+    "name": "npm",
+    "url": "https://www.npmjs.com",
+    "desc": {
+      "zh-Hans": "JavaScript 包管理仓库",
+      "en": "JavaScript package registry",
+      "ja": "JavaScript パッケージレジストリ"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["pkg"],
+        "template": "{url}/package/{pkg}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "mdn": {
+    "name": "MDN Web Docs",
+    "url": {
+      "zh-Hans": "https://developer.mozilla.org/zh-CN/",
+      "en": "https://developer.mozilla.org/en-US/",
+      "ja": "https://developer.mozilla.org/ja/"
+    },
+    "desc": {
+      "zh-Hans": "Web 开发权威文档",
+      "en": "Authoritative web development docs",
+      "ja": "Web 開発の公式ドキュメント"
+    },
+    "tags": ["dev", "reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "stackoverflow": {
+    "name": "Stack Overflow",
+    "url": "https://stackoverflow.com",
+    "aliases": ["so"],
+    "desc": {
+      "zh-Hans": "程序员问答社区",
+      "en": "Q&A community for programmers",
+      "ja": "プログラマー向け Q&A コミュニティ"
+    },
+    "tags": ["dev"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "zhihu": {
+    "name": {
+      "zh-Hans": "知乎",
+      "en": "Zhihu",
+      "ja": "知乎"
+    },
+    "url": "https://www.zhihu.com",
+    "aliases": ["zh"],
+    "desc": {
+      "zh-Hans": "中文问答社区",
+      "en": "Chinese Q&A community",
+      "ja": "中国語の Q&A コミュニティ"
+    },
+    "tags": ["community"]
+  },
+  "python": {
+    "name": "Python",
+    "url": "https://www.python.org",
+    "aliases": ["py"],
+    "desc": {
+      "zh-Hans": "Python 官方网站与下载",
+      "en": "Official Python website and downloads",
+      "ja": "Python 公式サイトとダウンロード"
+    },
+    "tags": ["dev", "download"]
+  },
+  "nodejs": {
+    "name": "Node.js",
+    "url": "https://nodejs.org",
+    "aliases": ["node"],
+    "desc": {
+      "zh-Hans": "Node.js 官方网站与下载",
+      "en": "Official Node.js website and downloads",
+      "ja": "Node.js 公式サイトとダウンロード"
+    },
+    "tags": ["dev", "download"]
+  },
+  "vscode": {
+    "name": "Visual Studio Code",
+    "url": "https://code.visualstudio.com",
+    "aliases": ["code"],
+    "desc": {
+      "zh-Hans": "微软开源代码编辑器",
+      "en": "Microsoft's open-source code editor",
+      "ja": "Microsoft のオープンソースコードエディタ"
+    },
+    "tags": ["dev", "download", "tool"]
+  },
+  "docker": {
+    "name": "Docker",
+    "url": "https://www.docker.com",
+    "desc": {
+      "zh-Hans": "容器化平台",
+      "en": "Containerization platform",
+      "ja": "コンテナプラットフォーム"
+    },
+    "tags": ["dev", "download", "tool"]
+  },
+  "dockerhub": {
+    "name": "Docker Hub",
+    "url": "https://hub.docker.com",
+    "aliases": ["dhub"],
+    "desc": {
+      "zh-Hans": "Docker 官方镜像仓库",
+      "en": "Docker's official image registry",
+      "ja": "Docker 公式のイメージレジストリ"
+    },
+    "tags": ["dev"],
+    "params": [
+      {
+        "param": ["user", "repo"],
+        "template": "{url}/r/{user}/{repo}"
+      },
+      {
+        "param": ["image"],
+        "template": "{url}/_/{image}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "oracle": {
+    "name": {
+      "zh-Hans": "Oracle 甲骨文",
+      "en": "Oracle",
+      "ja": "Oracle"
+    },
+    "url": {
+      "zh-Hans": "https://www.oracle.com/cn/",
+      "en": "https://www.oracle.com",
+      "ja": "https://www.oracle.com/jp/"
+    },
+    "aliases": ["甲骨文"],
+    "desc": {
+      "zh-Hans": "Oracle 官网（数据库、Java、云）",
+      "en": "Oracle: database, Java and cloud",
+      "ja": "Oracle 公式サイト（データベース・Java・クラウド）"
+    },
+    "tags": ["dev", "download"]
+  },
+  "microsoft": {
+    "name": "Microsoft",
+    "url": {
+      "zh-Hans": "https://www.microsoft.com/zh-cn/",
+      "en": "https://www.microsoft.com/en-us/",
+      "ja": "https://www.microsoft.com/ja-jp/"
+    },
+    "aliases": ["ms", "微软"],
+    "desc": {
+      "zh-Hans": "微软官方网站",
+      "en": "Official Microsoft website",
+      "ja": "Microsoft 公式サイト"
+    },
+    "tags": ["download", "office"]
+  },
+  "firefox": {
+    "name": "Firefox",
+    "url": {
+      "zh-Hans": "https://www.mozilla.org/zh-CN/firefox/",
+      "en": "https://www.mozilla.org/en-US/firefox/",
+      "ja": "https://www.mozilla.org/ja/firefox/"
+    },
+    "aliases": ["ff", "火狐"],
+    "desc": {
+      "zh-Hans": "Mozilla 开源浏览器",
+      "en": "Mozilla's open-source browser",
+      "ja": "Mozilla のオープンソースブラウザ"
+    },
+    "tags": ["browser", "download"]
+  },
+  "chrome": {
+    "name": "Google Chrome",
+    "url": "https://www.google.com/chrome/",
+    "aliases": ["谷歌浏览器"],
+    "desc": {
+      "zh-Hans": "Google 浏览器官方下载",
+      "en": "Official Google Chrome download",
+      "ja": "Google Chrome 公式ダウンロード"
+    },
+    "tags": ["browser", "download"]
+  },
+  "7zip": {
+    "name": "7-Zip",
+    "url": "https://www.7-zip.org",
+    "aliases": ["7z"],
+    "desc": {
+      "zh-Hans": "开源免费压缩软件",
+      "en": "Free open-source file archiver",
+      "ja": "無料のオープンソース圧縮ソフト"
+    },
+    "tags": ["download", "tool"]
+  },
+  "vlc": {
+    "name": "VLC media player",
+    "url": "https://www.videolan.org/vlc/",
+    "desc": {
+      "zh-Hans": "开源全能媒体播放器",
+      "en": "Open-source media player that plays everything",
+      "ja": "何でも再生できるオープンソースのメディアプレーヤー"
+    },
+    "tags": ["download", "tool", "video"]
+  },
+  "obs": {
+    "name": "OBS Studio",
+    "url": "https://obsproject.com",
+    "desc": {
+      "zh-Hans": "开源录屏与直播软件",
+      "en": "Open-source screen recording and streaming",
+      "ja": "オープンソースの録画・配信ソフト"
+    },
+    "tags": ["download", "tool", "video"]
+  },
+  "blender": {
+    "name": "Blender",
+    "url": "https://www.blender.org",
+    "desc": {
+      "zh-Hans": "开源 3D 创作套件",
+      "en": "Open-source 3D creation suite",
+      "ja": "オープンソースの 3D 制作スイート"
+    },
+    "tags": ["download", "design"]
+  },
+  "gimp": {
+    "name": "GIMP",
+    "url": "https://www.gimp.org",
+    "desc": {
+      "zh-Hans": "开源图像编辑器",
+      "en": "Open-source image editor",
+      "ja": "オープンソースの画像エディタ"
+    },
+    "tags": ["download", "design"]
+  },
+  "libreoffice": {
+    "name": "LibreOffice",
+    "url": "https://www.libreoffice.org",
+    "aliases": ["lo"],
+    "desc": {
+      "zh-Hans": "开源办公套件",
+      "en": "Open-source office suite",
+      "ja": "オープンソースのオフィススイート"
+    },
+    "tags": ["download", "office"]
+  },
+  "notepadpp": {
+    "name": "Notepad++",
+    "url": "https://notepad-plus-plus.org",
+    "aliases": ["npp", "notepad++"],
+    "desc": {
+      "zh-Hans": "Windows 开源文本编辑器",
+      "en": "Open-source text editor for Windows",
+      "ja": "Windows 向けオープンソーステキストエディタ"
+    },
+    "tags": ["download", "tool"]
+  },
+  "telegram": {
+    "name": "Telegram",
+    "url": "https://telegram.org",
+    "aliases": ["tg"],
+    "desc": {
+      "zh-Hans": "Telegram 官方网站与客户端下载",
+      "en": "Official Telegram website and app downloads",
+      "ja": "Telegram 公式サイトとアプリのダウンロード"
+    },
+    "tags": ["chat", "download"]
+  },
+  "wechat": {
+    "name": {
+      "zh-Hans": "微信",
+      "en": "WeChat",
+      "ja": "WeChat"
+    },
+    "url": "https://weixin.qq.com",
+    "aliases": ["weixin", "wx"],
+    "desc": {
+      "zh-Hans": "微信官方网站与客户端下载",
+      "en": "Official WeChat website and app downloads",
+      "ja": "WeChat 公式サイトとアプリのダウンロード"
+    },
+    "tags": ["chat", "download"]
+  },
+  "qq": {
+    "name": "QQ",
+    "url": "https://im.qq.com",
+    "desc": {
+      "zh-Hans": "QQ 官方网站与客户端下载",
+      "en": "Official QQ website and app downloads",
+      "ja": "QQ 公式サイトとアプリのダウンロード"
+    },
+    "tags": ["chat", "download"]
+  },
+  "reddit": {
+    "name": "Reddit",
+    "url": "https://www.reddit.com",
+    "aliases": ["rd"],
+    "desc": {
+      "zh-Hans": "海外综合社区论坛",
+      "en": "Community forums on every topic",
+      "ja": "あらゆる話題のコミュニティ掲示板"
+    },
+    "tags": ["community", "social"],
+    "params": [
+      {
+        "param": ["sub"],
+        "template": "{url}/r/{sub}"
+      },
+      {
+        "param": ["user"],
+        "template": "{url}/user/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/?q={q}"
+      }
+    ]
+  },
+  "x": {
+    "name": "X (Twitter)",
+    "url": "https://x.com",
+    "aliases": ["twitter", "tw", "推特"],
+    "desc": {
+      "zh-Hans": "实时动态社交平台（原 Twitter）",
+      "en": "Real-time social network (formerly Twitter)",
+      "ja": "リアルタイムのソーシャルネットワーク（旧 Twitter）"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "instagram": {
+    "name": "Instagram",
+    "url": "https://www.instagram.com",
+    "aliases": ["ig", "ins"],
+    "desc": {
+      "zh-Hans": "图片与短视频分享社交平台",
+      "en": "Photo and short video sharing network",
+      "ja": "写真と短い動画の共有 SNS"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}/"
+      }
+    ]
+  },
+  "facebook": {
+    "name": "Facebook",
+    "url": "https://www.facebook.com",
+    "aliases": ["fb", "脸书"],
+    "desc": {
+      "zh-Hans": "全球社交网络",
+      "en": "Global social network",
+      "ja": "世界的なソーシャルネットワーク"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/top/?q={q}"
+      }
+    ]
+  },
+  "tiktok": {
+    "name": "TikTok",
+    "url": "https://www.tiktok.com",
+    "aliases": ["tt"],
+    "desc": {
+      "zh-Hans": "短视频平台（国际版）",
+      "en": "Short video platform",
+      "ja": "ショート動画プラットフォーム"
+    },
+    "tags": ["video", "social"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/@{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "linkedin": {
+    "name": "LinkedIn",
+    "url": "https://www.linkedin.com",
+    "aliases": ["领英"],
+    "desc": {
+      "zh-Hans": "职场社交与求职平台",
+      "en": "Professional network and job search",
+      "ja": "ビジネス SNS と求人"
+    },
+    "tags": ["social", "work"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/in/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/results/all/?keywords={q}"
+      }
+    ]
+  },
+  "pinterest": {
+    "name": "Pinterest",
+    "url": "https://www.pinterest.com",
+    "desc": {
+      "zh-Hans": "图片灵感收集平台",
+      "en": "Visual ideas and inspiration boards",
+      "ja": "画像でアイデアを集めるサービス"
+    },
+    "tags": ["social", "design"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/pins/?q={q}"
+      }
+    ]
+  },
+  "weibo": {
+    "name": {
+      "zh-Hans": "微博",
+      "en": "Weibo",
+      "ja": "微博 (Weibo)"
+    },
+    "url": "https://weibo.com",
+    "aliases": ["微博", "wb"],
+    "desc": {
+      "zh-Hans": "新浪微博，国内社交媒体",
+      "en": "Chinese microblogging platform",
+      "ja": "中国のマイクロブログ"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://s.weibo.com/weibo?q={q}"
+      }
+    ]
+  },
+  "xiaohongshu": {
+    "name": {
+      "zh-Hans": "小红书",
+      "en": "Xiaohongshu (RedNote)",
+      "ja": "小紅書 (RedNote)"
+    },
+    "url": "https://www.xiaohongshu.com",
+    "aliases": ["小红书", "xhs", "rednote"],
+    "desc": {
+      "zh-Hans": "生活方式分享社区",
+      "en": "Lifestyle sharing community",
+      "ja": "ライフスタイル共有コミュニティ"
+    },
+    "tags": ["social", "community"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search_result?keyword={q}"
+      }
+    ]
+  },
+  "douban": {
+    "name": {
+      "zh-Hans": "豆瓣",
+      "en": "Douban",
+      "ja": "豆瓣 (Douban)"
+    },
+    "url": "https://www.douban.com",
+    "aliases": ["豆瓣", "db"],
+    "desc": {
+      "zh-Hans": "书影音评分与兴趣社区",
+      "en": "Book, film and music reviews community",
+      "ja": "本・映画・音楽のレビューコミュニティ"
+    },
+    "tags": ["community", "reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "discord": {
+    "name": "Discord",
+    "url": "https://discord.com",
+    "aliases": ["dc"],
+    "desc": {
+      "zh-Hans": "社群语音与文字聊天",
+      "en": "Voice and text chat for communities",
+      "ja": "コミュニティ向けのボイス・テキストチャット"
+    },
+    "tags": ["chat", "download"]
+  },
+  "whatsapp": {
+    "name": "WhatsApp",
+    "url": "https://www.whatsapp.com",
+    "aliases": ["wa"],
+    "desc": {
+      "zh-Hans": "Meta 旗下即时通讯应用",
+      "en": "Messaging app by Meta",
+      "ja": "Meta のメッセージアプリ"
+    },
+    "tags": ["chat", "download"]
+  },
+  "twitch": {
+    "name": "Twitch",
+    "url": "https://www.twitch.tv",
+    "desc": {
+      "zh-Hans": "游戏直播平台",
+      "en": "Live streaming, mostly games",
+      "ja": "ゲーム中心のライブ配信"
+    },
+    "tags": ["video", "game"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?term={q}"
+      }
+    ]
+  },
+  "douyin": {
+    "name": {
+      "zh-Hans": "抖音",
+      "en": "Douyin",
+      "ja": "抖音 (Douyin)"
+    },
+    "url": "https://www.douyin.com",
+    "aliases": ["抖音", "dy"],
+    "desc": {
+      "zh-Hans": "国内短视频平台",
+      "en": "Chinese short video platform",
+      "ja": "中国のショート動画プラットフォーム"
+    },
+    "tags": ["video", "social"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/{q}"
+      }
+    ]
+  },
+  "niconico": {
+    "name": {
+      "zh-Hans": "niconico",
+      "en": "niconico",
+      "ja": "ニコニコ動画"
+    },
+    "url": "https://www.nicovideo.jp",
+    "aliases": ["nico", "ニコニコ"],
+    "desc": {
+      "zh-Hans": "日本弹幕视频网站",
+      "en": "Japanese video site with on-screen comments",
+      "ja": "コメントが流れる動画サイト"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["v"],
+        "template": "{url}/watch/{v}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/{q}"
+      }
+    ]
+  },
+  "netflix": {
+    "name": "Netflix",
+    "url": "https://www.netflix.com",
+    "aliases": ["nf", "网飞"],
+    "desc": {
+      "zh-Hans": "影视剧流媒体订阅服务",
+      "en": "Streaming service for films and series",
+      "ja": "映画・ドラマの動画配信サービス"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "spotify": {
+    "name": "Spotify",
+    "url": "https://open.spotify.com",
+    "aliases": ["sp"],
+    "desc": {
+      "zh-Hans": "音乐与播客流媒体（网页播放器）",
+      "en": "Music and podcast streaming (web player)",
+      "ja": "音楽とポッドキャストの配信（Web プレーヤー）"
+    },
+    "tags": ["music"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/{q}"
+      }
+    ]
+  },
+  "pixiv": {
+    "name": "pixiv",
+    "url": "https://www.pixiv.net",
+    "aliases": ["p站"],
+    "desc": {
+      "zh-Hans": "插画与漫画创作社区",
+      "en": "Illustration and manga community",
+      "ja": "イラスト・マンガの投稿コミュニティ"
+    },
+    "tags": ["design", "community"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/users/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/tags/{q}"
+      }
+    ]
+  },
+  "amazon": {
+    "name": "Amazon",
+    "url": {
+      "zh-Hans": "https://www.amazon.cn",
+      "en": "https://www.amazon.com",
+      "ja": "https://www.amazon.co.jp"
+    },
+    "aliases": ["amz", "亚马逊"],
+    "desc": {
+      "zh-Hans": "亚马逊网上商城",
+      "en": "Online store",
+      "ja": "オンラインストア"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/s?k={q}"
+      }
+    ]
+  },
+  "ebay": {
+    "name": "eBay",
+    "url": "https://www.ebay.com",
+    "desc": {
+      "zh-Hans": "全球在线拍卖与购物",
+      "en": "Online auctions and shopping",
+      "ja": "オンラインオークションとショッピング"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/sch/i.html?_nkw={q}"
+      }
+    ]
+  },
+  "aliexpress": {
+    "name": "AliExpress",
+    "url": "https://www.aliexpress.com",
+    "aliases": ["ali", "速卖通"],
+    "desc": {
+      "zh-Hans": "阿里巴巴旗下跨境购物平台",
+      "en": "International shopping by Alibaba",
+      "ja": "アリババの越境 EC"
+    },
+    "tags": ["shopping"]
+  },
+  "taobao": {
+    "name": {
+      "zh-Hans": "淘宝",
+      "en": "Taobao",
+      "ja": "淘宝 (Taobao)"
+    },
+    "url": "https://www.taobao.com",
+    "aliases": ["淘宝", "tb"],
+    "desc": {
+      "zh-Hans": "阿里巴巴旗下购物平台",
+      "en": "Chinese shopping platform by Alibaba",
+      "ja": "アリババの中国向け EC"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://s.taobao.com/search?q={q}"
+      }
+    ]
+  },
+  "jd": {
+    "name": {
+      "zh-Hans": "京东",
+      "en": "JD.com",
+      "ja": "京東 (JD.com)"
+    },
+    "url": "https://www.jd.com",
+    "aliases": ["京东", "jingdong"],
+    "desc": {
+      "zh-Hans": "国内综合网上商城",
+      "en": "Chinese online store",
+      "ja": "中国のオンラインストア"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://search.jd.com/Search?keyword={q}"
+      }
+    ]
+  },
+  "gmail": {
+    "name": "Gmail",
+    "url": "https://mail.google.com",
+    "desc": {
+      "zh-Hans": "Google 邮箱",
+      "en": "Email by Google",
+      "ja": "Google のメール"
+    },
+    "tags": ["mail"]
+  },
+  "outlook": {
+    "name": "Outlook",
+    "url": "https://outlook.live.com/mail/",
+    "desc": {
+      "zh-Hans": "微软个人邮箱",
+      "en": "Personal email by Microsoft",
+      "ja": "Microsoft の個人向けメール"
+    },
+    "tags": ["mail", "office"]
+  },
+  "googlemaps": {
+    "name": {
+      "zh-Hans": "Google 地图",
+      "en": "Google Maps",
+      "ja": "Google マップ"
+    },
+    "url": "https://www.google.com/maps",
+    "aliases": ["gmaps", "maps", "谷歌地图"],
+    "desc": {
+      "zh-Hans": "地图与导航",
+      "en": "Maps and directions",
+      "ja": "地図と経路案内"
+    },
+    "tags": ["map"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/{q}"
+      }
+    ]
+  },
+  "googledrive": {
+    "name": {
+      "zh-Hans": "Google 云端硬盘",
+      "en": "Google Drive",
+      "ja": "Google ドライブ"
+    },
+    "url": "https://drive.google.com",
+    "aliases": ["gdrive"],
+    "desc": {
+      "zh-Hans": "Google 云存储与文档",
+      "en": "Cloud storage and documents by Google",
+      "ja": "Google のクラウドストレージ"
+    },
+    "tags": ["office", "tool"]
+  },
+  "googletranslate": {
+    "name": {
+      "zh-Hans": "Google 翻译",
+      "en": "Google Translate",
+      "ja": "Google 翻訳"
+    },
+    "url": "https://translate.google.com",
+    "aliases": ["gt", "谷歌翻译"],
+    "desc": {
+      "zh-Hans": "在线翻译",
+      "en": "Online translation",
+      "ja": "オンライン翻訳"
+    },
+    "tags": ["translate", "tool"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/?text={q}"
+      }
+    ]
+  },
+  "deepl": {
+    "name": {
+      "zh-Hans": "DeepL 翻译",
+      "en": "DeepL Translator",
+      "ja": "DeepL 翻訳"
+    },
+    "url": {
+      "zh-Hans": "https://www.deepl.com/zh/translator",
+      "en": "https://www.deepl.com/en/translator",
+      "ja": "https://www.deepl.com/ja/translator"
+    },
+    "desc": {
+      "zh-Hans": "AI 在线翻译",
+      "en": "AI translation",
+      "ja": "AI 翻訳"
+    },
+    "tags": ["translate", "tool", "ai"]
+  },
+  "chatgpt": {
+    "name": "ChatGPT",
+    "url": "https://chatgpt.com",
+    "aliases": ["gpt"],
+    "desc": {
+      "zh-Hans": "OpenAI 的 AI 助手",
+      "en": "AI assistant by OpenAI",
+      "ja": "OpenAI の AI アシスタント"
+    },
+    "tags": ["ai"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/?q={q}"
+      }
+    ]
+  },
+  "claude": {
+    "name": "Claude",
+    "url": "https://claude.ai",
+    "desc": {
+      "zh-Hans": "Anthropic 的 AI 助手",
+      "en": "AI assistant by Anthropic",
+      "ja": "Anthropic の AI アシスタント"
+    },
+    "tags": ["ai"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/new?q={q}"
+      }
+    ]
+  },
+  "gemini": {
+    "name": "Gemini",
+    "url": "https://gemini.google.com",
+    "desc": {
+      "zh-Hans": "Google 的 AI 助手",
+      "en": "AI assistant by Google",
+      "ja": "Google の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "deepseek": {
+    "name": "DeepSeek",
+    "url": "https://chat.deepseek.com",
+    "aliases": ["ds"],
+    "desc": {
+      "zh-Hans": "深度求索的 AI 助手",
+      "en": "AI assistant by DeepSeek",
+      "ja": "DeepSeek の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "epicgames": {
+    "name": "Epic Games Store",
+    "url": "https://store.epicgames.com",
+    "aliases": ["epic", "eg"],
+    "desc": {
+      "zh-Hans": "Epic 官方游戏商店",
+      "en": "Epic's official game store",
+      "ja": "Epic 公式ゲームストア"
+    },
+    "tags": ["game", "download"]
+  },
+  "minecraft": {
+    "name": {
+      "zh-Hans": "我的世界 (Minecraft)",
+      "en": "Minecraft",
+      "ja": "マインクラフト (Minecraft)"
+    },
+    "url": {
+      "zh-Hans": "https://www.minecraft.net/zh-hans",
+      "en": "https://www.minecraft.net/en-us",
+      "ja": "https://www.minecraft.net/ja-jp"
+    },
+    "aliases": ["mc", "我的世界", "マイクラ"],
+    "desc": {
+      "zh-Hans": "Mojang 官方网站，购买与下载正版",
+      "en": "Official site by Mojang: buy and download",
+      "ja": "Mojang 公式サイト：購入とダウンロード"
+    },
+    "tags": ["game", "download"]
+  },
+  "roblox": {
+    "name": "Roblox",
+    "url": "https://www.roblox.com",
+    "desc": {
+      "zh-Hans": "在线游戏创作与游玩平台",
+      "en": "Online platform to play and create games",
+      "ja": "ゲームを遊んで作れるオンラインプラットフォーム"
+    },
+    "tags": ["game"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/discover?Keyword={q}"
+      }
+    ]
+  },
+  "gog": {
+    "name": "GOG",
+    "url": "https://www.gog.com",
+    "desc": {
+      "zh-Hans": "无 DRM 游戏商店",
+      "en": "DRM-free game store",
+      "ja": "DRM フリーのゲームストア"
+    },
+    "tags": ["game", "download"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/games?query={q}"
+      }
+    ]
+  },
+  "blizzard": {
+    "name": "Blizzard",
+    "url": "https://www.blizzard.com",
+    "aliases": ["暴雪"],
+    "desc": {
+      "zh-Hans": "暴雪娱乐官网",
+      "en": "Blizzard Entertainment",
+      "ja": "Blizzard Entertainment 公式サイト"
+    },
+    "tags": ["game"]
+  },
+  "battlenet": {
+    "name": "Battle.net",
+    "url": "https://battle.net",
+    "aliases": ["bnet"],
+    "desc": {
+      "zh-Hans": "暴雪游戏商店与启动器",
+      "en": "Blizzard's game store and launcher",
+      "ja": "Blizzard のゲームストアとランチャー"
+    },
+    "tags": ["game", "download"]
+  },
+  "ea": {
+    "name": "EA",
+    "url": "https://www.ea.com",
+    "aliases": ["electronicarts"],
+    "desc": {
+      "zh-Hans": "艺电官网与 EA app",
+      "en": "Electronic Arts and the EA app",
+      "ja": "Electronic Arts と EA app"
+    },
+    "tags": ["game", "download"]
+  },
+  "ubisoft": {
+    "name": "Ubisoft",
+    "url": "https://www.ubisoft.com",
+    "aliases": ["育碧"],
+    "desc": {
+      "zh-Hans": "育碧官网与 Ubisoft Connect",
+      "en": "Ubisoft and Ubisoft Connect",
+      "ja": "Ubisoft と Ubisoft Connect"
+    },
+    "tags": ["game", "download"]
+  },
+  "playstation": {
+    "name": "PlayStation",
+    "url": "https://www.playstation.com",
+    "aliases": ["ps", "psn"],
+    "desc": {
+      "zh-Hans": "索尼 PlayStation 官网",
+      "en": "Sony PlayStation",
+      "ja": "ソニー PlayStation 公式サイト"
+    },
+    "tags": ["game"]
+  },
+  "xbox": {
+    "name": "Xbox",
+    "url": "https://www.xbox.com",
+    "desc": {
+      "zh-Hans": "微软 Xbox 官网",
+      "en": "Microsoft Xbox",
+      "ja": "Microsoft Xbox 公式サイト"
+    },
+    "tags": ["game"]
+  },
+  "nintendo": {
+    "name": {
+      "zh-Hans": "任天堂 (Nintendo)",
+      "en": "Nintendo",
+      "ja": "任天堂"
+    },
+    "url": {
+      "en": "https://www.nintendo.com",
+      "ja": "https://www.nintendo.com/jp/"
+    },
+    "aliases": ["任天堂", "switch"],
+    "desc": {
+      "zh-Hans": "任天堂官网",
+      "en": "Nintendo",
+      "ja": "任天堂公式サイト"
+    },
+    "tags": ["game"]
+  },
+  "leagueoflegends": {
+    "name": {
+      "zh-Hans": "英雄联盟 (League of Legends)",
+      "en": "League of Legends",
+      "ja": "リーグ・オブ・レジェンド"
+    },
+    "url": "https://www.leagueoflegends.com",
+    "aliases": ["lol", "英雄联盟"],
+    "desc": {
+      "zh-Hans": "Riot Games 官网（国际服）",
+      "en": "Riot Games' official site",
+      "ja": "Riot Games 公式サイト"
+    },
+    "tags": ["game", "download"]
+  },
+  "genshin": {
+    "name": {
+      "zh-Hans": "原神",
+      "en": "Genshin Impact",
+      "ja": "原神"
+    },
+    "url": {
+      "zh-Hans": "https://ys.mihoyo.com",
+      "en": "https://genshin.hoyoverse.com"
+    },
+    "aliases": ["原神", "ys"],
+    "desc": {
+      "zh-Hans": "米哈游官网",
+      "en": "Official site by HoYoverse",
+      "ja": "HoYoverse 公式サイト"
+    },
+    "tags": ["game", "download"]
+  },
+  "itchio": {
+    "name": "itch.io",
+    "url": "https://itch.io",
+    "aliases": ["itch"],
+    "desc": {
+      "zh-Hans": "独立游戏商店与社区",
+      "en": "Indie game store and community",
+      "ja": "インディーゲームのストアとコミュニティ"
+    },
+    "tags": ["game", "download"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "chesscom": {
+    "name": "Chess.com",
+    "url": "https://www.chess.com",
+    "aliases": ["chess", "国际象棋"],
+    "desc": {
+      "zh-Hans": "在线国际象棋",
+      "en": "Play chess online",
+      "ja": "オンラインチェス"
+    },
+    "tags": ["game"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/member/{user}"
+      }
+    ]
+  },
+  "lichess": {
+    "name": "Lichess",
+    "url": "https://lichess.org",
+    "desc": {
+      "zh-Hans": "免费开源的在线国际象棋",
+      "en": "Free and open-source online chess",
+      "ja": "無料・オープンソースのオンラインチェス"
+    },
+    "tags": ["game"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/@/{user}"
+      }
+    ]
+  },
+  "apple": {
+    "name": {
+      "zh-Hans": "Apple",
+      "en": "Apple",
+      "ja": "Apple"
+    },
+    "url": {
+      "zh-Hans": "https://www.apple.com.cn",
+      "en": "https://www.apple.com",
+      "ja": "https://www.apple.com/jp/"
+    },
+    "aliases": ["苹果"],
+    "desc": {
+      "zh-Hans": "Apple 官网",
+      "en": "Apple",
+      "ja": "Apple 公式サイト"
+    },
+    "tags": ["shopping", "download"]
+  },
+  "icloud": {
+    "name": "iCloud",
+    "url": "https://www.icloud.com",
+    "desc": {
+      "zh-Hans": "Apple 云服务（照片、邮件、云盘）",
+      "en": "Apple's cloud: photos, mail, drive",
+      "ja": "Apple のクラウド（写真・メール・ドライブ）"
+    },
+    "tags": ["office", "mail"]
+  },
+  "applemusic": {
+    "name": "Apple Music",
+    "url": "https://music.apple.com",
+    "aliases": ["am"],
+    "desc": {
+      "zh-Hans": "Apple 音乐流媒体",
+      "en": "Music streaming by Apple",
+      "ja": "Apple の音楽配信"
+    },
+    "tags": ["music"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?term={q}"
+      }
+    ]
+  },
+  "youtubemusic": {
+    "name": "YouTube Music",
+    "url": "https://music.youtube.com",
+    "aliases": ["ytm"],
+    "desc": {
+      "zh-Hans": "YouTube 音乐流媒体",
+      "en": "Music streaming by YouTube",
+      "ja": "YouTube の音楽配信"
+    },
+    "tags": ["music"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "soundcloud": {
+    "name": "SoundCloud",
+    "url": "https://soundcloud.com",
+    "aliases": ["sc"],
+    "desc": {
+      "zh-Hans": "音乐与音频分享平台",
+      "en": "Music and audio sharing",
+      "ja": "音楽・オーディオ共有"
+    },
+    "tags": ["music"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "yahoo": {
+    "name": "Yahoo",
+    "url": "https://www.yahoo.com",
+    "desc": {
+      "zh-Hans": "雅虎新闻、邮箱与搜索",
+      "en": "News, mail and search",
+      "ja": "ニュース・メール・検索"
+    },
+    "tags": ["news", "mail"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://search.yahoo.com/search?p={q}"
+      }
+    ]
+  },
+  "yahoojp": {
+    "name": {
+      "zh-Hans": "Yahoo! JAPAN",
+      "en": "Yahoo! JAPAN",
+      "ja": "Yahoo! JAPAN"
+    },
+    "url": "https://www.yahoo.co.jp",
+    "aliases": ["yahoojapan", "ヤフー"],
+    "desc": {
+      "zh-Hans": "日本门户网站",
+      "en": "Japanese portal: news, search and more",
+      "ja": "日本のポータルサイト"
+    },
+    "tags": ["news"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://search.yahoo.co.jp/search?p={q}"
+      }
+    ]
+  },
+  "bbc": {
+    "name": "BBC",
+    "url": "https://www.bbc.com",
+    "desc": {
+      "zh-Hans": "英国广播公司新闻",
+      "en": "BBC news",
+      "ja": "BBC ニュース"
+    },
+    "tags": ["news"]
+  },
+  "paypal": {
+    "name": "PayPal",
+    "url": "https://www.paypal.com",
+    "desc": {
+      "zh-Hans": "在线支付",
+      "en": "Online payments",
+      "ja": "オンライン決済"
+    },
+    "tags": ["finance"]
+  },
+  "booking": {
+    "name": "Booking.com",
+    "url": "https://www.booking.com",
+    "aliases": ["缤客"],
+    "desc": {
+      "zh-Hans": "酒店与住宿预订",
+      "en": "Hotel and stay booking",
+      "ja": "ホテル・宿泊予約"
+    },
+    "tags": ["travel"]
+  },
+  "airbnb": {
+    "name": "Airbnb",
+    "url": "https://www.airbnb.com",
+    "aliases": ["爱彼迎"],
+    "desc": {
+      "zh-Hans": "民宿与短租",
+      "en": "Homes and stays",
+      "ja": "民泊・宿泊"
+    },
+    "tags": ["travel"]
+  },
+  "duolingo": {
+    "name": "Duolingo",
+    "url": "https://www.duolingo.com",
+    "aliases": ["多邻国"],
+    "desc": {
+      "zh-Hans": "免费学语言",
+      "en": "Learn languages for free",
+      "ja": "無料で語学学習"
+    },
+    "tags": ["learning"]
+  },
+  "medium": {
+    "name": "Medium",
+    "url": "https://medium.com",
+    "desc": {
+      "zh-Hans": "文章与博客平台",
+      "en": "Articles and blogs",
+      "ja": "記事・ブログプラットフォーム"
+    },
+    "tags": ["reading"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/@{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "imdb": {
+    "name": "IMDb",
+    "url": "https://www.imdb.com",
+    "desc": {
+      "zh-Hans": "影视资料库与评分",
+      "en": "Movie and TV database and ratings",
+      "ja": "映画・ドラマのデータベース"
+    },
+    "tags": ["video", "reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/find/?q={q}"
+      }
+    ]
+  },
+  "notion": {
+    "name": "Notion",
+    "url": "https://www.notion.com",
+    "desc": {
+      "zh-Hans": "笔记与协作工作区",
+      "en": "Notes and team workspace",
+      "ja": "ノートとチームのワークスペース"
+    },
+    "tags": ["office", "work", "download"]
+  },
+  "figma": {
+    "name": "Figma",
+    "url": "https://www.figma.com",
+    "desc": {
+      "zh-Hans": "在线界面设计与协作",
+      "en": "Collaborative interface design",
+      "ja": "共同編集できる UI デザイン"
+    },
+    "tags": ["design", "work"]
+  },
+  "canva": {
+    "name": {
+      "zh-Hans": "Canva 可画",
+      "en": "Canva",
+      "ja": "Canva"
+    },
+    "url": "https://www.canva.com",
+    "desc": {
+      "zh-Hans": "在线平面设计",
+      "en": "Online graphic design",
+      "ja": "オンライングラフィックデザイン"
+    },
+    "tags": ["design"]
+  },
+  "dropbox": {
+    "name": "Dropbox",
+    "url": "https://www.dropbox.com",
+    "desc": {
+      "zh-Hans": "云存储与文件同步",
+      "en": "Cloud storage and file sync",
+      "ja": "クラウドストレージとファイル同期"
+    },
+    "tags": ["office", "download"]
+  },
+  "onedrive": {
+    "name": "OneDrive",
+    "url": "https://onedrive.live.com",
+    "desc": {
+      "zh-Hans": "微软云存储",
+      "en": "Cloud storage by Microsoft",
+      "ja": "Microsoft のクラウドストレージ"
+    },
+    "tags": ["office"]
+  },
+  "googledocs": {
+    "name": {
+      "zh-Hans": "Google 文档",
+      "en": "Google Docs",
+      "ja": "Google ドキュメント"
+    },
+    "url": "https://docs.google.com",
+    "aliases": ["gdocs"],
+    "desc": {
+      "zh-Hans": "在线文档、表格与幻灯片",
+      "en": "Online documents, sheets and slides",
+      "ja": "オンラインの文書・表計算・スライド"
+    },
+    "tags": ["office"]
+  },
+  "googlecalendar": {
+    "name": {
+      "zh-Hans": "Google 日历",
+      "en": "Google Calendar",
+      "ja": "Google カレンダー"
+    },
+    "url": "https://calendar.google.com",
+    "aliases": ["gcal"],
+    "desc": {
+      "zh-Hans": "在线日历",
+      "en": "Online calendar",
+      "ja": "オンラインカレンダー"
+    },
+    "tags": ["office"]
+  },
+  "zoom": {
+    "name": "Zoom",
+    "url": "https://www.zoom.com",
+    "desc": {
+      "zh-Hans": "视频会议",
+      "en": "Video meetings",
+      "ja": "ビデオ会議"
+    },
+    "tags": ["work", "chat", "download"]
+  },
+  "slack": {
+    "name": "Slack",
+    "url": "https://slack.com",
+    "desc": {
+      "zh-Hans": "团队沟通协作",
+      "en": "Team chat and collaboration",
+      "ja": "チームのチャットとコラボレーション"
+    },
+    "tags": ["work", "chat", "download"]
+  },
+  "baidupan": {
+    "name": {
+      "zh-Hans": "百度网盘",
+      "en": "Baidu Netdisk",
+      "ja": "百度網盤 (Baidu Netdisk)"
+    },
+    "url": "https://pan.baidu.com",
+    "aliases": ["百度网盘", "bdpan"],
+    "desc": {
+      "zh-Hans": "百度云存储",
+      "en": "Cloud storage by Baidu",
+      "ja": "Baidu のクラウドストレージ"
+    },
+    "tags": ["office", "download"]
+  },
+  "tieba": {
+    "name": {
+      "zh-Hans": "百度贴吧",
+      "en": "Baidu Tieba",
+      "ja": "百度貼吧 (Baidu Tieba)"
+    },
+    "url": "https://tieba.baidu.com",
+    "aliases": ["贴吧"],
+    "desc": {
+      "zh-Hans": "兴趣主题社区",
+      "en": "Chinese interest-based forums",
+      "ja": "中国の趣味別掲示板"
+    },
+    "tags": ["community"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/f?kw={q}"
+      }
+    ]
+  },
+  "alipay": {
+    "name": {
+      "zh-Hans": "支付宝",
+      "en": "Alipay",
+      "ja": "支付宝 (Alipay)"
+    },
+    "url": "https://www.alipay.com",
+    "aliases": ["支付宝", "zfb"],
+    "desc": {
+      "zh-Hans": "蚂蚁集团在线支付",
+      "en": "Online payments by Ant Group",
+      "ja": "Ant Group のオンライン決済"
+    },
+    "tags": ["finance"]
+  },
+  "neteasemusic": {
+    "name": {
+      "zh-Hans": "网易云音乐",
+      "en": "NetEase Cloud Music",
+      "ja": "NetEase Cloud Music"
+    },
+    "url": "https://music.163.com",
+    "aliases": ["网易云", "wyy"],
+    "desc": {
+      "zh-Hans": "音乐流媒体与社区",
+      "en": "Chinese music streaming",
+      "ja": "中国の音楽配信"
+    },
+    "tags": ["music"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/#/search/m/?s={q}"
+      }
+    ]
+  },
+  "qqmusic": {
+    "name": {
+      "zh-Hans": "QQ 音乐",
+      "en": "QQ Music",
+      "ja": "QQ Music"
+    },
+    "url": "https://y.qq.com",
+    "aliases": ["qq音乐"],
+    "desc": {
+      "zh-Hans": "腾讯音乐流媒体",
+      "en": "Music streaming by Tencent",
+      "ja": "Tencent の音楽配信"
+    },
+    "tags": ["music"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/n/ryqq_v2/search?w={q}"
+      }
+    ]
+  },
+  "iqiyi": {
+    "name": {
+      "zh-Hans": "爱奇艺",
+      "en": "iQIYI",
+      "ja": "iQIYI"
+    },
+    "url": "https://www.iqiyi.com",
+    "aliases": ["爱奇艺"],
+    "desc": {
+      "zh-Hans": "影视剧在线视频",
+      "en": "Chinese films and series",
+      "ja": "中国の映画・ドラマ配信"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/so/q_{q}"
+      }
+    ]
+  },
+  "youku": {
+    "name": {
+      "zh-Hans": "优酷",
+      "en": "Youku",
+      "ja": "Youku"
+    },
+    "url": "https://www.youku.com",
+    "aliases": ["优酷"],
+    "desc": {
+      "zh-Hans": "阿里巴巴旗下视频平台",
+      "en": "Video platform by Alibaba",
+      "ja": "アリババの動画配信"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://so.youku.com/search_video/q_{q}"
+      }
+    ]
+  },
+  "tencentvideo": {
+    "name": {
+      "zh-Hans": "腾讯视频",
+      "en": "Tencent Video",
+      "ja": "Tencent Video"
+    },
+    "url": "https://v.qq.com",
+    "aliases": ["腾讯视频", "txsp"],
+    "desc": {
+      "zh-Hans": "腾讯旗下视频平台",
+      "en": "Video platform by Tencent",
+      "ja": "Tencent の動画配信"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/x/search/?q={q}"
+      }
+    ]
+  },
+  "amap": {
+    "name": {
+      "zh-Hans": "高德地图",
+      "en": "Amap",
+      "ja": "高徳地図 (Amap)"
+    },
+    "url": "https://www.amap.com",
+    "aliases": ["高德", "gaode"],
+    "desc": {
+      "zh-Hans": "地图与导航",
+      "en": "Maps and directions in China",
+      "ja": "中国の地図とナビ"
+    },
+    "tags": ["map"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?query={q}"
+      }
+    ]
+  },
+  "baidumap": {
+    "name": {
+      "zh-Hans": "百度地图",
+      "en": "Baidu Maps",
+      "ja": "百度地図 (Baidu Maps)"
+    },
+    "url": "https://map.baidu.com",
+    "aliases": ["百度地图"],
+    "desc": {
+      "zh-Hans": "地图与导航",
+      "en": "Maps and directions in China",
+      "ja": "中国の地図とナビ"
+    },
+    "tags": ["map"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/{q}"
+      }
+    ]
+  },
+  "rakuten": {
+    "name": {
+      "zh-Hans": "乐天市场",
+      "en": "Rakuten Ichiba",
+      "ja": "楽天市場"
+    },
+    "url": "https://www.rakuten.co.jp",
+    "aliases": ["楽天"],
+    "desc": {
+      "zh-Hans": "日本网上商城",
+      "en": "Japanese online store",
+      "ja": "日本のオンラインショッピングモール"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://search.rakuten.co.jp/search/mall/{q}/"
+      }
+    ]
+  },
+  "mercari": {
+    "name": {
+      "zh-Hans": "Mercari",
+      "en": "Mercari",
+      "ja": "メルカリ"
+    },
+    "url": "https://jp.mercari.com",
+    "aliases": ["メルカリ"],
+    "desc": {
+      "zh-Hans": "日本二手交易平台",
+      "en": "Japanese secondhand marketplace",
+      "ja": "フリマアプリ"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?keyword={q}"
+      }
+    ]
+  },
+  "line": {
+    "name": "LINE",
+    "url": "https://line.me",
+    "desc": {
+      "zh-Hans": "日本常用即时通讯",
+      "en": "Messaging app popular in Japan",
+      "ja": "メッセージアプリ"
+    },
+    "tags": ["chat", "download"]
+  },
+  "perplexity": {
+    "name": "Perplexity",
+    "url": "https://www.perplexity.ai",
+    "aliases": ["pplx"],
+    "desc": {
+      "zh-Hans": "带引用来源的 AI 搜索",
+      "en": "AI search with cited sources",
+      "ja": "出典付きの AI 検索"
+    },
+    "tags": ["ai"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/new?q={q}"
+      }
+    ]
+  },
+  "copilot": {
+    "name": "Microsoft Copilot",
+    "url": "https://copilot.com",
+    "desc": {
+      "zh-Hans": "微软的 AI 助手",
+      "en": "AI assistant by Microsoft",
+      "ja": "Microsoft の AI アシスタント"
+    },
+    "tags": ["ai"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/?q={q}"
+      }
+    ]
+  },
+  "grok": {
+    "name": "Grok",
+    "url": "https://grok.com",
+    "desc": {
+      "zh-Hans": "xAI 的 AI 助手",
+      "en": "AI assistant by xAI",
+      "ja": "xAI の AI アシスタント"
+    },
+    "tags": ["ai"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/?q={q}"
+      }
+    ]
+  },
+  "kimi": {
+    "name": "Kimi",
+    "url": "https://www.kimi.com",
+    "desc": {
+      "zh-Hans": "月之暗面的 AI 助手",
+      "en": "AI assistant by Moonshot AI",
+      "ja": "Moonshot AI の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "doubao": {
+    "name": {
+      "zh-Hans": "豆包",
+      "en": "Doubao",
+      "ja": "Doubao"
+    },
+    "url": "https://www.doubao.com",
+    "aliases": ["豆包"],
+    "desc": {
+      "zh-Hans": "字节跳动的 AI 助手",
+      "en": "AI assistant by ByteDance",
+      "ja": "ByteDance の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "qwen": {
+    "name": {
+      "zh-Hans": "千问",
+      "en": "Qwen",
+      "ja": "Qwen"
+    },
+    "url": {
+      "zh-Hans": "https://www.qianwen.com",
+      "en": "https://chat.qwen.ai"
+    },
+    "aliases": ["千问", "通义", "tongyi"],
+    "desc": {
+      "zh-Hans": "阿里巴巴的 AI 助手（原通义）",
+      "en": "AI assistant by Alibaba",
+      "ja": "アリババの AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "huggingface": {
+    "name": "Hugging Face",
+    "url": "https://huggingface.co",
+    "aliases": ["hf"],
+    "desc": {
+      "zh-Hans": "AI 模型与数据集社区",
+      "en": "AI models and datasets hub",
+      "ja": "AI モデルとデータセットのハブ"
+    },
+    "tags": ["ai", "dev"],
+    "params": [
+      {
+        "param": ["user", "repo"],
+        "template": "{url}/{user}/{repo}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/models?search={q}"
+      }
+    ]
+  },
+  "threads": {
+    "name": "Threads",
+    "url": "https://www.threads.com",
+    "desc": {
+      "zh-Hans": "Meta 旗下文字社交平台",
+      "en": "Text-based social network by Meta",
+      "ja": "Meta のテキスト SNS"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/@{user}"
+      }
+    ]
+  },
+  "bluesky": {
+    "name": "Bluesky",
+    "url": "https://bsky.app",
+    "aliases": ["bsky"],
+    "desc": {
+      "zh-Hans": "去中心化社交网络",
+      "en": "Decentralized social network",
+      "ja": "分散型ソーシャルネットワーク"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/profile/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "quora": {
+    "name": "Quora",
+    "url": "https://www.quora.com",
+    "desc": {
+      "zh-Hans": "英文问答社区",
+      "en": "Questions and answers community",
+      "ja": "Q&A コミュニティ"
+    },
+    "tags": ["community"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "snapchat": {
+    "name": "Snapchat",
+    "url": "https://www.snapchat.com",
+    "aliases": ["snap"],
+    "desc": {
+      "zh-Hans": "阅后即焚的图片社交",
+      "en": "Photo messaging and stories",
+      "ja": "写真メッセージとストーリー"
+    },
+    "tags": ["social", "chat"]
+  },
+  "tumblr": {
+    "name": "Tumblr",
+    "url": "https://www.tumblr.com",
+    "desc": {
+      "zh-Hans": "轻博客社区",
+      "en": "Microblogging community",
+      "ja": "マイクロブログのコミュニティ"
+    },
+    "tags": ["social"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/{q}"
+      }
+    ]
+  },
+  "signal": {
+    "name": "Signal",
+    "url": "https://signal.org",
+    "desc": {
+      "zh-Hans": "端到端加密的即时通讯",
+      "en": "End-to-end encrypted messaging",
+      "ja": "エンドツーエンド暗号化のメッセージアプリ"
+    },
+    "tags": ["chat", "download"]
+  },
+  "messenger": {
+    "name": "Messenger",
+    "url": "https://www.messenger.com",
+    "desc": {
+      "zh-Hans": "Meta 旗下即时通讯",
+      "en": "Messaging by Meta",
+      "ja": "Meta のメッセージアプリ"
+    },
+    "tags": ["chat"]
+  },
+  "teams": {
+    "name": "Microsoft Teams",
+    "url": "https://teams.microsoft.com",
+    "desc": {
+      "zh-Hans": "微软团队协作与会议",
+      "en": "Team chat and meetings by Microsoft",
+      "ja": "Microsoft のチャットと会議"
+    },
+    "tags": ["work", "chat", "download"]
+  },
+  "dingtalk": {
+    "name": {
+      "zh-Hans": "钉钉",
+      "en": "DingTalk",
+      "ja": "DingTalk"
+    },
+    "url": "https://www.dingtalk.com",
+    "aliases": ["钉钉"],
+    "desc": {
+      "zh-Hans": "阿里巴巴办公协作平台",
+      "en": "Work collaboration by Alibaba",
+      "ja": "アリババの業務コラボレーション"
+    },
+    "tags": ["work", "chat", "download"]
+  },
+  "feishu": {
+    "name": {
+      "zh-Hans": "飞书",
+      "en": "Lark",
+      "ja": "Lark"
+    },
+    "url": {
+      "zh-Hans": "https://www.feishu.cn",
+      "en": "https://www.larksuite.com"
+    },
+    "aliases": ["飞书", "lark"],
+    "desc": {
+      "zh-Hans": "字节跳动办公协作平台",
+      "en": "Work collaboration by ByteDance",
+      "ja": "ByteDance の業務コラボレーション"
+    },
+    "tags": ["work", "chat", "download"]
+  },
+  "wecom": {
+    "name": {
+      "zh-Hans": "企业微信",
+      "en": "WeCom",
+      "ja": "WeCom"
+    },
+    "url": "https://work.weixin.qq.com",
+    "aliases": ["企业微信"],
+    "desc": {
+      "zh-Hans": "腾讯企业通讯与办公",
+      "en": "Work messaging by Tencent",
+      "ja": "Tencent の業務用チャット"
+    },
+    "tags": ["work", "chat", "download"]
+  },
+  "vimeo": {
+    "name": "Vimeo",
+    "url": "https://vimeo.com",
+    "desc": {
+      "zh-Hans": "高质量视频分享平台",
+      "en": "High-quality video sharing",
+      "ja": "高画質の動画共有"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "disneyplus": {
+    "name": "Disney+",
+    "url": "https://www.disneyplus.com",
+    "aliases": ["disney"],
+    "desc": {
+      "zh-Hans": "迪士尼流媒体",
+      "en": "Streaming by Disney",
+      "ja": "ディズニーの動画配信"
+    },
+    "tags": ["video"]
+  },
+  "primevideo": {
+    "name": "Prime Video",
+    "url": "https://www.primevideo.com",
+    "aliases": ["prime"],
+    "desc": {
+      "zh-Hans": "亚马逊流媒体",
+      "en": "Streaming by Amazon",
+      "ja": "Amazon の動画配信"
+    },
+    "tags": ["video"]
+  },
+  "crunchyroll": {
+    "name": "Crunchyroll",
+    "url": "https://www.crunchyroll.com",
+    "aliases": ["cr"],
+    "desc": {
+      "zh-Hans": "动画流媒体",
+      "en": "Anime streaming",
+      "ja": "アニメ配信"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "kuaishou": {
+    "name": {
+      "zh-Hans": "快手",
+      "en": "Kuaishou",
+      "ja": "Kuaishou"
+    },
+    "url": "https://www.kuaishou.com",
+    "aliases": ["快手", "ks"],
+    "desc": {
+      "zh-Hans": "国内短视频平台",
+      "en": "Chinese short video platform",
+      "ja": "中国のショート動画"
+    },
+    "tags": ["video", "social"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search/video?searchKey={q}"
+      }
+    ]
+  },
+  "mgtv": {
+    "name": {
+      "zh-Hans": "芒果TV",
+      "en": "Mango TV",
+      "ja": "Mango TV"
+    },
+    "url": "https://www.mgtv.com",
+    "aliases": ["芒果", "芒果tv"],
+    "desc": {
+      "zh-Hans": "湖南卫视旗下视频平台",
+      "en": "Video platform by Hunan TV",
+      "ja": "湖南テレビの動画配信"
+    },
+    "tags": ["video"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://so.mgtv.com/so?k={q}"
+      }
+    ]
+  },
+  "abema": {
+    "name": "ABEMA",
+    "url": "https://abema.tv",
+    "aliases": ["アベマ"],
+    "desc": {
+      "zh-Hans": "日本网络电视台",
+      "en": "Japanese internet TV",
+      "ja": "インターネットテレビ"
+    },
+    "tags": ["video"]
+  },
+  "tver": {
+    "name": "TVer",
+    "url": "https://tver.jp",
+    "desc": {
+      "zh-Hans": "日本民营电视台免费回看",
+      "en": "Free catch-up TV from Japanese networks",
+      "ja": "民放公式テレビ配信"
+    },
+    "tags": ["video"]
+  },
+  "walmart": {
+    "name": "Walmart",
+    "url": "https://www.walmart.com",
+    "aliases": ["沃尔玛"],
+    "desc": {
+      "zh-Hans": "沃尔玛网上商城",
+      "en": "Walmart online store",
+      "ja": "ウォルマートのオンラインストア"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "etsy": {
+    "name": "Etsy",
+    "url": "https://www.etsy.com",
+    "desc": {
+      "zh-Hans": "手工与复古商品市场",
+      "en": "Handmade and vintage marketplace",
+      "ja": "ハンドメイド・ヴィンテージのマーケット"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "temu": {
+    "name": "Temu",
+    "url": "https://www.temu.com",
+    "desc": {
+      "zh-Hans": "拼多多旗下跨境购物",
+      "en": "International shopping by PDD",
+      "ja": "PDD の越境 EC"
+    },
+    "tags": ["shopping"]
+  },
+  "shein": {
+    "name": "SHEIN",
+    "url": "https://www.shein.com",
+    "desc": {
+      "zh-Hans": "快时尚服饰购物",
+      "en": "Fast fashion shopping",
+      "ja": "ファストファッション通販"
+    },
+    "tags": ["shopping"]
+  },
+  "ikea": {
+    "name": {
+      "zh-Hans": "宜家 IKEA",
+      "en": "IKEA",
+      "ja": "IKEA"
+    },
+    "url": "https://www.ikea.com",
+    "aliases": ["宜家"],
+    "desc": {
+      "zh-Hans": "家居与家具",
+      "en": "Furniture and home",
+      "ja": "家具とインテリア"
+    },
+    "tags": ["shopping"]
+  },
+  "pinduoduo": {
+    "name": {
+      "zh-Hans": "拼多多",
+      "en": "Pinduoduo",
+      "ja": "Pinduoduo"
+    },
+    "url": "https://www.pinduoduo.com",
+    "aliases": ["拼多多", "pdd"],
+    "desc": {
+      "zh-Hans": "国内拼团购物平台",
+      "en": "Chinese group-buying shopping",
+      "ja": "中国の共同購入 EC"
+    },
+    "tags": ["shopping"]
+  },
+  "xianyu": {
+    "name": {
+      "zh-Hans": "闲鱼",
+      "en": "Xianyu (Goofish)",
+      "ja": "Xianyu (Goofish)"
+    },
+    "url": "https://www.goofish.com",
+    "aliases": ["闲鱼", "goofish"],
+    "desc": {
+      "zh-Hans": "阿里巴巴旗下二手交易",
+      "en": "Secondhand marketplace by Alibaba",
+      "ja": "アリババのフリマ"
+    },
+    "tags": ["shopping"]
+  },
+  "tmall": {
+    "name": {
+      "zh-Hans": "天猫",
+      "en": "Tmall",
+      "ja": "Tmall"
+    },
+    "url": "https://www.tmall.com",
+    "aliases": ["天猫"],
+    "desc": {
+      "zh-Hans": "阿里巴巴旗下品牌商城",
+      "en": "Brand mall by Alibaba",
+      "ja": "アリババのブランドモール"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "https://list.tmall.com/search_product.htm?q={q}"
+      }
+    ]
+  },
+  "tripcom": {
+    "name": {
+      "zh-Hans": "携程",
+      "en": "Trip.com",
+      "ja": "Trip.com"
+    },
+    "url": {
+      "zh-Hans": "https://www.ctrip.com",
+      "en": "https://www.trip.com"
+    },
+    "aliases": ["携程", "ctrip", "trip"],
+    "desc": {
+      "zh-Hans": "机票、酒店与火车票预订",
+      "en": "Flights, hotels and trains",
+      "ja": "航空券・ホテル・列車の予約"
+    },
+    "tags": ["travel"]
+  },
+  "expedia": {
+    "name": "Expedia",
+    "url": "https://www.expedia.com",
+    "desc": {
+      "zh-Hans": "机票与酒店预订",
+      "en": "Flights and hotels",
+      "ja": "航空券とホテルの予約"
+    },
+    "tags": ["travel"]
+  },
+  "agoda": {
+    "name": "Agoda",
+    "url": "https://www.agoda.com",
+    "desc": {
+      "zh-Hans": "酒店预订",
+      "en": "Hotel booking",
+      "ja": "ホテル予約"
+    },
+    "tags": ["travel"]
+  },
+  "tripadvisor": {
+    "name": "Tripadvisor",
+    "url": "https://www.tripadvisor.com",
+    "aliases": ["猫途鹰"],
+    "desc": {
+      "zh-Hans": "旅行点评与攻略",
+      "en": "Travel reviews and guides",
+      "ja": "旅行の口コミとガイド"
+    },
+    "tags": ["travel"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/Search?q={q}"
+      }
+    ]
+  },
+  "dianping": {
+    "name": {
+      "zh-Hans": "大众点评",
+      "en": "Dianping",
+      "ja": "Dianping"
+    },
+    "url": "https://www.dianping.com",
+    "aliases": ["大众点评", "点评"],
+    "desc": {
+      "zh-Hans": "本地生活点评",
+      "en": "Chinese local reviews",
+      "ja": "中国の口コミサイト"
+    },
+    "tags": ["travel"]
+  },
+  "meituan": {
+    "name": {
+      "zh-Hans": "美团",
+      "en": "Meituan",
+      "ja": "Meituan"
+    },
+    "url": "https://www.meituan.com",
+    "aliases": ["美团"],
+    "desc": {
+      "zh-Hans": "外卖与本地生活服务",
+      "en": "Food delivery and local services",
+      "ja": "フードデリバリーと生活サービス"
+    },
+    "tags": ["shopping", "travel"]
+  },
+  "googlescholar": {
+    "name": {
+      "zh-Hans": "Google 学术",
+      "en": "Google Scholar",
+      "ja": "Google Scholar"
+    },
+    "url": "https://scholar.google.com",
+    "aliases": ["scholar", "谷歌学术"],
+    "desc": {
+      "zh-Hans": "学术论文搜索",
+      "en": "Search scholarly papers",
+      "ja": "学術論文の検索"
+    },
+    "tags": ["reference", "learning"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/scholar?q={q}"
+      }
+    ]
+  },
+  "arxiv": {
+    "name": "arXiv",
+    "url": "https://arxiv.org",
+    "desc": {
+      "zh-Hans": "开放获取的论文预印本",
+      "en": "Open-access preprints",
+      "ja": "オープンアクセスのプレプリント"
+    },
+    "tags": ["reference", "learning"],
+    "params": [
+      {
+        "param": ["id"],
+        "template": "{url}/abs/{id}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/?query={q}&searchtype=all"
+      }
+    ]
+  },
+  "coursera": {
+    "name": "Coursera",
+    "url": "https://www.coursera.org",
+    "desc": {
+      "zh-Hans": "在线大学课程",
+      "en": "Online university courses",
+      "ja": "オンライン大学講座"
+    },
+    "tags": ["learning"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?query={q}"
+      }
+    ]
+  },
+  "khanacademy": {
+    "name": {
+      "zh-Hans": "可汗学院",
+      "en": "Khan Academy",
+      "ja": "カーンアカデミー"
+    },
+    "url": "https://www.khanacademy.org",
+    "aliases": ["khan", "可汗学院"],
+    "desc": {
+      "zh-Hans": "免费在线课程",
+      "en": "Free online lessons",
+      "ja": "無料のオンライン学習"
+    },
+    "tags": ["learning"]
+  },
+  "wolframalpha": {
+    "name": "Wolfram|Alpha",
+    "url": "https://www.wolframalpha.com",
+    "aliases": ["wolfram"],
+    "desc": {
+      "zh-Hans": "计算与知识引擎",
+      "en": "Computational knowledge engine",
+      "ja": "計算知識エンジン"
+    },
+    "tags": ["reference", "tool"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/input?i={q}"
+      }
+    ]
+  },
+  "internetarchive": {
+    "name": "Internet Archive",
+    "url": "https://archive.org",
+    "aliases": ["archive", "ia"],
+    "desc": {
+      "zh-Hans": "互联网档案馆（含 Wayback Machine）",
+      "en": "Digital library and the Wayback Machine",
+      "ja": "インターネットアーカイブ（Wayback Machine）"
+    },
+    "tags": ["reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?query={q}"
+      }
+    ]
+  },
+  "baidubaike": {
+    "name": {
+      "zh-Hans": "百度百科",
+      "en": "Baidu Baike",
+      "ja": "百度百科 (Baidu Baike)"
+    },
+    "url": "https://baike.baidu.com",
+    "aliases": ["百度百科", "baike"],
+    "desc": {
+      "zh-Hans": "中文百科",
+      "en": "Chinese encyclopedia",
+      "ja": "中国語の百科事典"
+    },
+    "tags": ["reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/item/{q}"
+      }
+    ]
+  },
+  "pypi": {
+    "name": "PyPI",
+    "url": "https://pypi.org",
+    "aliases": ["pip"],
+    "desc": {
+      "zh-Hans": "Python 包索引",
+      "en": "Python Package Index",
+      "ja": "Python パッケージインデックス"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["pkg"],
+        "template": "{url}/project/{pkg}/"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search/?q={q}"
+      }
+    ]
+  },
+  "crates": {
+    "name": "crates.io",
+    "url": "https://crates.io",
+    "aliases": ["cargo"],
+    "desc": {
+      "zh-Hans": "Rust 包仓库",
+      "en": "Rust package registry",
+      "ja": "Rust パッケージレジストリ"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["pkg"],
+        "template": "{url}/crates/{pkg}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "gopkg": {
+    "name": "Go Packages",
+    "url": "https://pkg.go.dev",
+    "aliases": ["godoc"],
+    "desc": {
+      "zh-Hans": "Go 包文档",
+      "en": "Go package docs",
+      "ja": "Go パッケージのドキュメント"
+    },
+    "tags": ["code", "dev"],
+    "params": [
+      {
+        "param": ["pkg"],
+        "template": "{url}/{pkg}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "leetcode": {
+    "name": {
+      "zh-Hans": "力扣 LeetCode",
+      "en": "LeetCode",
+      "ja": "LeetCode"
+    },
+    "url": {
+      "zh-Hans": "https://leetcode.cn",
+      "en": "https://leetcode.com"
+    },
+    "aliases": ["力扣", "lc"],
+    "desc": {
+      "zh-Hans": "算法题与面试练习",
+      "en": "Coding interview practice",
+      "ja": "コーディング面接の練習"
+    },
+    "tags": ["dev", "learning"],
+    "params": [
+      {
+        "param": ["problem"],
+        "template": "{url}/problems/{problem}/"
+      }
+    ]
+  },
+  "kaggle": {
+    "name": "Kaggle",
+    "url": "https://www.kaggle.com",
+    "desc": {
+      "zh-Hans": "数据科学竞赛与数据集",
+      "en": "Data science competitions and datasets",
+      "ja": "データサイエンスのコンペとデータセット"
+    },
+    "tags": ["dev", "ai"]
+  },
+  "cloudflare": {
+    "name": "Cloudflare",
+    "url": {
+      "zh-Hans": "https://www.cloudflare.com/zh-cn/",
+      "en": "https://www.cloudflare.com",
+      "ja": "https://www.cloudflare.com/ja-jp/"
+    },
+    "aliases": ["cf"],
+    "desc": {
+      "zh-Hans": "CDN、DNS 与网络安全",
+      "en": "CDN, DNS and web security",
+      "ja": "CDN・DNS・セキュリティ"
+    },
+    "tags": ["dev"]
+  },
+  "vercel": {
+    "name": "Vercel",
+    "url": "https://vercel.com",
+    "desc": {
+      "zh-Hans": "前端部署平台",
+      "en": "Frontend deployment platform",
+      "ja": "フロントエンドのデプロイ基盤"
+    },
+    "tags": ["dev"]
+  },
+  "aws": {
+    "name": "AWS",
+    "url": {
+      "zh-Hans": "https://aws.amazon.com/cn/",
+      "en": "https://aws.amazon.com",
+      "ja": "https://aws.amazon.com/jp/"
+    },
+    "aliases": ["亚马逊云"],
+    "desc": {
+      "zh-Hans": "亚马逊云服务",
+      "en": "Amazon Web Services",
+      "ja": "アマゾン ウェブ サービス"
+    },
+    "tags": ["dev"]
+  },
+  "vue": {
+    "name": "Vue.js",
+    "url": {
+      "zh-Hans": "https://cn.vuejs.org",
+      "en": "https://vuejs.org",
+      "ja": "https://ja.vuejs.org"
+    },
+    "aliases": ["vuejs"],
+    "desc": {
+      "zh-Hans": "渐进式 JavaScript 框架",
+      "en": "The progressive JavaScript framework",
+      "ja": "プログレッシブ JavaScript フレームワーク"
+    },
+    "tags": ["dev", "reference"]
+  },
+  "react": {
+    "name": "React",
+    "url": {
+      "zh-Hans": "https://zh-hans.react.dev",
+      "en": "https://react.dev",
+      "ja": "https://ja.react.dev"
+    },
+    "aliases": ["reactjs"],
+    "desc": {
+      "zh-Hans": "构建用户界面的 JavaScript 库",
+      "en": "The library for web and native user interfaces",
+      "ja": "UI を構築する JavaScript ライブラリ"
+    },
+    "tags": ["dev", "reference"]
+  },
+  "typescript": {
+    "name": "TypeScript",
+    "url": {
+      "zh-Hans": "https://www.typescriptlang.org/zh/",
+      "en": "https://www.typescriptlang.org",
+      "ja": "https://www.typescriptlang.org/ja/"
+    },
+    "aliases": ["ts"],
+    "desc": {
+      "zh-Hans": "带类型的 JavaScript",
+      "en": "JavaScript with types",
+      "ja": "型付き JavaScript"
+    },
+    "tags": ["dev", "reference"]
+  },
+  "archwiki": {
+    "name": "ArchWiki",
+    "url": "https://wiki.archlinux.org",
+    "aliases": ["arch"],
+    "desc": {
+      "zh-Hans": "Arch Linux 文档（Linux 通用参考）",
+      "en": "Arch Linux docs, useful for any Linux",
+      "ja": "Arch Linux のドキュメント"
+    },
+    "tags": ["dev", "reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/index.php?search={q}"
+      }
+    ]
+  },
+  "ubuntu": {
+    "name": "Ubuntu",
+    "url": "https://ubuntu.com",
+    "desc": {
+      "zh-Hans": "Ubuntu Linux 官网与下载",
+      "en": "Ubuntu Linux: download and docs",
+      "ja": "Ubuntu Linux 公式サイト"
+    },
+    "tags": ["dev", "download"]
+  },
+  "qiita": {
+    "name": "Qiita",
+    "url": "https://qiita.com",
+    "desc": {
+      "zh-Hans": "日本程序员技术文章社区",
+      "en": "Japanese developer articles",
+      "ja": "エンジニアの技術記事"
+    },
+    "tags": ["dev", "reading"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "zenn": {
+    "name": "Zenn",
+    "url": "https://zenn.dev",
+    "desc": {
+      "zh-Hans": "日本程序员技术文章与书籍",
+      "en": "Japanese developer articles and books",
+      "ja": "エンジニアの技術記事と本"
+    },
+    "tags": ["dev", "reading"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "note": {
+    "name": "note",
+    "url": "https://note.com",
+    "desc": {
+      "zh-Hans": "日本创作者文章平台",
+      "en": "Japanese platform for writers and creators",
+      "ja": "クリエイターの記事プラットフォーム"
+    },
+    "tags": ["reading"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/{user}"
+      },
+      {
+        "param": ["q"],
+        "template": "{url}/search?q={q}"
+      }
+    ]
+  },
+  "weblio": {
+    "name": "Weblio",
+    "url": "https://www.weblio.jp",
+    "desc": {
+      "zh-Hans": "日语词典",
+      "en": "Japanese dictionary",
+      "ja": "国語・英和辞典"
+    },
+    "tags": ["reference"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/content/{q}"
+      }
+    ]
+  },
+  "yahooshopping": {
+    "name": {
+      "zh-Hans": "Yahoo!购物",
+      "en": "Yahoo! Shopping (Japan)",
+      "ja": "Yahoo!ショッピング"
+    },
+    "url": "https://shopping.yahoo.co.jp",
+    "aliases": ["ヤフショ"],
+    "desc": {
+      "zh-Hans": "日本网上商城",
+      "en": "Japanese online store",
+      "ja": "日本のオンラインショッピング"
+    },
+    "tags": ["shopping"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?p={q}"
+      }
+    ]
+  },
+  "zozotown": {
+    "name": "ZOZOTOWN",
+    "url": "https://zozo.jp",
+    "aliases": ["zozo"],
+    "desc": {
+      "zh-Hans": "日本时尚服饰购物",
+      "en": "Japanese fashion shopping",
+      "ja": "ファッション通販"
+    },
+    "tags": ["shopping"]
+  },
+  "v2ex": {
+    "name": "V2EX",
+    "url": "https://www.v2ex.com",
+    "desc": {
+      "zh-Hans": "创意工作者社区",
+      "en": "Community for creators and developers",
+      "ja": "クリエイターと開発者のコミュニティ"
+    },
+    "tags": ["community", "dev"],
+    "params": [
+      {
+        "param": ["user"],
+        "template": "{url}/member/{user}"
+      }
+    ]
+  },
+  "juejin": {
+    "name": {
+      "zh-Hans": "稀土掘金",
+      "en": "Juejin",
+      "ja": "Juejin"
+    },
+    "url": "https://juejin.cn",
+    "aliases": ["掘金"],
+    "desc": {
+      "zh-Hans": "中文开发者技术社区",
+      "en": "Chinese developer community",
+      "ja": "中国の開発者コミュニティ"
+    },
+    "tags": ["dev", "community"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/search?query={q}"
+      }
+    ]
+  },
+  "hupu": {
+    "name": {
+      "zh-Hans": "虎扑",
+      "en": "Hupu",
+      "ja": "Hupu"
+    },
+    "url": "https://www.hupu.com",
+    "aliases": ["虎扑"],
+    "desc": {
+      "zh-Hans": "体育与生活社区",
+      "en": "Sports and lifestyle community",
+      "ja": "スポーツと生活のコミュニティ"
+    },
+    "tags": ["community"]
+  },
+  "nga": {
+    "name": {
+      "zh-Hans": "NGA 玩家社区",
+      "en": "NGA",
+      "ja": "NGA"
+    },
+    "url": "https://bbs.nga.cn",
+    "desc": {
+      "zh-Hans": "游戏玩家论坛",
+      "en": "Gaming forums",
+      "ja": "ゲームフォーラム"
+    },
+    "tags": ["community", "game"]
+  },
+  "brave": {
+    "name": "Brave",
+    "url": "https://brave.com",
+    "desc": {
+      "zh-Hans": "注重隐私的浏览器",
+      "en": "Privacy-focused browser",
+      "ja": "プライバシー重視のブラウザ"
+    },
+    "tags": ["browser", "download"]
+  },
+  "opera": {
+    "name": "Opera",
+    "url": "https://www.opera.com",
+    "desc": {
+      "zh-Hans": "Opera 浏览器",
+      "en": "Opera browser",
+      "ja": "Opera ブラウザ"
+    },
+    "tags": ["browser", "download"]
+  },
+  "thunderbird": {
+    "name": "Thunderbird",
+    "url": "https://www.thunderbird.net",
+    "desc": {
+      "zh-Hans": "Mozilla 免费邮件客户端",
+      "en": "Free email client by Mozilla",
+      "ja": "Mozilla の無料メールソフト"
+    },
+    "tags": ["mail", "download"]
+  },
+  "winrar": {
+    "name": "WinRAR",
+    "url": "https://www.win-rar.com",
+    "aliases": ["rar"],
+    "desc": {
+      "zh-Hans": "压缩与解压工具",
+      "en": "File compression tool",
+      "ja": "圧縮・解凍ソフト"
+    },
+    "tags": ["download", "tool"]
+  },
+  "everything": {
+    "name": "Everything",
+    "url": "https://www.voidtools.com",
+    "aliases": ["voidtools"],
+    "desc": {
+      "zh-Hans": "Windows 文件秒搜工具",
+      "en": "Instant file search for Windows",
+      "ja": "Windows の高速ファイル検索"
+    },
+    "tags": ["download", "tool"]
+  },
+  "audacity": {
+    "name": "Audacity",
+    "url": "https://www.audacityteam.org",
+    "desc": {
+      "zh-Hans": "免费音频编辑软件",
+      "en": "Free audio editor",
+      "ja": "無料の音声編集ソフト"
+    },
+    "tags": ["download", "tool", "music"]
+  },
+  "krita": {
+    "name": "Krita",
+    "url": "https://krita.org",
+    "desc": {
+      "zh-Hans": "免费数字绘画软件",
+      "en": "Free digital painting",
+      "ja": "無料のペイントソフト"
+    },
+    "tags": ["download", "design"]
+  },
+  "inkscape": {
+    "name": "Inkscape",
+    "url": "https://inkscape.org",
+    "desc": {
+      "zh-Hans": "免费矢量图形编辑",
+      "en": "Free vector graphics editor",
+      "ja": "無料のベクター画像編集"
+    },
+    "tags": ["download", "design"]
+  },
+  "handbrake": {
+    "name": "HandBrake",
+    "url": "https://handbrake.fr",
+    "desc": {
+      "zh-Hans": "免费视频转码工具",
+      "en": "Free video transcoder",
+      "ja": "無料の動画変換ソフト"
+    },
+    "tags": ["download", "tool", "video"]
+  },
+  "qbittorrent": {
+    "name": "qBittorrent",
+    "url": "https://www.qbittorrent.org",
+    "aliases": ["qbit"],
+    "desc": {
+      "zh-Hans": "免费开源 BT 客户端",
+      "en": "Free open-source BitTorrent client",
+      "ja": "無料の BitTorrent クライアント"
+    },
+    "tags": ["download", "tool"]
+  },
+  "wps": {
+    "name": "WPS Office",
+    "url": {
+      "zh-Hans": "https://www.wps.cn",
+      "en": "https://www.wps.com"
+    },
+    "desc": {
+      "zh-Hans": "金山办公套件",
+      "en": "Office suite by Kingsoft",
+      "ja": "Kingsoft のオフィスソフト"
+    },
+    "tags": ["download", "office"]
+  },
+  "zai": {
+    "name": {
+      "zh-Hans": "智谱清言 (Z.ai)",
+      "en": "Z.ai",
+      "ja": "Z.ai"
+    },
+    "url": {
+      "zh-Hans": "https://chatglm.cn",
+      "en": "https://chat.z.ai"
+    },
+    "aliases": ["智谱", "zhipu", "glm", "chatglm"],
+    "desc": {
+      "zh-Hans": "智谱的 AI 助手（GLM）",
+      "en": "AI assistant by Zhipu (GLM)",
+      "ja": "Zhipu の AI アシスタント（GLM）"
+    },
+    "tags": ["ai"]
+  },
+  "mimo": {
+    "name": {
+      "zh-Hans": "小米 MiMo",
+      "en": "Xiaomi MiMo",
+      "ja": "Xiaomi MiMo"
+    },
+    "url": "https://mimo.xiaomi.com",
+    "aliases": ["xiaomimimo"],
+    "desc": {
+      "zh-Hans": "小米的大模型",
+      "en": "AI models by Xiaomi",
+      "ja": "Xiaomi の AI モデル"
+    },
+    "tags": ["ai"]
+  },
+  "openrouter": {
+    "name": "OpenRouter",
+    "url": "https://openrouter.ai",
+    "desc": {
+      "zh-Hans": "统一接入多家 AI 模型的 API",
+      "en": "One API for many AI models",
+      "ja": "多数の AI モデルを使える統一 API"
+    },
+    "tags": ["ai", "dev"],
+    "params": [
+      {
+        "param": ["q"],
+        "template": "{url}/models?q={q}"
+      }
+    ]
+  },
+  "metaai": {
+    "name": "Meta AI",
+    "url": "https://www.meta.ai",
+    "desc": {
+      "zh-Hans": "Meta 的 AI 助手",
+      "en": "AI assistant by Meta",
+      "ja": "Meta の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "llama": {
+    "name": "Llama",
+    "url": "https://dev.meta.ai",
+    "desc": {
+      "zh-Hans": "Meta 的开放大模型与开发者平台",
+      "en": "Meta's open AI models and developer platform",
+      "ja": "Meta のオープン AI モデルと開発者向けプラットフォーム"
+    },
+    "tags": ["ai", "dev"]
+  },
+  "minimax": {
+    "name": "MiniMax",
+    "url": {
+      "zh-Hans": "https://www.minimax.cn",
+      "en": "https://www.minimax.io"
+    },
+    "aliases": ["海螺", "hailuo"],
+    "desc": {
+      "zh-Hans": "MiniMax 大模型与海螺 AI",
+      "en": "AI models and apps by MiniMax",
+      "ja": "MiniMax の AI モデルとアプリ"
+    },
+    "tags": ["ai"]
+  },
+  "mistral": {
+    "name": "Mistral (Le Chat)",
+    "url": "https://chat.mistral.ai",
+    "aliases": ["lechat"],
+    "desc": {
+      "zh-Hans": "Mistral AI 的 AI 助手",
+      "en": "AI assistant by Mistral AI",
+      "ja": "Mistral AI の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "nemotron": {
+    "name": "NVIDIA Nemotron",
+    "url": "https://www.nvidia.com/en-us/ai-data-science/foundation-models/nemotron/",
+    "desc": {
+      "zh-Hans": "英伟达的开放大模型",
+      "en": "NVIDIA's open AI models",
+      "ja": "NVIDIA のオープン AI モデル"
+    },
+    "tags": ["ai", "dev"]
+  },
+  "yuanbao": {
+    "name": {
+      "zh-Hans": "腾讯元宝",
+      "en": "Tencent Yuanbao",
+      "ja": "Tencent Yuanbao"
+    },
+    "url": "https://yuanbao.tencent.com",
+    "aliases": ["元宝", "腾讯元宝"],
+    "desc": {
+      "zh-Hans": "腾讯的 AI 助手",
+      "en": "AI assistant by Tencent",
+      "ja": "Tencent の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "wenxin": {
+    "name": {
+      "zh-Hans": "文心",
+      "en": "ERNIE (Wenxin)",
+      "ja": "ERNIE (Wenxin)"
+    },
+    "url": "https://wenxin.baidu.com",
+    "aliases": ["文心", "文心一言", "yiyan", "ernie"],
+    "desc": {
+      "zh-Hans": "百度的 AI 助手（原文心一言）",
+      "en": "AI assistant by Baidu",
+      "ja": "Baidu の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "stepfun": {
+    "name": {
+      "zh-Hans": "阶跃星辰",
+      "en": "StepFun",
+      "ja": "StepFun"
+    },
+    "url": "https://www.stepfun.com",
+    "aliases": ["阶跃"],
+    "desc": {
+      "zh-Hans": "阶跃星辰的 AI 助手",
+      "en": "AI assistant by StepFun",
+      "ja": "StepFun の AI アシスタント"
+    },
+    "tags": ["ai"]
+  },
+  "nvidia": {
+    "name": {
+      "zh-Hans": "NVIDIA 英伟达",
+      "en": "NVIDIA",
+      "ja": "NVIDIA"
+    },
+    "url": {
+      "zh-Hans": "https://www.nvidia.cn",
+      "en": "https://www.nvidia.com",
+      "ja": "https://www.nvidia.com/ja-jp/"
+    },
+    "aliases": ["英伟达"],
+    "desc": {
+      "zh-Hans": "显卡与驱动下载",
+      "en": "Graphics cards and drivers",
+      "ja": "グラフィックスカードとドライバー"
+    },
+    "tags": ["hardware", "download"]
+  },
+  "amd": {
+    "name": "AMD",
+    "url": {
+      "zh-Hans": "https://www.amd.com/zh-cn.html",
+      "en": "https://www.amd.com",
+      "ja": "https://www.amd.com/ja.html"
+    },
+    "desc": {
+      "zh-Hans": "处理器、显卡与驱动下载",
+      "en": "Processors, graphics and drivers",
+      "ja": "プロセッサー・グラフィックス・ドライバー"
+    },
+    "tags": ["hardware", "download"]
+  },
+  "intel": {
+    "name": {
+      "zh-Hans": "Intel 英特尔",
+      "en": "Intel",
+      "ja": "Intel"
+    },
+    "url": {
+      "zh-Hans": "https://www.intel.cn",
+      "en": "https://www.intel.com",
+      "ja": "https://www.intel.co.jp"
+    },
+    "aliases": ["英特尔"],
+    "desc": {
+      "zh-Hans": "处理器与驱动下载",
+      "en": "Processors and drivers",
+      "ja": "プロセッサーとドライバー"
+    },
+    "tags": ["hardware", "download"]
+  },
+  "samsung": {
+    "name": {
+      "zh-Hans": "三星 Samsung",
+      "en": "Samsung",
+      "ja": "Samsung"
+    },
+    "url": {
+      "zh-Hans": "https://www.samsung.com.cn",
+      "en": "https://www.samsung.com",
+      "ja": "https://www.samsung.com/jp/"
+    },
+    "aliases": ["三星", "galaxy"],
+    "desc": {
+      "zh-Hans": "三星手机与电子产品",
+      "en": "Samsung phones and electronics",
+      "ja": "サムスンのスマホと家電"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "xiaomi": {
+    "name": {
+      "zh-Hans": "小米",
+      "en": "Xiaomi",
+      "ja": "Xiaomi"
+    },
+    "url": {
+      "zh-Hans": "https://www.mi.com",
+      "en": "https://www.mi.com/global/",
+      "ja": "https://www.mi.com/jp/"
+    },
+    "aliases": ["小米", "mi"],
+    "desc": {
+      "zh-Hans": "小米手机与智能硬件",
+      "en": "Xiaomi phones and smart devices",
+      "ja": "Xiaomi のスマホとスマートデバイス"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "huawei": {
+    "name": {
+      "zh-Hans": "华为",
+      "en": "Huawei",
+      "ja": "Huawei"
+    },
+    "url": {
+      "zh-Hans": "https://consumer.huawei.com/cn/",
+      "en": "https://consumer.huawei.com"
+    },
+    "aliases": ["华为"],
+    "desc": {
+      "zh-Hans": "华为手机与智能设备",
+      "en": "Huawei phones and devices",
+      "ja": "Huawei のスマホとデバイス"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "honor": {
+    "name": {
+      "zh-Hans": "荣耀",
+      "en": "HONOR",
+      "ja": "HONOR"
+    },
+    "url": {
+      "zh-Hans": "https://www.honor.com/cn/",
+      "en": "https://www.honor.com"
+    },
+    "aliases": ["荣耀"],
+    "desc": {
+      "zh-Hans": "荣耀手机与智能设备",
+      "en": "HONOR phones and devices",
+      "ja": "HONOR のスマホとデバイス"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "oppo": {
+    "name": "OPPO",
+    "url": {
+      "zh-Hans": "https://www.oppo.com/cn/",
+      "en": "https://www.oppo.com",
+      "ja": "https://www.oppo.com/jp/"
+    },
+    "desc": {
+      "zh-Hans": "OPPO 手机与智能设备",
+      "en": "OPPO phones and devices",
+      "ja": "OPPO のスマホとデバイス"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "vivo": {
+    "name": "vivo",
+    "url": {
+      "zh-Hans": "https://www.vivo.com.cn",
+      "en": "https://www.vivo.com"
+    },
+    "desc": {
+      "zh-Hans": "vivo 手机与智能设备",
+      "en": "vivo phones and devices",
+      "ja": "vivo のスマホとデバイス"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "oneplus": {
+    "name": {
+      "zh-Hans": "一加 OnePlus",
+      "en": "OnePlus",
+      "ja": "OnePlus"
+    },
+    "url": {
+      "zh-Hans": "https://www.oneplus.com/cn",
+      "en": "https://www.oneplus.com"
+    },
+    "aliases": ["一加"],
+    "desc": {
+      "zh-Hans": "一加手机",
+      "en": "OnePlus phones",
+      "ja": "OnePlus のスマホ"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "sony": {
+    "name": {
+      "zh-Hans": "索尼 Sony",
+      "en": "Sony",
+      "ja": "ソニー"
+    },
+    "url": {
+      "zh-Hans": "https://www.sony.com.cn",
+      "en": "https://www.sony.com",
+      "ja": "https://www.sony.co.jp"
+    },
+    "aliases": ["索尼", "ソニー"],
+    "desc": {
+      "zh-Hans": "索尼电子产品",
+      "en": "Sony electronics",
+      "ja": "ソニーのエレクトロニクス"
+    },
+    "tags": ["hardware", "shopping"]
+  },
+  "lenovo": {
+    "name": {
+      "zh-Hans": "联想",
+      "en": "Lenovo",
+      "ja": "Lenovo"
+    },
+    "url": {
+      "zh-Hans": "https://www.lenovo.com.cn",
+      "en": "https://www.lenovo.com",
+      "ja": "https://www.lenovo.com/jp/ja/"
+    },
+    "aliases": ["联想"],
+    "desc": {
+      "zh-Hans": "联想电脑与驱动下载",
+      "en": "Lenovo computers and drivers",
+      "ja": "Lenovo の PC とドライバー"
+    },
+    "tags": ["hardware", "shopping", "download"]
+  },
+  "dell": {
+    "name": {
+      "zh-Hans": "戴尔",
+      "en": "Dell",
+      "ja": "Dell"
+    },
+    "url": {
+      "zh-Hans": "https://www.dell.com/zh-cn",
+      "en": "https://www.dell.com",
+      "ja": "https://www.dell.com/ja-jp"
+    },
+    "aliases": ["戴尔"],
+    "desc": {
+      "zh-Hans": "戴尔电脑与驱动下载",
+      "en": "Dell computers and drivers",
+      "ja": "Dell の PC とドライバー"
+    },
+    "tags": ["hardware", "shopping", "download"]
+  },
+  "hp": {
+    "name": {
+      "zh-Hans": "惠普",
+      "en": "HP",
+      "ja": "HP"
+    },
+    "url": {
+      "zh-Hans": "https://www.hp.com/cn-zh/home.html",
+      "en": "https://www.hp.com",
+      "ja": "https://www.hp.com/jp-ja/home.html"
+    },
+    "aliases": ["惠普"],
+    "desc": {
+      "zh-Hans": "惠普电脑、打印机与驱动",
+      "en": "HP computers, printers and drivers",
+      "ja": "HP の PC・プリンター・ドライバー"
+    },
+    "tags": ["hardware", "shopping", "download"]
+  },
+  "asus": {
+    "name": {
+      "zh-Hans": "华硕",
+      "en": "ASUS",
+      "ja": "ASUS"
+    },
+    "url": {
+      "zh-Hans": "https://www.asus.com.cn",
+      "en": "https://www.asus.com",
+      "ja": "https://www.asus.com/jp/"
+    },
+    "aliases": ["华硕"],
+    "desc": {
+      "zh-Hans": "华硕电脑、主板与驱动下载",
+      "en": "ASUS computers, motherboards and drivers",
+      "ja": "ASUS の PC・マザーボード・ドライバー"
+    },
+    "tags": ["hardware", "shopping", "download"]
+  }
+}

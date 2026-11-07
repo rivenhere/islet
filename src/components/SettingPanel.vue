@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { LanguageTypes } from "@/types/language";
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, onMounted, onUnmounted } from "vue";
 import { useSettingStore } from "@/store/setting";
 import { useI18n } from "vue-i18n";
 import { BUILTIN_ENGINES } from "@/config/searchEngines";
+import { SITES, contributeUrl } from "@/config/sites";
 import {
   downloadSettings,
   applySettingsImport,
@@ -16,7 +17,7 @@ import ShortcutManager from "./ShortcutManager.vue";
 const settingStore = useSettingStore();
 const { t, locale } = useI18n();
 
-// --- 设置导入 / 导出 ---
+// --- Settings import / export ---
 const fileInput = ref<HTMLInputElement | null>(null);
 const importStatus = ref<"" | "success" | "error">("");
 let importStatusTimer: ReturnType<typeof setTimeout> | undefined;
@@ -36,19 +37,21 @@ const handleFileChange = async (e: Event) => {
   const file = input.files?.[0];
   if (!file) return;
   const text = await file.text();
-  flashImportStatus(applySettingsImport(settingStore, text) ? "success" : "error");
-  // 重置，保证再次选同一文件也能触发 change
+  flashImportStatus(
+    applySettingsImport(settingStore, text) ? "success" : "error",
+  );
+  // Reset, so choosing the same file again still fires change
   input.value = "";
 };
 
-// 定义左侧的 Tabs 列表
+// Tabs on the left
 const tabs = computed(() => [
   { id: "clock", label: t("SettingPanel.tabs.clock") },
   { id: "system", label: t("SettingPanel.tabs.system") },
   { id: "about", label: t("SettingPanel.tabs.about") },
 ]);
 
-// 搜索引擎选项 = 内置 + 用户自定义（统一来源，避免硬编码重复）
+// Search engine options = built-in + user-defined (one source, to avoid duplicated hardcoding)
 const engineOptions = computed(() =>
   [...BUILTIN_ENGINES, ...settingStore.customEngines].map((e) => ({
     label: e.name,
@@ -56,45 +59,59 @@ const engineOptions = computed(() =>
   })),
 );
 
-// 时间制式选项
+// Hour format options
 const hourFormatOptions = computed(() => [
   { label: t("SettingPanel.clock.hour24"), value: "24" },
   { label: t("SettingPanel.clock.hour12"), value: "12" },
 ]);
 
-// 时钟字号选项
+// Clock size options
 const clockSizeOptions = computed(() => [
   { label: t("SettingPanel.clock.sizeSmall"), value: "small" },
   { label: t("SettingPanel.clock.sizeMedium"), value: "medium" },
   { label: t("SettingPanel.clock.sizeLarge"), value: "large" },
 ]);
 
-// 定义主题模式数据
+// Theme mode options
 const themeOptions = computed(() => [
   { label: t("SettingPanel.themeOptions.auto"), value: "auto" },
   { label: t("SettingPanel.themeOptions.light"), value: "light" },
   { label: t("SettingPanel.themeOptions.dark"), value: "dark" },
 ]);
 
-// 定义多语言的选项数据
+// Language options
 const languageOptions: {
   label: string;
   value: LanguageTypes;
 }[] = [
-  { label: "简体中文", value: "zh" },
+  { label: "简体中文", value: "zh-Hans" },
   { label: "English", value: "en" },
   { label: "日本語", value: "ja" },
 ];
 
-// 记录当前选中的 Tab，默认选中第一个
+// Currently selected tab, the first by default
 const activeTab = ref(tabs.value[0].id);
 
-// 关闭面板的方法
+// Close the panel
 const handleClosePanel = () => {
   settingStore.isSettingOpen = false;
 };
 
-// 监听切换语言
+// Shortcuts: Ctrl+, toggles the settings panel, Esc closes it
+const onGlobalKeydown = (e: KeyboardEvent) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === ",") {
+    e.preventDefault();
+    // Blur the search box when opening, to collapse its dropdown
+    (document.activeElement as HTMLElement | null)?.blur();
+    settingStore.isSettingOpen = !settingStore.isSettingOpen;
+  } else if (e.key === "Escape" && settingStore.isSettingOpen) {
+    handleClosePanel();
+  }
+};
+onMounted(() => window.addEventListener("keydown", onGlobalKeydown));
+onUnmounted(() => window.removeEventListener("keydown", onGlobalKeydown));
+
+// React to language changes
 watch(
   () => settingStore.language,
   (newLang) => {
@@ -215,6 +232,26 @@ watch(
                   </div>
 
                   <div class="setting-item">
+                    <span>{{ t("SettingPanel.system.siteSearch") }}</span>
+                    <PixelToggle v-model="settingStore.enableSiteSearch" />
+                  </div>
+
+                  <div class="setting-item">
+                    <span>{{ t("SettingPanel.system.openInNewTab") }}</span>
+                    <PixelToggle v-model="settingStore.openInNewTab" />
+                  </div>
+
+                  <div class="setting-item">
+                    <span class="item-label">
+                      {{ t("SettingPanel.system.focusOnNewTab") }}
+                      <small class="item-hint">{{
+                        t("SettingPanel.system.focusOnNewTabHint")
+                      }}</small>
+                    </span>
+                    <PixelToggle v-model="settingStore.focusOnNewTab" />
+                  </div>
+
+                  <div class="setting-item">
                     <span>{{ t("SettingPanel.system.appearance") }}</span>
                     <PixelSelect
                       v-model="settingStore.theme"
@@ -223,7 +260,12 @@ watch(
                   </div>
 
                   <div class="setting-item">
-                    <span>{{ t("SettingPanel.system.showHitokoto") }}</span>
+                    <span class="item-label">
+                      {{ t("SettingPanel.system.showHitokoto") }}
+                      <small class="item-hint">{{
+                        t("SettingPanel.system.showHitokotoHint")
+                      }}</small>
+                    </span>
                     <PixelToggle v-model="settingStore.showHitokoto" />
                   </div>
 
@@ -288,6 +330,19 @@ watch(
                 <p style="white-space: pre-wrap">
                   {{ t("SettingPanel.about.content") }}
                 </p>
+                <p>
+                  {{ t("SettingPanel.about.sites", { count: SITES.length }) }}
+                </p>
+                <p>
+                  <a
+                    class="about-link"
+                    :href="contributeUrl(locale)"
+                    target="_blank"
+                    rel="noopener"
+                    >{{ t("SettingPanel.about.contribute") }} →</a
+                  >
+                </p>
+                <p class="about-keys">{{ t("SettingPanel.about.keys") }}</p>
               </div>
             </div>
           </div>
@@ -298,7 +353,7 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-/* --- 遮罩层 --- */
+/* --- Overlay --- */
 .setting-overlay {
   position: fixed;
   inset: 0;
@@ -311,10 +366,12 @@ watch(
   transition: background-color 0.3s ease;
 }
 
-/* --- 面板本体 --- */
+/* --- Panel --- */
 .setting-panel {
   width: 760px;
   height: 520px;
+  max-width: 100%;
+  max-height: 100%;
   background-color: var(--panel-bg);
   border-radius: 20px;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
@@ -329,7 +386,7 @@ watch(
   transition: background-color 0.3s ease;
 }
 
-/* --- 顶部 Header --- */
+/* --- Top header --- */
 .panel-header {
   height: 64px;
   padding: 0 24px;
@@ -366,14 +423,14 @@ watch(
   }
 }
 
-/* --- 下方主体布局 --- */
+/* --- Main body layout --- */
 .panel-body {
   flex: 1;
   display: flex;
   overflow: hidden;
 }
 
-/* --- 左侧 Tabs --- */
+/* --- Left tabs --- */
 .sidebar {
   width: 180px;
   background-color: var(--hover-bg);
@@ -409,7 +466,7 @@ watch(
   }
 }
 
-/* --- 右侧内容区 --- */
+/* --- Right content area --- */
 .content-area {
   flex: 1;
   padding: 24px 32px;
@@ -417,11 +474,11 @@ watch(
   overflow-y: auto;
   transition: background-color 0.3s ease;
 
-  /* Firefox：细滚动条，颜色跟随主题 */
+  /* Firefox: thin scrollbar, color follows the theme */
   scrollbar-width: thin;
   scrollbar-color: var(--active-bg) transparent;
 
-  /* Chrome / Edge / Safari：像素风方块滚动条（硬边、无圆角） */
+  /* Chrome / Edge / Safari: pixel-style block scrollbar (hard edges, no rounding) */
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -432,7 +489,7 @@ watch(
 
   &::-webkit-scrollbar-thumb {
     background-color: var(--active-bg);
-    /* 两侧留白 + 背景色描边，做出居中的细方块滑块 */
+    /* Side gaps + background-colored border, making a thin centered block thumb */
     border: 2px solid var(--panel-bg);
     transition: background-color 0.2s ease;
   }
@@ -465,7 +522,7 @@ watch(
   }
 }
 
-/* 针对设置项列表的排版 */
+/* Layout for the settings list */
 .setting-list {
   display: flex;
   flex-direction: column;
@@ -492,11 +549,35 @@ watch(
   }
 }
 
-/* 设置项右侧多个控件并排（如「清空」按钮 + 开关） */
+/* Several controls side by side on the right of a setting (such as a "Clear" button + toggle) */
 .item-controls {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.item-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 16px;
+}
+
+.item-hint {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.about-link {
+  color: var(--text-main);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-keys {
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
 .text-btn {
@@ -517,7 +598,7 @@ watch(
   }
 }
 
-/* --- 设置备份 --- */
+/* --- Settings backup --- */
 .backup-actions {
   display: flex;
   align-items: center;
@@ -561,6 +642,53 @@ watch(
   }
 }
 
+/* --- Responsive: full screen when narrow, sidebar becomes horizontal tabs --- */
+@media (max-width: 768px) {
+  .setting-panel {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .panel-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: auto;
+    flex-direction: row;
+    flex-shrink: 0;
+    padding: 8px 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-main);
+  }
+
+  .tab-item {
+    flex: 1;
+    padding: 8px 12px;
+    text-align: center;
+  }
+
+  .content-area {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .panel-header {
+    height: 52px;
+    padding: 0 16px;
+  }
+
+  .content-area {
+    padding: 16px 12px;
+  }
+
+  .setting-item {
+    padding: 10px 12px;
+  }
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -570,7 +698,7 @@ watch(
   opacity: 0;
 }
 
-/* --- Vue 弹窗过渡动画 --- */
+/* --- Vue modal transition --- */
 .modal-enter-active,
 .modal-leave-active {
   transition: opacity 0.3s ease;

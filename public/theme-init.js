@@ -1,8 +1,11 @@
-// 首屏防闪屏脚本（FOUC）：在页面绘制前同步套用主题背景色。
+// First-paint flash prevention (FOUC): applies the theme background synchronously before the page paints.
 //
-// 必须作为「外部脚本」引入，不能写成内联 <script>：
-// 作为 MV3 浏览器扩展运行时，默认 CSP 为 script-src 'self'，会拦截内联脚本，
-// 导致首屏主题无法提前套用，出现「白 -> 黑」闪屏。外部脚本来自扩展自身则被允许。
+// It must be included as an external script, not an inline <script>:
+// running as an MV3 extension, the default CSP is script-src 'self', which blocks inline scripts,
+// so the theme couldn't apply early, causing a white-to-black flash. External scripts from the extension itself are allowed.
+//
+// Exception: this is a plain script under public, so it can't import src/utils/dbHelper.ts.
+// That makes it the only place in the project that reads localStorage directly (read-only, islet-setting.theme).
 (function () {
   var isDark = false;
   try {
@@ -11,11 +14,11 @@
     var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     isDark = theme === "dark" || (theme === "auto" && systemDark);
   } catch (e) {
-    /* localStorage 不可用或数据损坏时静默降级为浅色 */
+    /* Silently fall back to light if localStorage is unavailable or the data is corrupted */
   }
   var el = document.documentElement;
   if (isDark) el.classList.add("dark");
-  // 与 style.css 中的 --bg-main / --text-main 保持一致
+  // Keep in sync with --bg-main / --text-main in style.css
   el.style.backgroundColor = isDark ? "#121212" : "#ffffff";
   el.style.color = isDark ? "#e5e5e5" : "#1a1a1a";
 })();

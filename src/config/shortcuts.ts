@@ -1,29 +1,29 @@
 /**
- * 快捷导航（quick starts）数据结构与相关工具（单一数据源）
+ * Quick navigation data structures and helpers (single source of truth)
  *
- * 磁贴外观：内置像素图标（见 navIcons.ts）或站点名首字母；主色可选自
- * 下方精选调色板，未选择时按名称稳定派生一个颜色，保证默认也井然有序。
+ * Tile appearance: a built-in pixel icon (see navIcons.ts) or the site's initial; the main color can come
+ * from the palette below, or is derived consistently from the name, so the default still looks orderly.
  */
 
 export interface Shortcut {
-  /** 唯一标识 */
+  /** Unique id */
   id: string;
-  /** 展示名称 */
+  /** Display name */
   name: string;
-  /** 目标地址（已归一化，含协议） */
+  /** Target address (normalized, including the protocol) */
   url: string;
   /**
-   * 图标 SVG 的 path `d` 数据（选择图标时直接内联存储，
-   * 使新标签页渲染磁贴无需加载庞大的图标库）；为空则展示名称首字母。
+   * The icon SVG's path `d` data (stored inline when an icon is chosen,
+   * so new tabs can render tiles without loading the large icon library); empty shows the name's initial.
    */
   iconPath?: string;
-  /** 磁贴主色（hex，如 #4a6fa5）；为空则按名称派生 */
+  /** Tile main color (hex, such as #4a6fa5); empty derives it from the name */
   color?: string;
 }
 
 /**
- * 精选像素调色板：整体偏低饱和、沉稳，营造「高级质感」。
- * 深浅两种主题下均可读，前景统一用近白色。
+ * Curated pixel palette: low saturation and restrained overall, for a refined look.
+ * Readable in both light and dark themes, with a near-white foreground throughout.
  */
 export const SHORTCUT_COLORS: string[] = [
   "#64748b", // slate
@@ -40,10 +40,10 @@ export const SHORTCUT_COLORS: string[] = [
   "#8a6d52", // brown
 ];
 
-/** 磁贴前景色（图标 / 首字母），固定近白以贴合沉稳底色 */
+/** Tile foreground color (icon / initial), fixed near-white to suit the muted backgrounds */
 export const SHORTCUT_FG = "#f5f5f5";
 
-/** 按名称稳定派生一个调色板颜色（同名恒定，视觉上分布均匀） */
+/** Derive a palette color consistently from a name (same name, same color; evenly distributed) */
 export const colorForName = (name: string): string => {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
@@ -52,7 +52,7 @@ export const colorForName = (name: string): string => {
   return SHORTCUT_COLORS[hash % SHORTCUT_COLORS.length];
 };
 
-/** 取名称首字符作为字母图标（英文大写，其余原样，空则回退 ?） */
+/** Use the name's first character as a letter icon (uppercase for English, others unchanged, ? if empty) */
 export const initialForName = (name: string): string => {
   const ch = name.trim().charAt(0);
   if (!ch) return "?";
@@ -60,8 +60,8 @@ export const initialForName = (name: string): string => {
 };
 
 /**
- * 归一化用户输入的 URL：缺协议时补 https://。
- * 返回空字符串表示无法识别为有效地址。
+ * Normalize a URL typed by the user: add https:// if the protocol is missing.
+ * Returns an empty string if it can't be recognized as a valid address.
  */
 export const normalizeUrl = (raw: string): string => {
   const value = raw.trim();

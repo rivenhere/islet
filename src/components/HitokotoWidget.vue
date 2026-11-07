@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, watch, onUnmounted } from "vue";
 import { useSettingStore } from "@/store/setting";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const settingStore = useSettingStore();
 
-// 存储一言文本和出处
+// Quote text and its source
 const hitokotoText = ref(t("HitokotoWidget.padding"));
 const hitokotoFrom = ref("");
 
-// 加载态：避免重复点击刷新；复制态：短暂的「已复制」反馈
+// Loading state prevents repeat refresh clicks; copied state briefly shows "Copied"
 const loading = ref(false);
 const copied = ref(false);
 let copiedTimer: ReturnType<typeof setTimeout> | undefined;
 
-// 组件卸载时用于中断仍在进行的请求
+// Aborts any in-flight request when the component unmounts
 const controller = new AbortController();
 
-// 请求一言 API
+// Fetch a quote from the Hitokoto API
 const fetchHitokoto = async () => {
   if (loading.value) return;
   loading.value = true;
@@ -30,7 +30,7 @@ const fetchHitokoto = async () => {
     hitokotoText.value = data.hitokoto;
     hitokotoFrom.value = data.from;
   } catch (error) {
-    // 主动中断不算错误，无需展示兜底文案
+    // A deliberate abort isn't an error, so don't show the fallback text
     if (controller.signal.aborted) return;
     hitokotoText.value = t("HitokotoWidget.empty.title");
     hitokotoFrom.value = t("HitokotoWidget.empty.from");
@@ -39,7 +39,7 @@ const fetchHitokoto = async () => {
   }
 };
 
-// 复制当前一言（含出处）
+// Copy the current quote, including its source
 const copyHitokoto = async () => {
   const text = hitokotoFrom.value
     ? `${hitokotoText.value} —— ${hitokotoFrom.value}`
@@ -50,13 +50,18 @@ const copyHitokoto = async () => {
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => (copied.value = false), 1500);
   } catch (error) {
-    // 剪贴板不可用时静默失败
+    // Fail silently if the clipboard is unavailable
   }
 };
 
-onMounted(() => {
-  fetchHitokoto();
-});
+// Only use the network when turned on: no requests while off; fetch one once on (including first paint)
+watch(
+  () => settingStore.showHitokoto,
+  (show) => {
+    if (show) fetchHitokoto();
+  },
+  { immediate: true },
+);
 
 onUnmounted(() => {
   controller.abort();
@@ -68,15 +73,15 @@ onUnmounted(() => {
   <Transition name="fade">
     <div v-if="settingStore.showHitokoto" class="hitokoto-wrapper">
       <div class="hitokoto-content">
-        <!-- 传统的语录直角引号，很有文学气息 -->
+        <!-- Traditional corner quotation marks, for a literary feel -->
         <span class="quote-mark">「</span>
         <span class="text">{{ hitokotoText }}</span>
         <span class="quote-mark">」</span>
       </div>
-      <!-- 出处信息 -->
+      <!-- Source -->
       <div v-if="hitokotoFrom" class="hitokoto-from">—— {{ hitokotoFrom }}</div>
 
-      <!-- 操作按钮：刷新 / 复制 -->
+      <!-- Action buttons: refresh / copy -->
       <div class="hitokoto-actions">
         <button
           class="action-btn"
@@ -95,15 +100,29 @@ onUnmounted(() => {
         <button
           class="action-btn"
           :aria-label="t('HitokotoWidget.copy')"
-          :title="copied ? t('HitokotoWidget.copied') : t('HitokotoWidget.copy')"
+          :title="
+            copied ? t('HitokotoWidget.copied') : t('HitokotoWidget.copy')
+          "
           @click="copyHitokoto"
         >
-          <svg v-if="!copied" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <svg
+            v-if="!copied"
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            fill="currentColor"
+          >
             <path
               d="M18 22h-8v-2h8v2Zm-8-2H8v-2H6v-2h2V8h2v12Zm10 0h-2V8h2v12ZM6 16H4V4h2v12ZM16 6h2v2h-8V6h4V4h2v2Zm-2-2H6V2h8v2Z"
             />
           </svg>
-          <svg v-else viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <svg
+            v-else
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            fill="currentColor"
+          >
             <path
               d="M10 18H8v-2h2v2Zm-2-2H6v-2h2v2Zm4-2v2h-2v-2h2Zm-6 0H4v-2h2v2Zm8 0h-2v-2h2v2Zm2-2h-2v-2h2v2Zm2-2h-2V8h2v2Zm2-2h-2V6h2v2Z"
             />
@@ -129,19 +148,19 @@ onUnmounted(() => {
 }
 
 .hitokoto-content {
-  /* 1. 主体文字使用主颜色 */
+  /* 1. Main text uses the primary color */
   color: var(--text-main);
   font-size: 16px;
   line-height: 1.8;
   display: flex;
   align-items: flex-start;
   gap: 4px;
-  /* 加上颜色平滑过渡 */
+  /* Smooth color transition */
   transition: color 0.3s ease;
 }
 
 .quote-mark {
-  /* 2. 引号使用次要颜色 */
+  /* 2. Quotation marks use the secondary color */
   color: var(--text-secondary);
   font-size: 14px;
   transition: color 0.3s ease;
@@ -154,12 +173,12 @@ onUnmounted(() => {
 .hitokoto-from {
   margin-top: 12px;
   font-size: 14px;
-  /* 3. 出处使用次要颜色 */
+  /* 3. Source uses the secondary color */
   color: var(--text-secondary);
   transition: color 0.3s ease;
 }
 
-/* 操作按钮：默认淡出，hover 整块或聚焦时显现 */
+/* Action buttons: faded out by default, shown on hover or focus */
 .hitokoto-actions {
   margin-top: 16px;
   display: flex;

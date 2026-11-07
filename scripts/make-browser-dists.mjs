@@ -1,15 +1,15 @@
 /**
- * 从 dist/ 生成 Chrome 与 Firefox 双浏览器版本目录（dist-chrome/ 与 dist-firefox/）。
+ * Generates the Chrome and Firefox build folders (dist-chrome/ and dist-firefox/) from dist/.
  *
- * public/manifest.json 以 Firefox 完整形态为准（单一数据源），本脚本为 Chrome 做裁剪：
+ * public/manifest.json is the single source of truth in its full Firefox form, and this script trims it for Chrome:
  *
- * - chrome_settings_overrides（主页接管）：Chrome 仅在 Windows / macOS 支持该键，
- *   Linux 上会直接拒绝加载整个扩展（"not allowed for specified platform"）；
- *   且 Chrome 要求 homepage 为完整 URL，不接受扩展内相对路径。故 Chrome 版移除，
- *   Chrome 侧只接管新标签页。
- * - browser_specific_settings：Firefox 专属键（gecko id 等），Chrome 不识别并告警。
+ * - chrome_settings_overrides (home page override): Chrome only supports this key on Windows / macOS,
+ *   and Linux refuses to load the whole extension ("not allowed for specified platform");
+ *   Chrome also requires homepage to be a full URL, not a path inside the extension. So the Chrome version removes it,
+ *   and Chrome only takes over the new tab page.
+ * - browser_specific_settings: a Firefox-only key (gecko id and so on), which Chrome doesn't recognize and warns about.
  *
- * 本脚本被 scripts/publish.sh 与 GitHub Actions 共用，避免两处裁剪逻辑不同步。
+ * scripts/publish.sh and GitHub Actions share this script, so the trimming logic can't drift apart.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,11 +19,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
 
 if (!fs.existsSync(path.join(dist, "manifest.json"))) {
-  console.error("未找到 dist/manifest.json，请先执行 pnpm build");
+  console.error("dist/manifest.json not found, run pnpm build first");
   process.exit(1);
 }
 
-/** 复制 dist 到目标目录，并用 transform 调整其中的 manifest.json */
+/** Copy dist to the target folder, and adjust its manifest.json with transform */
 const make = (name, transform) => {
   const target = path.join(root, name);
   fs.rmSync(target, { recursive: true, force: true });
@@ -33,7 +33,7 @@ const make = (name, transform) => {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
   transform(manifest);
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
-  console.log(`已生成 ${name}/`);
+  console.log(`Generated ${name}/`);
 };
 
 make("dist-chrome", (m) => {
@@ -41,5 +41,5 @@ make("dist-chrome", (m) => {
   delete m.browser_specific_settings;
 });
 
-// Firefox：manifest 原样即为完整形态
+// Firefox: the manifest is already in its full form
 make("dist-firefox", () => {});

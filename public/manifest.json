@@ -3,7 +3,7 @@
   "name": "__MSG_extName__",
   "version": "1.7.3",
   "description": "__MSG_extDescription__",
-  "default_locale": "zh_CN",
+  "default_locale": "en",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
@@ -17,7 +17,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "talyra42@foxmail.com",
+      "id": "contact@025060.xyz",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "required": [

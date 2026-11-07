@@ -5,14 +5,14 @@
   user-select: none;
 }
 
-/* 输入类元素保留文本可选/可编辑 */
+/* Keep text selectable and editable in input elements */
 input,
 textarea {
   -webkit-user-select: text;
   user-select: text;
 }
 
-/* 好看的像素字体 */
+/* The pixel font */
 @font-face {
   font-family: "Fusion Pixel";
   src: url("@/assets/fonts/fusion-pixel-10px-monospaced-zh_hans.ttf")
@@ -22,33 +22,37 @@ textarea {
   font-display: swap;
 }
 
-/* 浅色变量 */
+/* Light variables */
 :root {
-  --bg-main: #ffffff; /* 页面主背景 */
-  --text-main: #1a1a1a; /* 主要文字颜色 */
-  --text-secondary: #666666; /* 次要文字（如：一言的出处） */
-  --border-main: #eaeaea; /* 较浅的边框 */
-  --border-hard: #1a1a1a; /* 像素风硬朗边框 */
-  --panel-bg: #ffffff; /* 面板/弹窗背景 */
-  --panel-overlay: rgba(0, 0, 0, 0.4); /* 遮罩层 */
-  --hover-bg: #f5f5f5; /* 悬停时的底色 */
-  --active-bg: #e5e5e5; /* 按下或选中时的底色 */
+  --bg-main: #ffffff; /* Main page background */
+  --text-main: #1a1a1a; /* Primary text color */
+  --text-secondary: #666666; /* Secondary text (such as the daily quote's source) */
+  --border-main: #eaeaea; /* Lighter border */
+  --border-hard: #1a1a1a; /* Hard pixel-style border */
+  --panel-bg: #ffffff; /* Panel and modal background */
+  --panel-overlay: rgba(0, 0, 0, 0.4); /* Overlay */
+  --hover-bg: #f5f5f5; /* Background on hover */
+  --menu-hover-bg: #ebebeb; /* Hover in a menu that marks its current item with selected-bg (subtler than it) */
+  --selected-bg: #e0e0e0; /* Current item in a menu (such as the engine switcher): more contrast than hover */
+  --active-bg: #e5e5e5; /* Background when pressed or selected */
 }
 
-/* 深色模式变量：当 html 或 body 拥有 .dark 类名时生效 */
+/* Dark mode variables: active when html or body has the .dark class */
 html.dark {
-  --bg-main: #121212; /* 深邃的黑灰底色 */
-  --text-main: #e5e5e5; /* 亮灰色文字，不刺眼 */
+  --bg-main: #121212; /* Deep gray-black background */
+  --text-main: #e5e5e5; /* Light gray text, easy on the eyes */
   --text-secondary: #999999;
   --border-main: #333333;
-  --border-hard: #e5e5e5; /* 深色模式下，边框要变成亮色 */
-  --panel-bg: #1e1e1e; /* 面板颜色比背景稍微亮一点点，拉开层次 */
-  --panel-overlay: rgba(0, 0, 0, 0.7); /* 深色模式下遮罩要更暗 */
+  --border-hard: #e5e5e5; /* In dark mode, borders become light */
+  --panel-bg: #1e1e1e; /* Slightly lighter than the background, for depth */
+  --panel-overlay: rgba(0, 0, 0, 0.7); /* The overlay is darker in dark mode */
   --hover-bg: #2c2c2c;
+  --menu-hover-bg: #2c2c2c;
+  --selected-bg: #3d3d3d;
   --active-bg: #3d3d3d;
 }
 
-/* 统一设置页面的基础背景和文字颜色 */
+/* Base background and text color for the page */
 body {
   background-color: var(--bg-main);
   color: var(--text-main);

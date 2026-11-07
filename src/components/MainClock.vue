@@ -6,29 +6,31 @@ import { useI18n } from "vue-i18n";
 const settingStore = useSettingStore();
 const { locale } = useI18n();
 
-// 当前时间（每秒更新一次的响应式来源）
+// Current time (reactive source updated every second)
 const now = ref(new Date());
 let timer: ReturnType<typeof setTimeout>;
 
 const updateTime = () => {
   now.value = new Date();
-  // 对齐到下一秒，避免累积漂移
+  // Align to the next second to avoid accumulated drift
   timer = setTimeout(updateTime, 1000 - now.value.getMilliseconds());
 };
 
-// i18n 语言 -> BCP47，供 Intl 本地化日期 / 星期
-const localeTag = computed(
-  () =>
-    ({ zh: "zh-CN", en: "en-US", ja: "ja-JP" })[locale.value] ?? "en-US",
-);
+// i18n language tag -> BCP 47 tag with region, for Intl-localized date and weekday
+const INTL_LOCALES: Record<string, string> = {
+  "zh-Hans": "zh-Hans-CN",
+  en: "en-US",
+  ja: "ja-JP",
+};
+const localeTag = computed(() => INTL_LOCALES[locale.value] ?? "en-US");
 
-// 12 小时制时的 AM/PM，24 小时制为空
+// AM/PM in 12-hour format, empty in 24-hour format
 const meridiem = computed(() => {
   if (settingStore.hourFormat !== "12") return "";
   return now.value.getHours() < 12 ? "AM" : "PM";
 });
 
-// 主时间文本 HH:MM(:SS)
+// Main time text HH:MM(:SS)
 const timeText = computed(() => {
   const d = now.value;
   let hour = d.getHours();
@@ -42,7 +44,7 @@ const timeText = computed(() => {
   return `${hh}:${mm}:${ss}`;
 });
 
-// 日期 / 星期（按当前语言本地化），按开关拼接
+// Date and weekday (localized to the current language), joined according to the toggles
 const dateText = computed(() => {
   const parts: string[] = [];
   if (settingStore.showWeekday) {
@@ -116,15 +118,15 @@ onUnmounted(() => {
   transition: color 0.3s ease;
 }
 
-/* 字号档位 */
+/* Size options; the longest text, HH:MM:SS AM, is about 4.5em wide, so capping at 20vw makes it fit narrow windows */
 .size-small .time-part {
-  font-size: 56px;
+  font-size: min(56px, 20vw);
 }
 .size-medium .time-part {
-  font-size: 80px;
+  font-size: min(80px, 20vw);
 }
 .size-large .time-part {
-  font-size: 112px;
+  font-size: min(112px, 20vw);
 }
 
 .size-small .date-part {

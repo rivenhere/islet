@@ -1,26 +1,24 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { Shortcut } from "@/config/shortcuts";
-import {
-  colorForName,
-  initialForName,
-  SHORTCUT_FG,
-} from "@/config/shortcuts";
+import { colorForName, initialForName, SHORTCUT_FG } from "@/config/shortcuts";
 import PixelIcon from "./PixelIcon.vue";
 
 const props = defineProps<{
-  /** 传入完整 shortcut，或仅 name/iconPath/color 的草稿（用于编辑预览） */
+  /** A full shortcut, or a draft with only name/iconPath/color (for the editor preview) */
   shortcut: Pick<Shortcut, "name" | "iconPath" | "color">;
-  /** 磁贴边长（px） */
+  /** Tile side length in px */
   size?: number;
 }>();
 
 const size = computed(() => props.size ?? 48);
-const bg = computed(() => props.shortcut.color || colorForName(props.shortcut.name));
+const bg = computed(
+  () => props.shortcut.color || colorForName(props.shortcut.name),
+);
 const initial = computed(() => initialForName(props.shortcut.name));
-/** 图标尺寸约为磁贴的一半 */
+/** Icon size is about half the tile */
 const iconSize = computed(() => Math.round(size.value * 0.5));
-/** 字母字号约为磁贴的 0.42 */
+/** Letter size is about 0.42 of the tile */
 const letterSize = computed(() => Math.round(size.value * 0.42));
 </script>
 

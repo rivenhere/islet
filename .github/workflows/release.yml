@@ -1,20 +1,23 @@
 name: Release
 
-# 推送形如 v1.6.0 的 tag 即触发：自动写回版本号、构建、打包并发布 GitHub Release。
+# Pushing a tag like v1.6.0 triggers this: write back the version, build, package and publish a GitHub Release.
 #
-# 用法（本地）：
+# Usage (local):
 #   git tag v1.6.0
 #   git push origin v1.6.0
 #
-# 流程：从 tag 解析版本号 -> 写入 manifest.json / package.json 并提交回 main
-#       -> pnpm build -> 打包 dist 为 zip -> 创建 GitHub Release 并上传 zip。
+# Flow: parse the version from the tag -> write it to manifest.json / package.json and commit back to main
+#       -> pnpm build -> package dist as zips -> sign the Chrome .crx -> create a GitHub Release and upload the files.
+#
+# Secret CHROME_CRX_KEY: the .crx signing key (a .pem file). The same key must be used for every release,
+# or the extension ID changes. If the secret isn't set, the .crx is skipped and only the zips are released.
 
 on:
   push:
     tags:
       - "v*"
 
-# 需要写权限：把版本号提交回 main，以及创建 Release。
+# Needs write permission: to commit the version back to main and create the Release.
 permissions:
   contents: write
 
@@ -22,42 +25,43 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: 解析 tag 中的版本号
+      - name: Parse the version from the tag
         id: ver
-        # GITHUB_REF_NAME 为 tag 名（如 v1.6.0），去掉前缀 v 得到纯版本号。
+        # GITHUB_REF_NAME is the tag name (such as v1.6.0); removing the v prefix gives the version.
         run: |
           version="${GITHUB_REF_NAME#v}"
           if ! echo "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-            echo "::error::tag '$GITHUB_REF_NAME' 不是合法的 vX.Y.Z 形式"
+            echo "::error::tag '$GITHUB_REF_NAME' is not a valid vX.Y.Z tag"
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
-      # 检出 main 分支（而非 detached 的 tag），以便把版本号提交回去。
-      - name: 检出 main
+      # Check out main (not the detached tag), so the version can be committed back.
+      - name: Check out main
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
 
-      - name: 安装 pnpm
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          # 必须与本地一致：pnpm 9 会要求 pnpm-workspace.yaml 含 packages 字段而报错，
-          # pnpm 10+ 才把该文件兼作配置文件（允许只放 allowBuilds 等设置）。
+          # Doesn't need to match local. If CI fails because of the pnpm version, bump this to the latest pnpm.
+          # Needs pnpm 10+: pnpm 9 errors if pnpm-workspace.yaml has no packages field,
+          # and only pnpm 10+ also treats that file as config (allowing just settings like allowBuilds).
           version: 11.5.0
 
-      - name: 安装 Node
+      - name: Install Node
         uses: actions/setup-node@v4
         with:
-          # pnpm 11.5.0 要求 Node >= 22.13（用到内置模块 node:sqlite），低于此会崩。
+          # pnpm 11.5.0 requires Node >= 22.13 (it uses the built-in node:sqlite module) and crashes below that.
           node-version: 22
           cache: pnpm
 
-      - name: 安装依赖
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: 写入版本号到 manifest.json 与 package.json
+      - name: Write the version to manifest.json and package.json
         env:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
@@ -71,7 +75,7 @@ jobs:
             }
           '
 
-      - name: 提交版本号回 main
+      - name: Commit the version back to main
         env:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
@@ -79,18 +83,18 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/manifest.json package.json
           if git diff --cached --quiet; then
-            echo "版本号无变化，跳过提交"
+            echo "Version unchanged, skipping commit"
           else
-            git commit -m "chore: 发布 v${VERSION}"
+            git commit -m "chore: release v${VERSION}"
             git push origin HEAD:main
           fi
 
-      - name: 构建
+      - name: Build
         run: pnpm build
 
-      # Chrome 版会移除 Firefox 专属键（chrome_settings_overrides / browser_specific_settings），
-      # 否则 Linux 上的 Chrome 会直接拒绝加载。裁剪逻辑与本地 scripts/publish.sh 共用同一脚本。
-      - name: 生成 Chrome / Firefox 双版本并打包
+      # The Chrome version removes Firefox-only keys (chrome_settings_overrides / browser_specific_settings),
+      # otherwise Chrome on Linux refuses to load it. The trimming logic is shared with local scripts/publish.sh.
+      - name: Generate and package the Chrome and Firefox versions
         env:
           VERSION: ${{ steps.ver.outputs.version }}
         run: |
@@ -98,11 +102,43 @@ jobs:
           (cd dist-chrome && zip -qr "../islet-v${VERSION}-chrome.zip" .)
           (cd dist-firefox && zip -qr "../islet-v${VERSION}-firefox.zip" .)
 
-      - name: 创建 GitHub Release
+      # Uses the Google Chrome that ubuntu-latest has preinstalled, so no third-party code touches the key.
+      # The key only exists on disk during this step.
+      # The .crx is optional: if anything here fails, the step only warns and the zips are still released.
+      - name: Pack and sign the Chrome .crx
+        continue-on-error: true
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          CRX_KEY: ${{ secrets.CHROME_CRX_KEY }}
+        run: |
+          if [ -z "$CRX_KEY" ]; then
+            echo "::warning::CHROME_CRX_KEY is not set, skipping the .crx"
+            exit 0
+          fi
+          key="$RUNNER_TEMP/islet-crx.pem"
+          trap 'rm -f "$key"' EXIT
+          (umask 077 && printf '%s\n' "$CRX_KEY" > "$key")
+          if ! google-chrome --headless=new --no-message-box \
+            --user-data-dir="$RUNNER_TEMP/chrome-profile" \
+            --pack-extension="$PWD/dist-chrome" \
+            --pack-extension-key="$key" || [ ! -s dist-chrome.crx ]; then
+            echo "::warning::Failed to pack the .crx, releasing only the zips"
+            rm -f dist-chrome.crx
+            exit 0
+          fi
+          # Wrapped in a zip: clicking a bare .crx makes Chrome try to install it from the download,
+          # which fails (CRX_REQUIRED_PROOF_MISSING). Users unzip it and drag the .crx onto chrome://extensions.
+          mv dist-chrome.crx "islet-v${VERSION}-chrome.crx"
+          zip -q "islet-v${VERSION}-chrome-crx.zip" "islet-v${VERSION}-chrome.crx"
+
+      - name: Create the GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           name: v${{ steps.ver.outputs.version }}
+          # A missing .crx zip (skipped or failed) only gives a warning here, it doesn't fail the release.
+          fail_on_unmatched_files: false
           files: |
             islet-v${{ steps.ver.outputs.version }}-chrome.zip
             islet-v${{ steps.ver.outputs.version }}-firefox.zip
+            islet-v${{ steps.ver.outputs.version }}-chrome-crx.zip
           generate_release_notes: true

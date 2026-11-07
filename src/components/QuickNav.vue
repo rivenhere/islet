@@ -9,7 +9,7 @@ import PixelIcon from "./PixelIcon.vue";
 const { t } = useI18n();
 const settingStore = useSettingStore();
 
-// 编辑器状态：open + 正在编辑的 id（null 为新增）
+// Editor state: open + the id being edited (null when adding)
 const editorOpen = ref(false);
 const editingId = ref<string | null>(null);
 
@@ -36,11 +36,13 @@ const closeEditor = () => {
       class="tile"
       :href="s.url"
       :title="s.name"
+      :target="settingStore.openInNewTab ? '_blank' : undefined"
+      :rel="settingStore.openInNewTab ? 'noopener' : undefined"
     >
       <ShortcutIcon :shortcut="s" :size="48" />
       <span class="tile-name">{{ s.name }}</span>
 
-      <!-- 悬停操作：编辑 / 删除 -->
+      <!-- Hover actions: edit / delete -->
       <span class="tile-actions">
         <button
           class="tile-act"
@@ -59,7 +61,7 @@ const closeEditor = () => {
       </span>
     </a>
 
-    <!-- 新增磁贴 -->
+    <!-- Add tile -->
     <button
       class="tile add-tile"
       :aria-label="t('SettingPanel.shortcuts.addTitle')"
@@ -71,7 +73,11 @@ const closeEditor = () => {
       <span class="tile-name">{{ t("SettingPanel.shortcuts.addShort") }}</span>
     </button>
 
-    <ShortcutEditor :open="editorOpen" :edit-id="editingId" @close="closeEditor" />
+    <ShortcutEditor
+      :open="editorOpen"
+      :edit-id="editingId"
+      @close="closeEditor"
+    />
   </div>
 </template>
 
@@ -130,7 +136,7 @@ const closeEditor = () => {
   color: var(--text-main);
 }
 
-/* 悬停操作按钮 */
+/* Hover action buttons */
 .tile-actions {
   position: absolute;
   top: -4px;
@@ -172,7 +178,7 @@ const closeEditor = () => {
   }
 }
 
-/* 新增磁贴 */
+/* Add tile */
 .add-tile .add-icon {
   box-sizing: border-box;
   width: 48px;

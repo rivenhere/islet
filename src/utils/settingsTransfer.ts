@@ -1,16 +1,17 @@
 /**
- * 设置导入 / 导出工具
+ * Settings import / export helpers
  *
- * 纯本地：导出为 JSON 文件下载，导入时解析并按类型校验后写回 store。
+ * Local only: exports as a downloaded JSON file; imports parse and type-check values before writing them to the store.
  */
 import type { useSettingStore } from "@/store/setting";
+import { normalizeLocale } from "@/i18n";
 
 type SettingStore = ReturnType<typeof useSettingStore>;
 
-/** 导出文件的格式版本，便于未来兼容处理 */
+/** Format version of the exported file, for future compatibility */
 const EXPORT_VERSION = 1;
 
-/** 参与导入 / 导出的设置项（排除 isSettingOpen 等临时 UI 状态） */
+/** Settings included in import / export (excludes temporary UI state such as isSettingOpen) */
 const TRANSFER_KEYS = [
   "showHitokoto",
   "showSeconds",
@@ -27,6 +28,9 @@ const TRANSFER_KEYS = [
   "autoHideSettingButton",
   "showShortcuts",
   "shortcuts",
+  "enableSiteSearch",
+  "openInNewTab",
+  "focusOnNewTab",
 ] as const;
 
 type TransferKey = (typeof TRANSFER_KEYS)[number];
@@ -41,7 +45,7 @@ const isValidEngine = (e: unknown): boolean =>
   isStr((e as Record<string, unknown>).name) &&
   isStr((e as Record<string, unknown>).searchUrl);
 
-/** 可选字符串字段（缺省或字符串均合法） */
+/** Optional string field (missing or a string are both valid) */
 const isOptStr = (v: unknown): boolean => v === undefined || isStr(v);
 
 const isValidShortcut = (s: unknown): boolean =>
@@ -53,7 +57,7 @@ const isValidShortcut = (s: unknown): boolean =>
   isOptStr((s as Record<string, unknown>).iconPath) &&
   isOptStr((s as Record<string, unknown>).color);
 
-/** 每个设置项的取值校验，导入时逐项过滤非法值 */
+/** Validation for each setting; invalid values are filtered out one by one on import */
 const VALIDATORS: Record<TransferKey, (v: unknown) => boolean> = {
   showHitokoto: isBool,
   showSeconds: isBool,
@@ -66,20 +70,24 @@ const VALIDATORS: Record<TransferKey, (v: unknown) => boolean> = {
   enableSearchHistory: isBool,
   searchHistory: (v) => Array.isArray(v) && v.every(isStr),
   theme: (v) => v === "light" || v === "dark" || v === "auto",
-  language: (v) => v === "zh" || v === "en" || v === "ja",
+  // Accept forms like "zh" from old backups; normalized before being applied
+  language: (v) => normalizeLocale(v) !== null,
   autoHideSettingButton: isBool,
   showShortcuts: isBool,
   shortcuts: (v) => Array.isArray(v) && v.every(isValidShortcut),
+  enableSiteSearch: isBool,
+  openInNewTab: isBool,
+  focusOnNewTab: isBool,
 };
 
-/** 构造导出对象 */
+/** Build the export object */
 const buildExport = (store: SettingStore) => {
   const settings: Record<string, unknown> = {};
   for (const key of TRANSFER_KEYS) settings[key] = store[key];
   return { app: "islet", version: EXPORT_VERSION, settings };
 };
 
-/** 导出设置为 JSON 文件并触发下载 */
+/** Export settings as a JSON file and trigger the download */
 export const downloadSettings = (store: SettingStore) => {
   const data = JSON.stringify(buildExport(store), null, 2);
   const blob = new Blob([data], { type: "application/json" });
@@ -92,8 +100,8 @@ export const downloadSettings = (store: SettingStore) => {
 };
 
 /**
- * 解析并应用导入的设置文本。
- * @returns 是否成功导入（文件可解析且至少有一项合法设置）
+ * Parse and apply imported settings text.
+ * @returns Whether the import succeeded (the file parses and has at least one valid setting)
  */
 export const applySettingsImport = (
   store: SettingStore,
@@ -113,7 +121,8 @@ export const applySettingsImport = (
   const patch: Record<string, unknown> = {};
   for (const key of TRANSFER_KEYS) {
     if (key in source && VALIDATORS[key](source[key])) {
-      patch[key] = source[key];
+      patch[key] =
+        key === "language" ? normalizeLocale(source[key]) : source[key];
     }
   }
 
